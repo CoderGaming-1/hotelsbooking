@@ -20,4 +20,7 @@ static String imgAntDesignStarFilled = '$imagePath/img_ant_design_star_filled.pn
   static String imgNavFavorite = '$imagePath/img_nav_favorite.png';
   static String imgNavMyProfile = '$imagePath/img_nav_my_profile.png';
 static String imageNotFound = 'assets/images/image_not_found.PNG';
+// On Boarding Images
+  static String imageLogo = '$imagePath/logo.png';
+  static String imgBackgroundOnBoarding = '$imagePath/onboarding_background.png';
 }

@@ -27,4 +27,8 @@ final Map<String, String> enUs = {
 // Network Error String
   "msg_network_err": "Network Error",
   "msg_something_went_wrong": "Something Went Wrong!",
+  // On boarding Screen
+  "msg_onboarding" : "Let’s Find Your Sweet & Dream Place",
+  "lbl_get_started" : "Get Started",
+  "lbl_log_in_as_guest" : "Log in as guest",
 };
