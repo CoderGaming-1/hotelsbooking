@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hotelsbooking/presentation/sign_up_screen/sign_up_screen.dart';
 
 
@@ -109,26 +109,29 @@ class _SignInScreenState extends State<SignInScreen>{
                   Expanded(
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFFF2F3F6),
+                          backgroundColor: const Color(0xF2F3F6),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
                           padding: const EdgeInsets.symmetric(vertical: 20)
                       ),
                       onPressed: (){},
-                      child: SvgPicture.asset("assets/icons/ic_facebook.svg"),),),
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: SvgPicture.asset("assets/images/ic_google.svg"),
+                      ),),),
                   const SizedBox(width: 20,),
                   Expanded(
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFFF2F3F6),
+                          backgroundColor: const Color(0xF2F3F6),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
                           padding: const EdgeInsets.symmetric(vertical: 20)
                       ),
                       onPressed: (){},
-                      child: SvgPicture.asset("assets/icons/ic_google.svg"),),),
+                      child: SvgPicture.asset("assets/images/ic_facebook.svg"),),),
                 ],
               ),
               const SizedBox(height: 10,),

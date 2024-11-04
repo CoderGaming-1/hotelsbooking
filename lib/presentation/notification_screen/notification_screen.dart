@@ -19,7 +19,9 @@ class _NotificationScreenState extends State<NotificationScreen>{
         centerTitle: true,
         backgroundColor: Color(0xffffffff),
         leading: IconButton(
-            onPressed: (){},
+            onPressed: (){
+              Navigator.pop(context);
+            },
             icon: const Icon(Icons.arrow_back)),
       ),
     );

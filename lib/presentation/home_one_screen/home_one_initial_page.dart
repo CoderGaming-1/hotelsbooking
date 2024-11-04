@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hotelsbooking/core/app_export.dart';
 import 'package:hotelsbooking/data/models/selectionPopupModel/selection_popup_model.dart';
+import 'package:hotelsbooking/presentation/notification_screen/notification_screen.dart';
 import 'package:hotelsbooking/widgets/app_bar/appbar_title_dropdown.dart';
 import 'package:hotelsbooking/widgets/app_bar/appbar_trailing_image.dart';
 import 'package:hotelsbooking/widgets/app_bar/custom_app_bar.dart';
@@ -83,6 +84,9 @@ class HomeOneInitialPageState extends State<HomeOneInitialPage> {
         imagePath: ImageConstant.imgMessageTextSquare02,
       ),
       AppbarTrailingImage(
+        onTap: (){
+          Navigator.push(context, MaterialPageRoute(builder: (ctx) => const NotificationScreen()),);
+        },
         imagePath: ImageConstant.imgIcon,
         margin: EdgeInsets.only(
           left: 8.h,
