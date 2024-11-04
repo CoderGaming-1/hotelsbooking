@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hotelsbooking/core/app_export.dart';
 import 'package:hotelsbooking/data/models/selectionPopupModel/selection_popup_model.dart';
+import 'package:hotelsbooking/presentation/editprofile_screen/editprofile_screen.dart';
+import 'package:hotelsbooking/presentation/favorite_screen/favorite_screen.dart';
+import 'package:hotelsbooking/presentation/mybooking_screen/mybooking_screen.dart';
+import 'package:hotelsbooking/presentation/myprofile_page/myprofile_page.dart';
 import 'package:hotelsbooking/widgets/custom_bottom_bar.dart';
 import 'package:hotelsbooking/presentation/home_one_screen/bloc/home_one_bloc.dart';
 import 'package:hotelsbooking/presentation/home_one_screen/home_one_initial_page.dart';
@@ -96,11 +100,11 @@ class HomeOneScreen extends StatelessWidget {
       case BottomBarEnum.Home:
         return AppRoutes.homeOneInitialPage;
       case BottomBarEnum.Mybooking:
-        return "/mybooking_screen";
+        return AppRoutes.mybookingScreen;
       case BottomBarEnum.Favorite:
-        return "/";
+        return AppRoutes.favoriteScreen;
       case BottomBarEnum.Myprofile:
-        return "/";
+        return AppRoutes.myprofileScreen;
       default:
         return "/";
     }
@@ -116,6 +120,15 @@ class HomeOneScreen extends StatelessWidget {
     switch (currentRoute) {
       case AppRoutes.homeOneInitialPage:
         return HomeOneInitialPage.builder(context);
+      case AppRoutes.myprofileScreen:
+        return MyprofilePage.builder(context);
+      case AppRoutes.mybookingScreen:
+        return MybookingScreen.builder(context);
+      case AppRoutes.favoriteScreen:
+        return FavoriteScreen.builder(context);
+      case AppRoutes.editProfileScreen:
+        return EditprofileScreen.builder(context);
+
       default:
         return DefaultWidgets();
     }

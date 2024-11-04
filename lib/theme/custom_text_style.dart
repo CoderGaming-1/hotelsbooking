@@ -92,5 +92,90 @@ class CustomTextStyles {
   theme.textTheme.titleSmall!.plusJakartaSans.copyWith(
   fontWeight: FontWeight.w700,
   );
+  static TextStyle get titleSmallPoppinsRedA700 =>
+      theme.textTheme.titleSmall!.plusJakartaSans.copyWith(
+        color: appTheme.red500,
+        fontWeight: FontWeight.w500,
+      );
+  /// titleSmallPoppinsPrimary titleMediumBlack900
+  ///
+  static TextStyle get titleSmallPoppinsPrimary =>
+      theme.textTheme.titleSmall!.plusJakartaSans.copyWith(
+        color: appTheme.black900,
+        fontWeight: FontWeight.w500,
+      );
+  static TextStyle get titleMediumBlack900 =>
+      theme.textTheme.titleSmall!.plusJakartaSans.copyWith(
+        color: appTheme.black90001,
+        fontWeight: FontWeight.w600,
+      );
+  static TextStyle get titleMediumBlack90001 =>
+      theme.textTheme.titleSmall!.plusJakartaSans.copyWith(
+        color: appTheme.black90001,
+        fontWeight: FontWeight.w600,
+      );
+  static TextStyle get labelLargePoppinsBlack90001SemiBold_1 =>
+  theme.textTheme.labelLarge!.poppins.copyWith(
+  color: appTheme.black90001,
+  fontWeight: FontWeight.w600,
+  );
+  static TextStyle get labelMediumBlack90001 =>
+      theme.textTheme.labelMedium!.copyWith(
+        color: appTheme.black90001.withOpacity(0.5),
+        fontWeight: FontWeight.w500,
+      );
+  static TextStyle get labelMediumCyan600 =>
+      theme.textTheme.labelMedium!.copyWith(
+        color: appTheme.cyan600,
+      );
 
+  static TextStyle get labelMediumBlack90001_1 =>
+      theme.textTheme.labelMedium!.copyWith(
+        color: appTheme.black90001.withOpacity(0.5), );
+  static TextStyle get labelMediumPlusJakartaSansAmberA200 =>
+      theme.textTheme.labelMedium!.plusJakartaSans.copyWith(
+        color: appTheme.amberA200,
+        fontWeight: FontWeight.w700,
+      );
+  static TextStyle get labelMediumPlusJakartaSansBluegray400Bold =>
+  theme.textTheme.labelMedium!.plusJakartaSans.copyWith(
+  color: appTheme.blueGray400,
+  fontWeight: FontWeight.w700,
+  );
+  static TextStyle get labelLargePlusJakartaSansBlack90001Bold =>
+  theme.textTheme.labelLarge!.plusJakartaSans.copyWith(
+  color: appTheme.black90001,
+  fontWeight: FontWeight.w700,
+  );
+
+  static TextStyle get labelLargePlusJakartaSansBlack90001 =>
+      theme.textTheme.labelLarge!.plusJakartaSans.copyWith(
+        color: appTheme.black90001.withOpacity(0.5),
+        fontWeight: FontWeight.w700,
+  );
+
+  static TextStyle get labelLargePlusJakartaSansGray800 =>
+  theme.textTheme.labelLarge!.plusJakartaSans.copyWith(
+  color: appTheme.gray900,
+  fontWeight: FontWeight.w700,
+  );
+
+  static TextStyle get labelMediumPlusJakartaSansAmberA200Bold =>
+  theme.textTheme.labelMedium!.plusJakartaSans.copyWith( color: appTheme.amberA200,
+  fontWeight: FontWeight.w700,
+  );
+
+  static TextStyle get labelMediumPlusJakartaSansBlack900Bold =>
+      theme.textTheme.labelMedium!.plusJakartaSans.copyWith(
+        color: appTheme.black900.withOpacity (0.5),
+        fontWeight: FontWeight.w700,
+  );
+  static TextStyle get labelLargeOnPrimaryContainer =>
+  theme.textTheme.labelLarge!.copyWith(
+  color: theme.colorScheme.onPrimaryContainer.withOpacity(1),
+  );
+  static TextStyle get titleMediumPrimaryContainer =>
+      theme.textTheme.titleMedium!.copyWith( color: theme.colorScheme.primaryContainer,
+  fontWeight: FontWeight.w500,
+  );
 }

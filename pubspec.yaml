@@ -1,6 +1,6 @@
 name: hotelsbooking
 description: "A new Flutter project."
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: 'none' # Remove this line if you wish to publish to pub.devddd
 version: 1.0.0+1
 environment:
   sdk: ^3.5.1
@@ -16,6 +16,7 @@ dependencies:
   shared_preferences: ^2.3.0
   connectivity_plus: ^6.0.4
   flutter_rating_bar: ^4.0.1
+  responsive_grid_list: ^1.4.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
