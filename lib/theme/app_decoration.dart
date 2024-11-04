@@ -46,4 +46,15 @@ class BorderRadiusStyle {
   static BorderRadius get roundedBorder8 => BorderRadius.circular(
     8.0,
   );
+
+  static BorderRadius get roundedBorder16 => BorderRadius.circular(
+    16.0,
+  );
+  static BorderRadius get roundedBorder20 => BorderRadius.circular(
+    16.0,
+  );
+
+  static BorderRadius get customBorderBL12 => BorderRadius.vertical(
+    bottom : Radius.circular(12.h),
+  );
 }

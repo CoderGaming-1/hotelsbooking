@@ -1,5 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:hotelsbooking/core/app_export.dart';
+
+extension SearchViewStyleHelper on CustomSearchView {
+  static OutlineInputBorder get outlineCyan => OutlineInputBorder(
+  borderRadius: BorderRadius.circular(16.h),
+  borderSide: BorderSide(
+  color: appTheme.cyan600,
+  width: 1,
+  ),
+  );
+}
 class CustomSearchView extends StatelessWidget {
   CustomSearchView({Key? key,
     this.alignment,
