@@ -8,77 +8,81 @@ import '../../widgets/app_bar/custom_app_bar.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_icon_button.dart';
 import '../../widgets/custom_text_form_field.dart';
-import 'bloc/editprofile_bloc.dart'; import 'models/editprofile_model.dart';
+import 'bloc/editprofile_bloc.dart';
+import 'models/editprofile_model.dart';
+
 // ignore_for_file: must_be_immutable
 class EditprofileScreen extends StatelessWidget {
   EditprofileScreen({Key? key})
-      :
-        super( key: key, );
-  GlobalKey <FormState> _formkey = GlobalKey<FormState>();
-  static Widget builder (BuildContext context) {
+      : super(
+          key: key,
+        );
+  GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+  static Widget builder(BuildContext context) {
     return BlocProvider<EditprofileBloc>(
-        create: (context) => EditprofileBloc (EditprofileState( editprofileModelobj: EditprofileModel(),
-        ))
-          ..add(EditprofileInitialEvent()),
-    child: EditprofileScreen(),
+      create: (context) => EditprofileBloc(EditprofileState(
+        editprofileModelobj: EditprofileModel(),
+      ))
+        ..add(EditprofileInitialEvent()),
+      child: EditprofileScreen(),
     );
-    }
-    @override
-    Widget build(BuildContext context) {
+  }
 
-
-      return SafeArea(
-          child: Scaffold(
-          resizeToAvoidBottomInset: false,
-          appBar: _buildAppBar (context),
-      body: SizedBox(
-      height: SizeUtils.height,
-      child: Form(
-      key: _formkey,
-      child: Container(
-      width: double.maxFinite,
-      padding: EdgeInsets.symmetric(
-      horizontal: 24.h,
-      vertical: 12.h,
-      ),
-      child: Column(
-      children: [
-      _buildTopNavigation (context),
-      SizedBox (height: 12.h),
-      CustomImageView(
-      imagePath: ImageConstant.imgAvatars3dAvatar1,
-      height: 100.h,
-      width: 102.h,
-      ),
-      SizedBox(height: 6.h),
-      _buildUsernameSection (context),
-      SizedBox (height: 10.h),
-      _buildEmailSection(context),
-      SizedBox (height: 14.h),
-      _buildPhoneNumberSection(context),
-      Spacer(),
-      CustomElevatedButton(
-      height: 48.h,
-      text: "Save Changes".tr,
-      margin: EdgeInsets.only(
-      left: 16.h,
-      right: 22.h,
-      ),
-      buttonStyle: CustomButtonStyles.fillPrimary,
-      buttonTextStyle:
-      CustomTextStyles.titleMediumPrimaryContainer,
-      ),
-      SizedBox(height: 40.h)
-      ],
-      ),
-      ),
-      ),
-      ),
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: _buildAppBar(context),
+        body: SizedBox(
+          height: SizeUtils.height,
+          child: Form(
+            key: _formkey,
+            child: Container(
+              width: double.maxFinite,
+              padding: EdgeInsets.symmetric(
+                horizontal: 24.h,
+                vertical: 12.h,
+              ),
+              child: Column(
+                children: [
+                  _buildTopNavigation(context),
+                  SizedBox(height: 12.h),
+                  CustomImageView(
+                    imagePath: ImageConstant.imgAvatars3dAvatar1,
+                    height: 100.h,
+                    width: 102.h,
+                  ),
+                  SizedBox(height: 6.h),
+                  _buildUsernameSection(context),
+                  SizedBox(height: 10.h),
+                  _buildEmailSection(context),
+                  SizedBox(height: 14.h),
+                  _buildPhoneNumberSection(context),
+                  Spacer(),
+                  CustomElevatedButton(
+                    height: 48.h,
+                    text: "Save Changes".tr,
+                    margin: EdgeInsets.only(
+                      left: 16.h,
+                      right: 22.h,
+                    ),
+                    buttonStyle: CustomButtonStyles.fillPrimary,
+                    buttonTextStyle:
+                        CustomTextStyles.titleMediumPrimaryContainer,
+                  ),
+                  SizedBox(height: 40.h)
+                ],
+              ),
+            ),
           ),
-      );
-    }
+        ),
+      ),
+    );
+  }
+
   /// Section Widget
-  PreferredSizeWidget _buildAppBar (BuildContext context) {
+  PreferredSizeWidget _buildAppBar(BuildContext context) {
     return CustomAppBar(
       centerTitle: true,
       title: AppbarTitle(
@@ -92,7 +96,8 @@ class EditprofileScreen extends StatelessWidget {
       ],
     );
   }
-  Widget _buildTopNavigation (BuildContext context) {
+
+  Widget _buildTopNavigation(BuildContext context) {
     return SizedBox(
       width: double.maxFinite,
       child: Row(
@@ -118,156 +123,156 @@ class EditprofileScreen extends StatelessWidget {
       ),
     );
   }
-    /// Section Widget
-    Widget _buildUsernameSection (BuildContext context) {
-      return Container(
-        width: double.maxFinite,
-        margin: EdgeInsets.only(right: 16.h),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "lbl_username".tr,
-              style: theme.textTheme.titleMedium,
-            ),
-            SizedBox(height: 6.h),
-            BlocSelector<EditprofileBloc,
-                EditprofileState,
-                TextEditingController?>(
-              selector: (state) => state.userNameController,
-              builder: (context, userNameController) {
-                return CustomTextFormField(
-                  controller: userNameController,
-                  hintText: "lbl_name".tr,
-                  prefix: Container(
-                    margin: EdgeInsets.fromLTRB(12.h, 10.h, 10.h, 10.h),
-                    child: CustomImageView(
-                      imagePath: ImageConstant.imgLock,
-                      height: 22.h,
-                      width: 20.h,
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                  prefixConstraints: BoxConstraints(
-                    maxHeight: 44.h,
-                  ),
-                  contentPadding: EdgeInsets.symmetric(
-                    horizontal: 12.h,
-                    vertical: 10.h,
-                  ),
-                );
-              },
-            )
-          ],
-        ),
-      );
-    }
+
   /// Section Widget
-  Widget _buildEmailSection (BuildContext context) {
+  Widget _buildUsernameSection(BuildContext context) {
     return Container(
-        width: double.maxFinite,
-        margin: EdgeInsets.only(right: 16.h),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+      width: double.maxFinite,
+      margin: EdgeInsets.only(right: 16.h),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
           Text(
-          "lbl_email".tr,
-          style: theme.textTheme.titleMedium,
-        ),
-        BlocSelector<EditprofileBloc, EditprofileState, TextEditingController?>(
-        selector: (state) => state.emailtwoController,
-    builder: (context, emailtwoController) {
-    return CustomTextFormField(
-    controller: emailtwoController,
-    hintText: "msg_mail".tr,
-    textInputType: TextInputType.emailAddress,
-    prefix: Container(
-    margin: EdgeInsets.fromLTRB(12.h, 10.h, 10.h, 10.h),
-    child: CustomImageView(
-    imagePath: ImageConstant.imgEmail,
-    height: 22.h,
-    width: 24.h,
-    fit: BoxFit.contain,
-    ),
-    ),
-    prefixConstraints: BoxConstraints(
-    maxHeight: 48.h,
-    ),
-    contentPadding: EdgeInsets.symmetric(
-    horizontal: 12.h,
-    vertical: 10.h,
-    ),
-
-
-
-      validator: (value) {
-        // if (value == null ||
-        //     (!isValidEmail (value, isRequired: true))) {
-        //   return "err_msg_please_enter_valid_email".tr;
-        // }
-        return null;
-      },
-    );
-    },
-        )
-          ],
-        ),
+            "lbl_username".tr,
+            style: theme.textTheme.titleMedium,
+          ),
+          SizedBox(height: 6.h),
+          BlocSelector<EditprofileBloc, EditprofileState,
+              TextEditingController?>(
+            selector: (state) => state.userNameController,
+            builder: (context, userNameController) {
+              return CustomTextFormField(
+                controller: userNameController,
+                hintText: "lbl_name".tr,
+                prefix: Container(
+                  margin: EdgeInsets.fromLTRB(12.h, 10.h, 10.h, 10.h),
+                  child: CustomImageView(
+                    imagePath: ImageConstant.imgLock,
+                    height: 22.h,
+                    width: 20.h,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+                prefixConstraints: BoxConstraints(
+                  maxHeight: 44.h,
+                ),
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: 12.h,
+                  vertical: 10.h,
+                ),
+              );
+            },
+          )
+        ],
+      ),
     );
   }
+
   /// Section Widget
-  Widget _buildPhoneNumberSection (BuildContext context) {
+  Widget _buildEmailSection(BuildContext context) {
     return Container(
-        width: double.maxFinite,
-        margin: EdgeInsets.only(right: 16.h),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+      width: double.maxFinite,
+      margin: EdgeInsets.only(right: 16.h),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
           Text(
-          "lbl_phone_number".tr,
-          style: theme.textTheme.titleMedium,
-        ),
-        SizedBox(height: 2.h),
-        BlocSelector<EditprofileBloc, EditprofileState,
-            TextEditingController?>(
-        selector: (state) => state.phoneNumberController,
-    builder: (context, phoneNumberController) {
-    return CustomTextFormField(
-    controller: phoneNumberController,
-
-
-      hintText: "lbl_phone".tr,
-      textInputAction: TextInputAction.done,
-      textInputType: TextInputType.phone,
-      prefix: Container(
-        margin: EdgeInsets.fromLTRB (12.h, 10.h, 10.h, 10.h),
-        child: CustomImageView(
-          imagePath: ImageConstant.imgPhone,
-          height: 22.h,
-          width: 24.h,
-          fit: BoxFit.contain,
-        ),
+            "lbl_email".tr,
+            style: theme.textTheme.titleMedium,
+          ),
+          BlocSelector<EditprofileBloc, EditprofileState,
+              TextEditingController?>(
+            selector: (state) => state.emailtwoController,
+            builder: (context, emailtwoController) {
+              return CustomTextFormField(
+                controller: emailtwoController,
+                hintText: "msg_mail".tr,
+                textInputType: TextInputType.emailAddress,
+                prefix: Container(
+                  margin: EdgeInsets.fromLTRB(12.h, 10.h, 10.h, 10.h),
+                  child: CustomImageView(
+                    imagePath: ImageConstant.imgEmail,
+                    height: 22.h,
+                    width: 24.h,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+                prefixConstraints: BoxConstraints(
+                  maxHeight: 48.h,
+                ),
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: 12.h,
+                  vertical: 10.h,
+                ),
+                validator: (value) {
+                  // if (value == null ||
+                  //     (!isValidEmail (value, isRequired: true))) {
+                  //   return "err_msg_please_enter_valid_email".tr;
+                  // }
+                  return null;
+                },
+              );
+            },
+          )
+        ],
       ),
-      prefixConstraints: BoxConstraints(
-        maxHeight: 48.h,
-      ),
-      contentPadding: EdgeInsets.symmetric(
-        horizontal: 12.h,
-        vertical: 10.h,
-      ),
-      validator: (value) {
-        // if (!isValidPhone (value)) {
-        //   return "err_msg_please_enter_valid_phone_number".tr;
-        // }
-        return null;
-      },
-    );
-    },
-        )
-          ],
-        ),
     );
   }
+
+  /// Section Widget
+  Widget _buildPhoneNumberSection(BuildContext context) {
+    return Container(
+      width: double.maxFinite,
+      margin: EdgeInsets.only(right: 16.h),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "lbl_phone_number".tr,
+            style: theme.textTheme.titleMedium,
+          ),
+          SizedBox(height: 2.h),
+          BlocSelector<EditprofileBloc, EditprofileState,
+              TextEditingController?>(
+            selector: (state) => state.phoneNumberController,
+            builder: (context, phoneNumberController) {
+              return CustomTextFormField(
+                controller: phoneNumberController,
+                hintText: "lbl_phone".tr,
+                textInputAction: TextInputAction.done,
+                textInputType: TextInputType.phone,
+                prefix: Container(
+                  margin: EdgeInsets.fromLTRB(12.h, 10.h, 10.h, 10.h),
+                  child: CustomImageView(
+                    imagePath: ImageConstant.imgPhone,
+                    height: 22.h,
+                    width: 24.h,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+                prefixConstraints: BoxConstraints(
+                  maxHeight: 48.h,
+                ),
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: 12.h,
+                  vertical: 10.h,
+                ),
+                validator: (value) {
+                  // if (!isValidPhone (value)) {
+                  //   return "err_msg_please_enter_valid_phone_number".tr;
+                  // }
+                  return null;
+                },
+              );
+            },
+          )
+        ],
+      ),
+    );
+  }
+
   /// Navigates to the previous screen.
-  onTapBtnArrowleftone (BuildContext context) { NavigatorService.goBack();
+  onTapBtnArrowleftone(BuildContext context) {
+    NavigatorService.goBack();
   }
 }

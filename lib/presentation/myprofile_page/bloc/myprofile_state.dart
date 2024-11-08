@@ -1,4 +1,5 @@
 part of 'myprofile_bloc.dart';
+
 /// Represents the state of Myprofile in the application.
 // ignore_for_file: must_be_immutable
 class MyprofileState extends Equatable {
@@ -8,6 +9,7 @@ class MyprofileState extends Equatable {
   List<Object?> get props => [myprofileModelObj];
   MyprofileState copywith({MyprofileModel? myprofileModelobj}) {
     return MyprofileState(
-      myprofileModelObj: myprofileModelObj ?? this.myprofileModelObj, );
+      myprofileModelObj: myprofileModelObj ?? this.myprofileModelObj,
+    );
   }
 }

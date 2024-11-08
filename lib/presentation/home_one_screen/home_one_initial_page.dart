@@ -11,29 +11,33 @@ import 'bloc/home_one_bloc.dart';
 import 'models/home_one_initial_model.dart';
 import 'models/hotellist_item_model.dart';
 import 'widgets/hotellist_item_widget.dart';
+
 class HomeOneInitialPage extends StatefulWidget {
   const HomeOneInitialPage({Key? key})
-      :
-        super(
-        key: key, );
+      : super(
+          key: key,
+        );
   @override
   HomeOneInitialPageState createState() => HomeOneInitialPageState();
-  static Widget builder (BuildContext context) {
+  static Widget builder(BuildContext context) {
     return BlocProvider<HomeOneBloc>(
-      create: (context) => HomeOneBloc (HomeOneState(
-        homeOneInitialModelObj: HomeOneInitialModel(), ))
+      create: (context) => HomeOneBloc(HomeOneState(
+        homeOneInitialModelObj: HomeOneInitialModel(),
+      ))
         ..add(HomeOneInitialEvent()),
       child: HomeOneInitialPage(),
     );
   }
 }
+
 class HomeOneInitialPageState extends State<HomeOneInitialPage> {
   @override
-  Widget build (BuildContext context) {
+  Widget build(BuildContext context) {
     return Container(
       width: double.maxFinite,
       decoration: BoxDecoration(
-        color: appTheme.whiteA700,),
+        color: appTheme.whiteA700,
+      ),
       child: Column(
         children: [
           SizedBox(
@@ -61,8 +65,9 @@ class HomeOneInitialPageState extends State<HomeOneInitialPage> {
       ),
     );
   }
+
   /// Section Widget
-  Widget _buildAppBar (BuildContext context) {
+  Widget _buildAppBar(BuildContext context) {
     return Container(
       width: double.maxFinite,
       child: CustomAppBar(
@@ -80,34 +85,39 @@ class HomeOneInitialPageState extends State<HomeOneInitialPage> {
           },
         ),
         actions: [
-        AppbarTrailingImage(
-        imagePath: ImageConstant.imgMessageTextSquare02,
-      ),
-      AppbarTrailingImage(
-        onTap: (){
-          Navigator.push(context, MaterialPageRoute(builder: (ctx) => const NotificationScreen()),);
-        },
-        imagePath: ImageConstant.imgIcon,
-        margin: EdgeInsets.only(
-          left: 8.h,
-          right: 32.h,
-        ),
-      )
+          AppbarTrailingImage(
+            imagePath: ImageConstant.imgMessageTextSquare02,
+          ),
+          AppbarTrailingImage(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (ctx) => NotificationScreen()),
+              );
+            },
+            imagePath: ImageConstant.imgIcon,
+            margin: EdgeInsets.only(
+              left: 8.h,
+              right: 32.h,
+            ),
+          )
         ],
       ),
     );
   }
+
   /// Section Widget
-  Widget _buildWelcomeSection (BuildContext context) {
+  Widget _buildWelcomeSection(BuildContext context) {
     return Container(
       width: double.maxFinite,
-      margin: EdgeInsets.symmetric (horizontal: 24.h),
+      margin: EdgeInsets.symmetric(horizontal: 24.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             padding: EdgeInsets.only(left: 10.h),
-            child: Text( "lbl_hello_hoangphan".tr,
+            child: Text(
+              "lbl_hello_hoangphan".tr,
               style: CustomTextStyles.labelLargePoppinsBlack90001,
             ),
           ),
@@ -129,11 +139,9 @@ class HomeOneInitialPageState extends State<HomeOneInitialPage> {
               textAlign: TextAlign.left,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
-
-
             ),
           ),
-          SizedBox (height: 14.h),
+          SizedBox(height: 14.h),
           BlocSelector<HomeOneBloc, HomeOneState, TextEditingController?>(
             selector: (state) => state.searchController,
             builder: (context, searchController) {
@@ -142,7 +150,6 @@ class HomeOneInitialPageState extends State<HomeOneInitialPage> {
                 hintText: "msg_search_your_hotel".tr,
                 contentPadding: EdgeInsets.fromLTRB(12.h, 16.h, 16.h, 16.h),
               );
-
             },
           ),
           SizedBox(height: 14.h),
@@ -166,14 +173,14 @@ class HomeOneInitialPageState extends State<HomeOneInitialPage> {
       ),
     );
   }
+
   /// Section Widget
-  Widget _buildHotelList (BuildContext context) {
+  Widget _buildHotelList(BuildContext context) {
     return Align(
       alignment: Alignment.centerLeft,
       child: Container(
         margin: EdgeInsets.only(left: 26.h),
-        child: BlocSelector < HomeOneBloc, HomeOneState, HomeOneInitialModel?
-        >(
+        child: BlocSelector<HomeOneBloc, HomeOneState, HomeOneInitialModel?>(
           selector: (state) => state.homeOneInitialModelObj,
           builder: (context, homeOneInitialModelObj) {
             return SingleChildScrollView(
@@ -183,14 +190,14 @@ class HomeOneInitialPageState extends State<HomeOneInitialPage> {
                 spacing: 14.h,
                 children: List.generate(
                   homeOneInitialModelObj?.hotellistItemList.length ?? 0,
-                      (index) {
-                  HotellistItemModel model =
-                      homeOneInitialModelObj?.hotellistItemList[index] ??
-                          HotellistItemModel();
-                  return HotellistItemWidget(
-                    model,
-                  );
-                },
+                  (index) {
+                    HotellistItemModel model =
+                        homeOneInitialModelObj?.hotellistItemList[index] ??
+                            HotellistItemModel();
+                    return HotellistItemWidget(
+                      model,
+                    );
+                  },
                 ),
               ),
             );
@@ -199,12 +206,13 @@ class HomeOneInitialPageState extends State<HomeOneInitialPage> {
       ),
     );
   }
+
   /// Section Widget
   Widget _buildNearbyHotels(BuildContext context) {
     return Container(
       width: double.maxFinite,
-      margin: EdgeInsets.symmetric (horizontal: 20.h),
-      child: Column (
+      margin: EdgeInsets.symmetric(horizontal: 20.h),
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
@@ -250,9 +258,9 @@ class HomeOneInitialPageState extends State<HomeOneInitialPage> {
                     ],
                   ),
                 ),
-                SizedBox (width: 4.h),
+                SizedBox(width: 4.h),
                 Expanded(
-                  child: Column (
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
@@ -265,7 +273,8 @@ class HomeOneInitialPageState extends State<HomeOneInitialPage> {
                             ),
                             Padding(
                               padding: EdgeInsets.only(left: 24.h),
-                              child: Text( "lbl_25_day".tr,
+                              child: Text(
+                                "lbl_25_day".tr,
                                 style: CustomTextStyles.titleSmallInterCyan600,
                               ),
                             )
@@ -275,7 +284,8 @@ class HomeOneInitialPageState extends State<HomeOneInitialPage> {
                       SizedBox(height: 6.h),
                       Text(
                         "msg_ram_nagar_nt_0872".tr,
-                        style: CustomTextStyles.labelLargePlusJakartaSansBluegray400,
+                        style: CustomTextStyles
+                            .labelLargePlusJakartaSansBluegray400,
                       ),
                       SizedBox(height: 6.h),
                       SizedBox(
@@ -287,8 +297,10 @@ class HomeOneInitialPageState extends State<HomeOneInitialPage> {
                             ),
                             Padding(
                               padding: EdgeInsets.only(left: 4.h),
-                              child: Text( "lbl_5_0".tr,
-                                style: CustomTextStyles.labelLargePlusJakartaSansBlack900,
+                              child: Text(
+                                "lbl_5_0".tr,
+                                style: CustomTextStyles
+                                    .labelLargePlusJakartaSansBlack900,
                               ),
                             )
                           ],

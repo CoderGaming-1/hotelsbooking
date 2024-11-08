@@ -1,4 +1,5 @@
 part of 'mybooking_bloc.dart';
+
 /// Represents the state of Mybooking in the application.
 // ignore_for_file: must_be_immutable
 class MybookingState extends Equatable {
@@ -11,11 +12,12 @@ class MybookingState extends Equatable {
   List<Object?> get props => [mybookinghistorTabModelObj, mybookingModelObj];
 
   MybookingState copywith({
-    MybookinghistorTabModel? mybookinghistorTabModelObj, MybookingModel? mybookingModelObj,
+    MybookinghistorTabModel? mybookinghistorTabModelObj,
+    MybookingModel? mybookingModelObj,
   }) {
     return MybookingState(
-      mybookinghistorTabModelObj: mybookinghistorTabModelObj ??
-          this.mybookinghistorTabModelObj,
+      mybookinghistorTabModelObj:
+          mybookinghistorTabModelObj ?? this.mybookinghistorTabModelObj,
       mybookingModelObj: mybookingModelObj ?? this.mybookingModelObj,
     );
   }

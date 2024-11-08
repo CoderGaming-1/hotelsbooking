@@ -24,12 +24,12 @@ import 'package:hotelsbooking/presentation/home_one_screen/models/home_one_model
 // }
 class DefaultWidgets extends StatelessWidget {
   @override
-  Widget build (BuildContext context) {
+  Widget build(BuildContext context) {
     return Container(
       color: Color(0xffffffff),
       padding: EdgeInsets.all(10),
       child: Center(
-        child: Column (
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -45,14 +45,14 @@ class DefaultWidgets extends StatelessWidget {
     );
   }
 }
+
 class HomeOneScreen extends StatelessWidget {
   HomeOneScreen({Key? key})
-      :
-        super(
-        key: key,
-      );
+      : super(
+          key: key,
+        );
   GlobalKey<NavigatorState> navigatorKey = GlobalKey();
-  static Widget builder (BuildContext context) {
+  static Widget builder(BuildContext context) {
     return BlocProvider<HomeOneBloc>(
       create: (context) => HomeOneBloc(HomeOneState(
         homeOneModelObj: HomeOneModel(),
@@ -61,6 +61,7 @@ class HomeOneScreen extends StatelessWidget {
       child: HomeOneScreen(),
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -72,30 +73,32 @@ class HomeOneScreen extends StatelessWidget {
           onGenerateRoute: (routeSetting) => PageRouteBuilder(
             pageBuilder: (ctx, ani, ani1) =>
                 getCurrentPage(context, routeSetting.name!),
-            transitionDuration: Duration (seconds: 0),
+            transitionDuration: Duration(seconds: 0),
           ),
         ),
         bottomNavigationBar: SizedBox(
           width: double.maxFinite,
           child: _buildBottomNavigation(context),
-        ) ,
+        ),
       ),
     );
   }
+
   /// Section Widget
   Widget _buildBottomNavigation(BuildContext context) {
     return SizedBox(
       width: double.maxFinite,
       child: CustomBottomBar(
         onChanged: (BottomBarEnum type) {
-          Navigator.pushNamed (
-              navigatorKey.currentContext!, getCurrentRoute (type));
+          Navigator.pushNamed(
+              navigatorKey.currentContext!, getCurrentRoute(type));
         },
       ),
     );
   }
+
   ///Handling route based on bottom click actions
-  String getCurrentRoute (BottomBarEnum type) {
+  String getCurrentRoute(BottomBarEnum type) {
     switch (type) {
       case BottomBarEnum.Home:
         return AppRoutes.homeOneInitialPage;
@@ -114,9 +117,9 @@ class HomeOneScreen extends StatelessWidget {
 
 //Handling page based on route
   Widget getCurrentPage(
-      BuildContext context,
-      String currentRoute,
-      ) {
+    BuildContext context,
+    String currentRoute,
+  ) {
     switch (currentRoute) {
       case AppRoutes.homeOneInitialPage:
         return HomeOneInitialPage.builder(context);

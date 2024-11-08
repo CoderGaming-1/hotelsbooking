@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'bookinglistsection_item_model.dart';
+
 /// This class is used in the [mybookinghistor_tab_page] screen.
 // ignore_for_file: must_be_immutable
 class MybookinghistorTabModel extends Equatable {
@@ -9,9 +10,10 @@ class MybookinghistorTabModel extends Equatable {
       {List<BookinglistsectionItemModel>? bookinglistsectionItemList}) {
     return MybookinghistorTabModel(
       bookinglistsectionItemList:
-      bookinglistsectionItemList ?? this.bookinglistsectionItemList,
+          bookinglistsectionItemList ?? this.bookinglistsectionItemList,
     );
   }
+
   @override
   List<Object?> get props => [bookinglistsectionItemList];
 }
