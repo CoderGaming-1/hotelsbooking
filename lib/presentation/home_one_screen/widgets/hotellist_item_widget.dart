@@ -19,11 +19,21 @@ class HotellistItemWidget extends StatelessWidget {
           child: Stack(
             alignment: Alignment.center,
             children: [
-              CustomImageView(
-                imagePath: hotellistItemModelObj.dayOne!,
-                height: 268.h,
-                width: double.maxFinite,
-
+              // CustomImageView(
+              //   imagePath: hotellistItemModelObj.dayOne!,
+              //   height: 268.h,
+              //   width: double.maxFinite,
+              //
+              // ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, '/detail_screen');
+                },
+                child: CustomImageView(
+                  imagePath: hotellistItemModelObj.dayOne!,
+                  height: 268.h,
+                  width: double.maxFinite,
+                ),
               ),
               Container(
                 width: double.maxFinite,

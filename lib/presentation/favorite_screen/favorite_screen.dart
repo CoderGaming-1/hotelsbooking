@@ -7,6 +7,15 @@ import 'bloc/favorite_bloc.dart';
 import 'models/favorite_model.dart';
 import 'models/favoritegrid_item_model.dart';
 import 'widgets/favoritegrid_item_widget.dart';
+import 'package:hotelsbooking/presentation/editprofile_screen/editprofile_screen.dart';
+import 'package:hotelsbooking/presentation/favorite_screen/favorite_screen.dart';
+import 'package:hotelsbooking/presentation/mybooking_screen/mybooking_screen.dart';
+import 'package:hotelsbooking/presentation/myprofile_page/myprofile_page.dart';
+import 'package:hotelsbooking/widgets/custom_bottom_bar.dart';
+import 'package:hotelsbooking/presentation/home_one_screen/bloc/home_one_bloc.dart';
+import 'package:hotelsbooking/presentation/home_one_screen/home_one_initial_page.dart';
+import 'package:hotelsbooking/presentation/home_one_screen/models/home_one_model.dart';
+import 'package:hotelsbooking/presentation/detail_screen/detail_screen.dart';
 // ignore_for_file: must_be_immutable
 class FavoriteScreen extends StatelessWidget {
   FavoriteScreen({Key? key})
@@ -58,14 +67,12 @@ class FavoriteScreen extends StatelessWidget {
   _buildFavoriteGrid(context)
   ],
   ),
-
-
-
   ),
-  // bottomNavigationBar: SizedBox(
-  // width: double.maxFinite,
-  // child: _buildBottomNavigation(context),
-  // ),
+  bottomNavigationBar:
+  SizedBox(
+  width: double.maxFinite,
+  child: _buildBottomNavigation(context),
+  ),
   ),
   );
   }
@@ -94,8 +101,6 @@ class FavoriteScreen extends StatelessWidget {
   (index) {
   FavoritegridItemModel model =
   favoriteModelObj?.favoritegridItemList[index] ??
-
-
   FavoritegridItemModel();
   return FavoritegridItemWidget( model, );
   },
@@ -108,30 +113,60 @@ class FavoriteScreen extends StatelessWidget {
   }
   /// Section Widget
 
-  Widget _buildBottomNavigation (BuildContext context) {
-  return SizedBox(
-  width: double.maxFinite,
-  child: CustomBottomBar(
-  onChanged: (BottomBarEnum type) {
-  Navigator.pushNamed (
-  navigatorKey.currentContext!, getCurrentRoute (type));
-  },
-  ),
-  );
+  Widget _buildBottomNavigation(BuildContext context) {
+    return SizedBox(
+      width: double.maxFinite,
+      child: CustomBottomBar(
+        onChanged: (BottomBarEnum type) {
+          final route = getCurrentRoute(type);
+          // Navigator.pushNamed (
+          //     navigatorKey.currentContext!, getCurrentRoute (type));
+          if (route.isNotEmpty) {
+            Navigator.of(context).pushNamed(route);
+          }
+        },
+      ),
+    );
   }
   ///Handling route based on bottom click actions
   String getCurrentRoute (BottomBarEnum type) {
-  switch (type) {
-  case BottomBarEnum.Home:
-  return "/";
-  case BottomBarEnum.Mybooking:
-  return "/";
-  case BottomBarEnum.Favorite:
-  return "/";
-  case BottomBarEnum.Myprofile:
-  return "/";
-  default:
-  return "/";
+    switch (type) {
+      case BottomBarEnum.Home:
+        return AppRoutes.homeOneInitialPage;
+      case BottomBarEnum.Mybooking:
+        return AppRoutes.mybookingScreen;
+      case BottomBarEnum.Favorite:
+        return AppRoutes.favoriteScreen;
+      case BottomBarEnum.Myprofile:
+        return AppRoutes.myprofileScreen;
+      default:
+        return "/";
+    }
   }
+
+  ///Add Default Widgets
+
+//Handling page based on route
+  Widget getCurrentPage(
+      BuildContext context,
+      String currentRoute,
+      ) {
+    switch (currentRoute) {
+      case AppRoutes.homeOneInitialPage:
+        return HomeOneInitialPage.builder(context);
+      case AppRoutes.myprofileScreen:
+        return MyprofilePage.builder(context);
+      case AppRoutes.mybookingScreen:
+        return MybookingScreen.builder(context);
+      case AppRoutes.favoriteScreen:
+        return FavoriteScreen.builder(context);
+      case AppRoutes.editProfileScreen:
+        return EditprofileScreen.builder(context);
+      case AppRoutes.detailScreen:
+        return DetailsScreen.builder(context);
+
+      default:
+        return DefaultWidgets();
+    }
   }
 }

@@ -4,6 +4,14 @@ import '../../widgets/custom_bottom_bar.dart';
 import 'bloc/mybooking_bloc.dart';
 import 'models/mybooking_model.dart';
 import 'mybookinghistor_tab_page.dart';
+import 'package:hotelsbooking/presentation/home_one_screen/bloc/home_one_bloc.dart';
+import 'package:hotelsbooking/presentation/home_one_screen/home_one_initial_page.dart';
+import 'package:hotelsbooking/presentation/home_one_screen/models/home_one_model.dart';
+import 'package:hotelsbooking/presentation/detail_screen/detail_screen.dart';
+import 'package:hotelsbooking/presentation/editprofile_screen/editprofile_screen.dart';
+import 'package:hotelsbooking/presentation/favorite_screen/favorite_screen.dart';
+import 'package:hotelsbooking/presentation/mybooking_screen/mybooking_screen.dart';
+import 'package:hotelsbooking/presentation/myprofile_page/myprofile_page.dart';
 class MybookingScreen extends StatefulWidget {
   const MybookingScreen({Key? key})
       :
@@ -60,12 +68,10 @@ class MybookingScreenState extends State<MybookingScreen> with TickerProviderSta
   ),
   /// bottom Navigation Bar
 
-  // bottomNavigationBar: SizedBox(
-  // width: double.maxFinite,
-  // child: _buildBottomNavigationBar(context),
-  //
-  //
-  // ),
+  bottomNavigationBar: SizedBox(
+  width: double.maxFinite,
+  child: _buildBottomNavigation(context),
+  ),
   ),
   );
   }
@@ -157,32 +163,59 @@ class MybookingScreenState extends State<MybookingScreen> with TickerProviderSta
   );
   }
   /// Section Widget
-  Widget _buildBottomNavigationBar (BuildContext context) {
-  return SizedBox(
-  width: double.maxFinite,
-  child: CustomBottomBar(
-  onChanged: (BottomBarEnum type) {
-  Navigator.pushNamed (
-  navigatorKey.currentContext!, getCurrentRoute (type));
-  },
-  ),
-
-
-  );
+  Widget _buildBottomNavigation(BuildContext context) {
+    return SizedBox(
+      width: double.maxFinite,
+      child: CustomBottomBar(
+        onChanged: (BottomBarEnum type) {
+          final route = getCurrentRoute(type);
+          // Navigator.pushNamed (
+          //     navigatorKey.currentContext!, getCurrentRoute (type));
+          if (route.isNotEmpty) {
+            Navigator.of(context).pushNamed(route);
+          }
+        },
+      ),
+    );
   }
   ///Handling route based on bottom click actions
   String getCurrentRoute (BottomBarEnum type) {
-  switch (type) {
-  case BottomBarEnum.Home:
-  return "/";
-  case BottomBarEnum.Mybooking:
-  return "/";
-  case BottomBarEnum.Favorite:
-  return "/";
-  case BottomBarEnum.Myprofile:
-  return "/";
-  default:
-  return "/";
+    switch (type) {
+      case BottomBarEnum.Home:
+        return AppRoutes.homeOneInitialPage;
+      case BottomBarEnum.Mybooking:
+        return AppRoutes.mybookingScreen;
+      case BottomBarEnum.Favorite:
+        return AppRoutes.favoriteScreen;
+      case BottomBarEnum.Myprofile:
+        return AppRoutes.myprofileScreen;
+      default:
+        return "/";
+    }
   }
+
+  ///Add Default Widgets
+
+//Handling page based on route
+  Widget getCurrentPage(
+      BuildContext context,
+      String currentRoute,
+      ) {
+    switch (currentRoute) {
+      case AppRoutes.homeOneInitialPage:
+        return HomeOneInitialPage.builder(context);
+      case AppRoutes.myprofileScreen:
+        return MyprofilePage.builder(context);
+      case AppRoutes.mybookingScreen:
+        return MybookingScreen.builder(context);
+      case AppRoutes.favoriteScreen:
+        return FavoriteScreen.builder(context);
+      case AppRoutes.editProfileScreen:
+        return EditprofileScreen.builder(context);
+      case AppRoutes.detailScreen:
+        return DetailsScreen.builder(context);
+      default:
+        return DefaultWidgets();
+    }
   }
 }

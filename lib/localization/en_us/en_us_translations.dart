@@ -71,4 +71,61 @@ final Map<String, String> enUs = {
   "lbl_save_changes": "Save Changes",
   "lbl_username": "Username",
   "msg_mail": "hoangphan5721@gmail.com",
+
+  // From Details Screen
+  "lbl_continue": "Continue",
+  "lbl_from_detail": "From Detail",
+  "lbl_guests": "Guests",
+  "lbl_number_phone": "Number Phone",
+  "lbl_room_type": "Room Type",
+  "lbl_select_date": "Select Date",
+  "msg_i_accept_the_apps":
+  "I accept the Apps Terms of Service, Community Guidelines, and Privacy",
+  "msg_keep_me_update_on":
+  "Keep me update on more hotel and news from this apps",
+  "msg_select_number_of": "Select number of guest",
+  "msg_select_room_type": "Select room type",
+  "msg_send_me_emails_about":
+  "Send me emails about the best hotel nearby or discount",
+  "msg_your_phone_number": "Your phone number",
+  "lbl_select" : "Payment",
+
+  // Checkout Screen
+  "lbl_0876556478": "0876556478",
+  "lbl_139_00": "\$139.00",
+  "lbl_141_50": "\$141.50",
+  "lbl_25_day": "\$25/Day",
+  "lbl_2_50": "\$2.50",
+  "lbl_5_0": "5.0",
+  "lbl_admin_fee": "Admin fee",
+  "lbl_asteria_hostel": "Asteria hostel",
+  "lbl_checkout": "Checkout",
+  "lbl_guest": "Guest",
+  "lbl_payment": "Payment",
+  "lbl_phone": "Phone",
+  "lbl_price": "Price",
+  "lbl_price_details": "Price Details",
+  "lbl_promo": "Promo",
+  "lbl_queen_room": "Queen Room",
+  "lbl_room_type2": "Room type",
+  "lbl_total_price": "Total Price",
+  "lbl_your_booking": "Your Booking",
+  "msg_12_15_nov_2024": "12 15 Nov 2024",
+  "msg_2_guest_1_room": "2 Guest (1 Room)",
+  "msg_ram_nagar_nt_0872": "Ram Nagar NT 0872, Katraj",
+
+  // Details Screen
+  "lbl_dates" : "Dates",
+  "lbl 38 day": "\$38/Day",
+  "lbl 5 0": "5.0",
+  "lbl book now": "Book Now",
+  "lbl_breakfast": "BREAKFAST",
+  "lbl_description": "Description",
+  "lbl_details": "DETAILS",
+  "lbl_free_wifi": "Free Wifi",
+  "lbl_preview": "Preview",
+  "msg_contact_98674456xx": "CONTACT TO OUR SERVICE CUSTOMER",
+  "msg_start_living_your":
+  "Start living your best lifefrom day one\nBring a box full of hopes, dreams, ambitions... and of course, your personal belongings.",
+  "msg_upper_indira_nagar": "Upper indira nagar, NT 0870, Bibwewadi",
 };

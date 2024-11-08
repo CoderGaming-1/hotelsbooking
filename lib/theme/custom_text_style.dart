@@ -178,4 +178,45 @@ class CustomTextStyles {
       theme.textTheme.titleMedium!.copyWith( color: theme.colorScheme.primaryContainer,
   fontWeight: FontWeight.w500,
   );
+  static TextStyle get bodySmallErrorContainer =>
+      theme.textTheme.bodySmall!.copyWith( color: theme.colorScheme.errorContainer, );
+  static TextStyle get titleSmallPlusJakartaSansOnPrimary =>
+      theme.textTheme.titleSmall!.plusJakartaSans.copyWith(
+        color: theme.colorScheme.onPrimary,
+        fontWeight: FontWeight.w700,
+      );
+  static TextStyle get titleSmallInterPrimary => theme.textTheme.titleSmall!.inter.copyWith(
+    color: theme.colorScheme.primary,
+    fontWeight: FontWeight.w700,
+  );
+  static TextStyle get titleSmallPlusJakartaSansPrimaryContainer =>
+      theme.textTheme.titleSmall!.plusJakartaSans.copyWith(
+      color: theme.colorScheme.primaryContainer,
+      fontWeight: FontWeight.w700,
+      );
+  static TextStyle get titleMediumPlusJakartaSansOnPrimary => theme.textTheme.titleMedium!.plusJakartaSans.copyWith(
+    color: theme.colorScheme.primaryContainer,
+    fontWeight: FontWeight.w700,
+  );
+  static TextStyle get titleSmallPlusJakartaSansBlack900 =>
+      theme.textTheme.titleSmall!.plusJakartaSans.copyWith(
+  color: appTheme.black900,
+  fontWeight: FontWeight.w700,
+  );
+
+  static TextStyle get labelLargePlusJakartaSansOnPrimaryContainer => theme.textTheme.labelLarge!.plusJakartaSans.copyWith(
+  color: theme.colorScheme.onPrimaryContainer.withOpacity(1),
+  );
+  static TextStyle get titleSmallOnPrimaryContainer =>
+  theme.textTheme.titleSmall!.copyWith(
+  color: theme.colorScheme.onPrimaryContainer.withOpacity(1),
+  fontWeight: FontWeight.w500,
+  );
+  static TextStyle get titleSmall0nPrimaryContainer_1 =>
+  theme.textTheme.titleSmall!.copyWith(
+  color: theme.colorScheme.onPrimaryContainer.withOpacity (1), );
+
+  static TextStyle get titleSmallMedium => theme.textTheme.titleSmall!.copyWith(
+  fontWeight: FontWeight.w500,
+  );
 }

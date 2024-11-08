@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hotelsbooking/core/app_export.dart';
 import 'package:hotelsbooking/data/models/selectionPopupModel/selection_popup_model.dart';
+import 'package:hotelsbooking/presentation/from_details_screen/from_details_screen.dart';
 import 'package:hotelsbooking/widgets/app_bar/appbar_title_dropdown.dart';
 import 'package:hotelsbooking/widgets/app_bar/appbar_trailing_image.dart';
 import 'package:hotelsbooking/widgets/app_bar/custom_app_bar.dart';
@@ -10,23 +11,54 @@ import 'bloc/home_one_bloc.dart';
 import 'models/home_one_initial_model.dart';
 import 'models/hotellist_item_model.dart';
 import 'widgets/hotellist_item_widget.dart';
+import 'package:hotelsbooking/presentation/editprofile_screen/editprofile_screen.dart';
+import 'package:hotelsbooking/presentation/favorite_screen/favorite_screen.dart';
+import 'package:hotelsbooking/presentation/mybooking_screen/mybooking_screen.dart';
+import 'package:hotelsbooking/presentation/myprofile_page/myprofile_page.dart';
+import 'package:hotelsbooking/widgets/custom_bottom_bar.dart';
+import 'package:hotelsbooking/presentation/home_one_screen/bloc/home_one_bloc.dart';
+import 'package:hotelsbooking/presentation/home_one_screen/home_one_initial_page.dart';
+import 'package:hotelsbooking/presentation/home_one_screen/models/home_one_model.dart';
+import 'package:hotelsbooking/presentation/detail_screen/detail_screen.dart';
+import 'package:hotelsbooking/presentation/from_details_screen/from_details_screen.dart';
+class DefaultWidgets extends StatelessWidget {
+  @override
+  Widget build (BuildContext context) {
+    return Container(
+      color: Color(0xffffffff),
+      padding: EdgeInsets.all(10),
+      child: Center(
+        child: Column (
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Please replace the respective Widget here',
+              style: TextStyle(
+                fontSize: 18,
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
 class HomeOneInitialPage extends StatefulWidget {
-  const HomeOneInitialPage({Key? key})
-      :
-        super(
-        key: key, );
+  HomeOneInitialPage({Key? key}) :super(key: key, );
   @override
   HomeOneInitialPageState createState() => HomeOneInitialPageState();
+
   static Widget builder (BuildContext context) {
     return BlocProvider<HomeOneBloc>(
-      create: (context) => HomeOneBloc (HomeOneState(
-        homeOneInitialModelObj: HomeOneInitialModel(), ))
+      create: (context) => HomeOneBloc (HomeOneState(homeOneInitialModelObj: HomeOneInitialModel(), ))
         ..add(HomeOneInitialEvent()),
       child: HomeOneInitialPage(),
     );
   }
 }
 class HomeOneInitialPageState extends State<HomeOneInitialPage> {
+  final GlobalKey<NavigatorState> navigatorKey = GlobalKey();
   @override
   Widget build (BuildContext context) {
     return Container(
@@ -50,7 +82,9 @@ class HomeOneInitialPageState extends State<HomeOneInitialPage> {
                     SizedBox(height: 12.h),
                     _buildHotelList(context),
                     SizedBox(height: 12.h),
-                    _buildNearbyHotels(context)
+                    _buildNearbyHotels(context),
+                    SizedBox(height: 12.h),
+                    _buildBottomNavigation(context)
                   ],
                 ),
               ),
@@ -60,6 +94,55 @@ class HomeOneInitialPageState extends State<HomeOneInitialPage> {
       ),
     );
   }
+
+
+// class HomeOneInitialPage extends StatefulWidget {
+//   const HomeOneInitialPage({Key? key}) :super(key: key, );
+//   @override
+//   HomeOneInitialPageState createState() => HomeOneInitialPageState();
+//
+//   static Widget builder (BuildContext context) {
+//     return BlocProvider<HomeOneBloc>(
+//       create: (context) => HomeOneBloc (HomeOneState(homeOneInitialModelObj: HomeOneInitialModel(), ))
+//         ..add(HomeOneInitialEvent()),
+//       child: HomeOneInitialPage(),
+//     );
+//   }
+// }
+// class HomeOneInitialPageState extends State<HomeOneInitialPage> {
+//   @override
+//   Widget build (BuildContext context) {
+//     return Container(
+//       width: double.maxFinite,
+//       decoration: BoxDecoration(
+//         color: appTheme.whiteA700,),
+//       child: Column(
+//         children: [
+//           SizedBox(
+//             width: double.maxFinite,
+//             child: _buildAppBar(context),
+//           ),
+//           Expanded(
+//             child: SingleChildScrollView(
+//               child: SizedBox(
+//                 width: double.maxFinite,
+//                 child: Column(
+//                   children: [
+//                     SizedBox(height: 8.h),
+//                     _buildWelcomeSection(context),
+//                     SizedBox(height: 12.h),
+//                     _buildHotelList(context),
+//                     SizedBox(height: 12.h),
+//                     _buildNearbyHotels(context)
+//                   ],
+//                 ),
+//               ),
+//             ),
+//           )
+//         ],
+//       ),
+//     );
+//   }
   /// Section Widget
   Widget _buildAppBar (BuildContext context) {
     return Container(
@@ -168,8 +251,7 @@ class HomeOneInitialPageState extends State<HomeOneInitialPage> {
       alignment: Alignment.centerLeft,
       child: Container(
         margin: EdgeInsets.only(left: 26.h),
-        child: BlocSelector < HomeOneBloc, HomeOneState, HomeOneInitialModel?
-        >(
+        child: BlocSelector < HomeOneBloc, HomeOneState, HomeOneInitialModel?>(
           selector: (state) => state.homeOneInitialModelObj,
           builder: (context, homeOneInitialModelObj) {
             return SingleChildScrollView(
@@ -299,5 +381,62 @@ class HomeOneInitialPageState extends State<HomeOneInitialPage> {
         ],
       ),
     );
+  }
+  Widget _buildBottomNavigation(BuildContext context) {
+    return SizedBox(
+      width: double.maxFinite,
+      child: CustomBottomBar(
+        onChanged: (BottomBarEnum type) {
+          final route = getCurrentRoute(type);
+          // Navigator.pushNamed (
+          //     navigatorKey.currentContext!, getCurrentRoute (type));
+          if (route.isNotEmpty) {
+            Navigator.of(context).pushNamed(route);
+          }
+        },
+      ),
+    );
+  }
+  ///Handling route based on bottom click actions
+  String getCurrentRoute (BottomBarEnum type) {
+    switch (type) {
+      case BottomBarEnum.Home:
+        return AppRoutes.homeOneInitialPage;
+      case BottomBarEnum.Mybooking:
+        return AppRoutes.mybookingScreen;
+      case BottomBarEnum.Favorite:
+        return AppRoutes.favoriteScreen;
+      case BottomBarEnum.Myprofile:
+        return AppRoutes.myprofileScreen;
+      default:
+        return "/";
+    }
+  }
+
+  ///Add Default Widgets
+
+//Handling page based on route
+  Widget getCurrentPage(
+      BuildContext context,
+      String currentRoute,
+      ) {
+    switch (currentRoute) {
+      case AppRoutes.homeOneInitialPage:
+        return HomeOneInitialPage.builder(context);
+      case AppRoutes.myprofileScreen:
+        return MyprofilePage.builder(context);
+      case AppRoutes.mybookingScreen:
+        return MybookingScreen.builder(context);
+      case AppRoutes.favoriteScreen:
+        return FavoriteScreen.builder(context);
+      case AppRoutes.editProfileScreen:
+        return EditprofileScreen.builder(context);
+      case AppRoutes.detailScreen:
+        return DetailsScreen.builder(context);
+      case AppRoutes.fromdetailsScreen:
+        return FromDetailsScreen.builder(context);
+      default:
+        return DefaultWidgets();
+    }
   }
 }

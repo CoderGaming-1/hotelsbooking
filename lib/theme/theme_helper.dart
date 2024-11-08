@@ -91,6 +91,9 @@ class LightCodeColors {
   Color get errorContainer => const Color(0xFF000000);
   Color get onPrimary => const Color(0xFF0F0F0F);
   Color get onPrimaryContainer => const Color(0x19878787);
+  Color get gray50B2 => const Color(0xB2F5F5FF);
+
+  Color get blueGray100 => const Color(0xFFD9D9D9);
 }
 /// Define your custom color scheme here.
 class MyColorSchemes {

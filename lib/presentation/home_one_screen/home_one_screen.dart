@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hotelsbooking/core/app_export.dart';
 import 'package:hotelsbooking/data/models/selectionPopupModel/selection_popup_model.dart';
+import 'package:hotelsbooking/presentation/checkout_screen/checkout_screen.dart';
 import 'package:hotelsbooking/presentation/editprofile_screen/editprofile_screen.dart';
 import 'package:hotelsbooking/presentation/favorite_screen/favorite_screen.dart';
 import 'package:hotelsbooking/presentation/mybooking_screen/mybooking_screen.dart';
@@ -9,19 +10,9 @@ import 'package:hotelsbooking/widgets/custom_bottom_bar.dart';
 import 'package:hotelsbooking/presentation/home_one_screen/bloc/home_one_bloc.dart';
 import 'package:hotelsbooking/presentation/home_one_screen/home_one_initial_page.dart';
 import 'package:hotelsbooking/presentation/home_one_screen/models/home_one_model.dart';
-// ignore_for_file: must_be_immutable
-
-// class HomeOneScreen extends StatelessWidget {
-//   HomeOneScreen({Key? key}) : super(key: key);
-//   GlobalKey<NavigatorState> navigatorKey = GlobalKey();
-//   static Widget builder(BuildContext context) {
-//     return BlocProvider<HomeOneBloc>(
-//       create: (context) => HomeOneBloc(HomeOneState(
-//         HomeOneModelobj: HomeOneModel(),
-//       ))
-//     );
-//   }
-// }
+import 'package:hotelsbooking/presentation/detail_screen/detail_screen.dart';
+import 'package:hotelsbooking/presentation/from_details_screen/from_details_screen.dart';
+import 'package:hotelsbooking/presentation/checkout_screen/checkout_screen.dart';
 class DefaultWidgets extends StatelessWidget {
   @override
   Widget build (BuildContext context) {
@@ -46,11 +37,7 @@ class DefaultWidgets extends StatelessWidget {
   }
 }
 class HomeOneScreen extends StatelessWidget {
-  HomeOneScreen({Key? key})
-      :
-        super(
-        key: key,
-      );
+  HomeOneScreen({Key? key}) :super(key: key,);
   GlobalKey<NavigatorState> navigatorKey = GlobalKey();
   static Widget builder (BuildContext context) {
     return BlocProvider<HomeOneBloc>(
@@ -75,12 +62,20 @@ class HomeOneScreen extends StatelessWidget {
             transitionDuration: Duration (seconds: 0),
           ),
         ),
-        bottomNavigationBar: SizedBox(
-          width: double.maxFinite,
-          child: _buildBottomNavigation(context),
-        ) ,
+        // bottomNavigationBar: SizedBox(
+        //   width: double.maxFinite,
+        //   child: _buildBottomNavigation(context),
+        // ) ,
+
+        bottomNavigationBar: _shouldShowBottomNavigation(navigatorKey.currentContext?.widget?.toString())
+            ? _buildBottomNavigation(context)
+            : null,
+
       ),
     );
+  }
+  bool _shouldShowBottomNavigation(String? routeName) {
+    return routeName == AppRoutes.homeOneScreen || routeName == AppRoutes.homeOneInitialPage;
   }
   /// Section Widget
   Widget _buildBottomNavigation(BuildContext context) {
@@ -128,7 +123,12 @@ class HomeOneScreen extends StatelessWidget {
         return FavoriteScreen.builder(context);
       case AppRoutes.editProfileScreen:
         return EditprofileScreen.builder(context);
-
+      case AppRoutes.detailScreen:
+        return DetailsScreen.builder(context);
+      case AppRoutes.fromdetailsScreen:
+        return FromDetailsScreen.builder(context);
+      case AppRoutes.checkoutScreen:
+        return CheckoutScreen.builder(context);
       default:
         return DefaultWidgets();
     }
