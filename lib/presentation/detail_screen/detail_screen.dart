@@ -59,16 +59,18 @@ class DetailsScreen extends StatelessWidget {
                   "lbl_description".tr,
                   style: CustomTextStyles.titleMediumBlack900,
                 ),
-                SizedBox(height: 12.h),
+                SizedBox(height: 8.h),
                 SizedBox(
                   width: 292.h,
                   child: Text(
                     "msg_start_living_your".tr,
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
-                    style: theme.textTheme.bodySmall!.copyWith(
-                      height: 1.50,
-                    ),
+                    style: TextStyle(
+                      color: Color(0xFF878787),
+                    fontSize: 12,
+                    fontFamily: 'Plus Jakarta Sans',
+                    fontWeight: FontWeight.w500),
                   ),
                 ),
                 SizedBox(
@@ -114,11 +116,9 @@ class DetailsScreen extends StatelessWidget {
       ),
       centerTitle: true,
       title: Text(
-          'Details',
-          style: TextStyle(
-              fontSize: 20,
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.bold),
+        'Details',
+        style: TextStyle(
+            fontSize: 20, fontFamily: 'Poppins', fontWeight: FontWeight.bold),
       ),
       actions: [
         AppbarTrailingIconbutton(
@@ -378,9 +378,11 @@ class DetailsScreen extends StatelessWidget {
             child: Text(
               "msg_upper_indira_nagar".tr,
               // style: CustomTextStyles.labelLargeOnPrimaryContainer,
-              style: theme.textTheme.bodySmall!.copyWith(
-                height: 1.50,
-              ),
+              style: TextStyle(
+                  color: Color(0xFF878787),
+                  fontSize: 12,
+                  fontFamily: 'Plus Jakarta Sans',
+                  fontWeight: FontWeight.w500),
             ),
           )
         ],
