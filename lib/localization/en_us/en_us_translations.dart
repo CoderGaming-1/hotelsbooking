@@ -19,7 +19,7 @@ final Map<String, String> enUs = {
   "msg_discover_your_perfect": "Discover your\nperfect place to stay",
   "msg_perfect_place_to": "perfect place to stay",
   "msg_ram_nagar_nt_0872": "Ram Nagar NT 0872, Katraj",
-  "msg_recomended_hotel": "Recomended Hotel",
+  "msg_recommended_hotel": "Recommended Hotel",
   "msg_search_your_hotel": "Search your hotel",
   "msg_stanza_living_hostel": "STANZA LIVING HOSTEL",
   "msg_streetrome_ny_13440": "StreetRome, NY 13440",
@@ -33,12 +33,12 @@ final Map<String, String> enUs = {
   "lbl_log_in_as_guest" : "Log in as guest",
 
   // MyFavorite Screen
-  "lbl_299": "\$299",
-  "lbl_382": "\$382",
-  "lbl_382_299": "\$382 \$299",
+  "lbl_299": r"$299",
+  "lbl_382": r"$382 ",
+  "lbl_382_299": r"$382 $299",
   "lbl_5_0_463": "5.0(463)",
   "msg_alice_springs_nt": "Alice Springs NT 0870, Australia",
-  "msg_the_aston_vill_hotel": "The Aston Vill Hotel",
+  "msg_the_aston_villa_hotel": "The Aston Villa Hotel",
 // MyProfile Screen
   "lbl_change_password": "Change Password",
   "lbl_edit_profile": "Edit Profile",
@@ -71,4 +71,61 @@ final Map<String, String> enUs = {
   "lbl_save_changes": "Save Changes",
   "lbl_username": "Username",
   "msg_mail": "hoangphan5721@gmail.com",
+
+  // From Details Screen
+  "lbl_continue": "Continue",
+  "lbl_from_detail": "From Detail",
+  "lbl_guests": "Guests",
+  "lbl_number_phone": "Number Phone",
+  "lbl_room_type": "Room Type",
+  "lbl_select_date": "Select Date",
+  "msg_i_accept_the_apps":
+  "I accept the Apps Terms of Service, Community Guidelines, and Privacy",
+  "msg_keep_me_update_on":
+  "Keep me update on more hotel and news from this apps",
+  "msg_select_number_of": "Select number of guest",
+  "msg_select_room_type": "Select room type",
+  "msg_send_me_emails_about":
+  "Send me emails about the best hotel nearby or discount",
+  "msg_your_phone_number": "Your phone number",
+  "lbl_select" : "Payment",
+
+  // Checkout Screen
+  "lbl_0876556478": "0876556478",
+  "lbl_139_00": "\$139.00",
+  "lbl_141_50": "\$141.50",
+  "lbl_25_day": "\$25/Day",
+  "lbl_2_50": "\$2.50",
+  "lbl_5_0": "5.0",
+  "lbl_admin_fee": "Admin fee",
+  "lbl_asteria_hostel": "Asteria hostel",
+  "lbl_checkout": "Checkout",
+  "lbl_guest": "Guest",
+  "lbl_payment": "Payment",
+  "lbl_phone": "Phone",
+  "lbl_price": "Price",
+  "lbl_price_details": "Price Details",
+  "lbl_promo": "Promo",
+  "lbl_queen_room": "Queen Room",
+  "lbl_room_type2": "Room type",
+  "lbl_total_price": "Total Price",
+  "lbl_your_booking": "Your Booking",
+  "msg_12_15_nov_2024": "12 15 Nov 2024",
+  "msg_2_guest_1_room": "2 Guest (1 Room)",
+  "msg_ram_nagar_nt_0872": "Ram Nagar NT 0872, Katraj",
+
+  // Details Screen
+  "lbl_dates" : "Dates",
+  "lbl_38_day": "\$38/Day",
+  "lbl_5_0": "5.0",
+  "lbl_book_now": "Book Now",
+  "lbl_breakfast": "BREAKFAST",
+  "lbl_description": "Description",
+  "lbl_details": "DETAILS",
+  "lbl_free_wifi": "Free Wifi",
+  "lbl_preview": "Preview",
+  "msg_contact_98674456xx": "CONTACT TO OUR SERVICE CUSTOMER",
+  "msg_start_living_your":
+  "Start living your best lifefrom day one\nBring a box full of hopes, dreams, ambitions... and of course, your personal belongings.",
+  "msg_upper_indira_nagar": "Upper indira nagar, NT 0870, Bibwewadi",
 };

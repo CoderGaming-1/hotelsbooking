@@ -57,4 +57,7 @@ class BorderRadiusStyle {
   static BorderRadius get customBorderBL12 => BorderRadius.vertical(
     bottom : Radius.circular(12.h),
   );
+  static BorderRadius get roundedBorder12 => BorderRadius.circular(
+    12.0,
+  );
 }

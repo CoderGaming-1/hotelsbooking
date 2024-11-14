@@ -28,8 +28,6 @@ class CustomElevatedButton extends BaseButton {
   );
   final BoxDecoration? decoration;
   final Widget? leftIcon;
-
-
   final Widget? rightIcon;
 
   @override
@@ -37,8 +35,7 @@ class CustomElevatedButton extends BaseButton {
     return alignment != null
         ? Align(
         alignment: alignment ?? Alignment.center,
-        child: buildElevatedButtonWidget)
-        : buildElevatedButtonWidget;
+        child: buildElevatedButtonWidget) : buildElevatedButtonWidget;
   }
 
   Widget get buildElevatedButtonWidget =>
@@ -60,8 +57,7 @@ class CustomElevatedButton extends BaseButton {
               leftIcon ?? const SizedBox.shrink(),
               Text(
                 text,
-                style: buttonTextStyle ??
-                    CustomTextStyles.titleSmallPoppinsRedA700,
+                style: buttonTextStyle ?? CustomTextStyles.labelMediumBlack90001,
               ),
               rightIcon ?? const SizedBox.shrink()
             ],

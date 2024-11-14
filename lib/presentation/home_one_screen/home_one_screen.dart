@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hotelsbooking/core/app_export.dart';
 import 'package:hotelsbooking/data/models/selectionPopupModel/selection_popup_model.dart';
+import 'package:hotelsbooking/presentation/checkout_screen/checkout_screen.dart';
 import 'package:hotelsbooking/presentation/editprofile_screen/editprofile_screen.dart';
 import 'package:hotelsbooking/presentation/favorite_screen/favorite_screen.dart';
 import 'package:hotelsbooking/presentation/mybooking_screen/mybooking_screen.dart';
@@ -9,27 +10,17 @@ import 'package:hotelsbooking/widgets/custom_bottom_bar.dart';
 import 'package:hotelsbooking/presentation/home_one_screen/bloc/home_one_bloc.dart';
 import 'package:hotelsbooking/presentation/home_one_screen/home_one_initial_page.dart';
 import 'package:hotelsbooking/presentation/home_one_screen/models/home_one_model.dart';
-// ignore_for_file: must_be_immutable
-
-// class HomeOneScreen extends StatelessWidget {
-//   HomeOneScreen({Key? key}) : super(key: key);
-//   GlobalKey<NavigatorState> navigatorKey = GlobalKey();
-//   static Widget builder(BuildContext context) {
-//     return BlocProvider<HomeOneBloc>(
-//       create: (context) => HomeOneBloc(HomeOneState(
-//         HomeOneModelobj: HomeOneModel(),
-//       ))
-//     );
-//   }
-// }
+import 'package:hotelsbooking/presentation/detail_screen/detail_screen.dart';
+import 'package:hotelsbooking/presentation/from_details_screen/from_details_screen.dart';
+import 'package:hotelsbooking/presentation/checkout_screen/checkout_screen.dart';
 class DefaultWidgets extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build (BuildContext context) {
     return Container(
       color: Color(0xffffffff),
       padding: EdgeInsets.all(10),
       child: Center(
-        child: Column(
+        child: Column (
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -45,14 +36,10 @@ class DefaultWidgets extends StatelessWidget {
     );
   }
 }
-
 class HomeOneScreen extends StatelessWidget {
-  HomeOneScreen({Key? key})
-      : super(
-          key: key,
-        );
+  HomeOneScreen({Key? key}) :super(key: key,);
   GlobalKey<NavigatorState> navigatorKey = GlobalKey();
-  static Widget builder(BuildContext context) {
+  static Widget builder (BuildContext context) {
     return BlocProvider<HomeOneBloc>(
       create: (context) => HomeOneBloc(HomeOneState(
         homeOneModelObj: HomeOneModel(),
@@ -61,7 +48,6 @@ class HomeOneScreen extends StatelessWidget {
       child: HomeOneScreen(),
     );
   }
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -73,32 +59,38 @@ class HomeOneScreen extends StatelessWidget {
           onGenerateRoute: (routeSetting) => PageRouteBuilder(
             pageBuilder: (ctx, ani, ani1) =>
                 getCurrentPage(context, routeSetting.name!),
-            transitionDuration: Duration(seconds: 0),
+            transitionDuration: Duration (seconds: 0),
           ),
         ),
-        bottomNavigationBar: SizedBox(
-          width: double.maxFinite,
-          child: _buildBottomNavigation(context),
-        ),
+        // bottomNavigationBar: SizedBox(
+        //   width: double.maxFinite,
+        //   child: _buildBottomNavigation(context),
+        // ) ,
+
+        bottomNavigationBar: _shouldShowBottomNavigation(navigatorKey.currentContext?.widget?.toString())
+            ? _buildBottomNavigation(context)
+            : null,
+
       ),
     );
   }
-
+  bool _shouldShowBottomNavigation(String? routeName) {
+    return routeName == AppRoutes.homeOneScreen || routeName == AppRoutes.homeOneInitialPage;
+  }
   /// Section Widget
   Widget _buildBottomNavigation(BuildContext context) {
     return SizedBox(
       width: double.maxFinite,
       child: CustomBottomBar(
         onChanged: (BottomBarEnum type) {
-          Navigator.pushNamed(
-              navigatorKey.currentContext!, getCurrentRoute(type));
+          Navigator.pushNamed (
+              navigatorKey.currentContext!, getCurrentRoute (type));
         },
       ),
     );
   }
-
   ///Handling route based on bottom click actions
-  String getCurrentRoute(BottomBarEnum type) {
+  String getCurrentRoute (BottomBarEnum type) {
     switch (type) {
       case BottomBarEnum.Home:
         return AppRoutes.homeOneInitialPage;
@@ -117,9 +109,9 @@ class HomeOneScreen extends StatelessWidget {
 
 //Handling page based on route
   Widget getCurrentPage(
-    BuildContext context,
-    String currentRoute,
-  ) {
+      BuildContext context,
+      String currentRoute,
+      ) {
     switch (currentRoute) {
       case AppRoutes.homeOneInitialPage:
         return HomeOneInitialPage.builder(context);
@@ -131,7 +123,12 @@ class HomeOneScreen extends StatelessWidget {
         return FavoriteScreen.builder(context);
       case AppRoutes.editProfileScreen:
         return EditprofileScreen.builder(context);
-
+      case AppRoutes.detailScreen:
+        return DetailsScreen.builder(context);
+      case AppRoutes.fromdetailsScreen:
+        return FromDetailsScreen.builder(context);
+      case AppRoutes.checkoutScreen:
+        return CheckoutScreen.builder(context);
       default:
         return DefaultWidgets();
     }

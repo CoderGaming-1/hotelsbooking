@@ -5,11 +5,23 @@ class CustomButtonStyles {
 // Filled button style
   static ButtonStyle get fillPrimary =>
       ElevatedButton.styleFrom(
-          backgroundColor: theme.colorScheme.primary,
+          backgroundColor: theme.colorScheme.primaryContainer,
           shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(12.h),),
   elevation:0,
   padding:EdgeInsets.zero,);
+  static const Color cyan600 = Color(0xFF06B3C4);
+
+  static ButtonStyle get onChoose =>
+      ElevatedButton.styleFrom(
+        backgroundColor: cyan600, // Set the background color here
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.h),
+        ),
+        elevation: 0,
+        padding: EdgeInsets.zero,
+      );
+
 
 // text button style
   static ButtonStyle get none =>

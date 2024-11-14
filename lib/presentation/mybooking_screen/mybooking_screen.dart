@@ -4,14 +4,24 @@ import '../../widgets/custom_bottom_bar.dart';
 import 'bloc/mybooking_bloc.dart';
 import 'models/mybooking_model.dart';
 import 'mybookinghistor_tab_page.dart';
+import 'package:hotelsbooking/presentation/home_one_screen/bloc/home_one_bloc.dart';
+import 'package:hotelsbooking/presentation/home_one_screen/home_one_initial_page.dart';
+import 'package:hotelsbooking/presentation/home_one_screen/models/home_one_model.dart';
+import 'package:hotelsbooking/presentation/detail_screen/detail_screen.dart';
+import 'package:hotelsbooking/presentation/editprofile_screen/editprofile_screen.dart';
+import 'package:hotelsbooking/presentation/favorite_screen/favorite_screen.dart';
+import 'package:hotelsbooking/presentation/mybooking_screen/mybooking_screen.dart';
+import 'package:hotelsbooking/presentation/myprofile_page/myprofile_page.dart';
 
 class MybookingScreen extends StatefulWidget {
   const MybookingScreen({Key? key})
       : super(
           key: key,
         );
+
   @override
   MybookingScreenState createState() => MybookingScreenState();
+
   static Widget builder(BuildContext context) {
     return BlocProvider<MybookingBloc>(
       create: (context) => MybookingBloc(MybookingState(
@@ -41,6 +51,17 @@ class MybookingScreenState extends State<MybookingScreen>
     return SafeArea(
       child: Scaffold(
         backgroundColor: appTheme.whiteA700,
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: Text(
+            'My Booking',
+            style: TextStyle(
+                fontSize: 20,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.bold),
+          ),
+          centerTitle: true,
+        ),
         body: SizedBox(
           width: double.maxFinite,
           child: Column(
@@ -64,12 +85,10 @@ class MybookingScreenState extends State<MybookingScreen>
 
         /// bottom Navigation Bar
 
-        // bottomNavigationBar: SizedBox(
-        // width: double.maxFinite,
-        // child: _buildBottomNavigationBar(context),
-        //
-        //
-        // ),
+        bottomNavigationBar: SizedBox(
+          width: double.maxFinite,
+          child: _buildBottomNavigation(context),
+        ),
       ),
     );
   }
@@ -162,13 +181,17 @@ class MybookingScreenState extends State<MybookingScreen>
   }
 
   /// Section Widget
-  Widget _buildBottomNavigationBar(BuildContext context) {
+  Widget _buildBottomNavigation(BuildContext context) {
     return SizedBox(
       width: double.maxFinite,
       child: CustomBottomBar(
         onChanged: (BottomBarEnum type) {
-          Navigator.pushNamed(
-              navigatorKey.currentContext!, getCurrentRoute(type));
+          final route = getCurrentRoute(type);
+          // Navigator.pushNamed (
+          //     navigatorKey.currentContext!, getCurrentRoute (type));
+          if (route.isNotEmpty) {
+            Navigator.of(context).pushNamed(route);
+          }
         },
       ),
     );
@@ -178,15 +201,40 @@ class MybookingScreenState extends State<MybookingScreen>
   String getCurrentRoute(BottomBarEnum type) {
     switch (type) {
       case BottomBarEnum.Home:
-        return "/";
+        return AppRoutes.homeOneInitialPage;
       case BottomBarEnum.Mybooking:
-        return "/";
+        return AppRoutes.mybookingScreen;
       case BottomBarEnum.Favorite:
-        return "/";
+        return AppRoutes.favoriteScreen;
       case BottomBarEnum.Myprofile:
-        return "/";
+        return AppRoutes.myprofileScreen;
       default:
         return "/";
+    }
+  }
+
+  ///Add Default Widgets
+
+//Handling page based on route
+  Widget getCurrentPage(
+    BuildContext context,
+    String currentRoute,
+  ) {
+    switch (currentRoute) {
+      case AppRoutes.homeOneInitialPage:
+        return HomeOneInitialPage.builder(context);
+      case AppRoutes.myprofileScreen:
+        return MyprofilePage.builder(context);
+      case AppRoutes.mybookingScreen:
+        return MybookingScreen.builder(context);
+      case AppRoutes.favoriteScreen:
+        return FavoriteScreen.builder(context);
+      case AppRoutes.editProfileScreen:
+        return EditprofileScreen.builder(context);
+      case AppRoutes.detailScreen:
+        return DetailsScreen.builder(context);
+      default:
+        return DefaultWidgets();
     }
   }
 }

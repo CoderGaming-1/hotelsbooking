@@ -7,6 +7,15 @@ import 'bloc/favorite_bloc.dart';
 import 'models/favorite_model.dart';
 import 'models/favoritegrid_item_model.dart';
 import 'widgets/favoritegrid_item_widget.dart';
+import 'package:hotelsbooking/presentation/editprofile_screen/editprofile_screen.dart';
+import 'package:hotelsbooking/presentation/favorite_screen/favorite_screen.dart';
+import 'package:hotelsbooking/presentation/mybooking_screen/mybooking_screen.dart';
+import 'package:hotelsbooking/presentation/myprofile_page/myprofile_page.dart';
+import 'package:hotelsbooking/widgets/custom_bottom_bar.dart';
+import 'package:hotelsbooking/presentation/home_one_screen/bloc/home_one_bloc.dart';
+import 'package:hotelsbooking/presentation/home_one_screen/home_one_initial_page.dart';
+import 'package:hotelsbooking/presentation/home_one_screen/models/home_one_model.dart';
+import 'package:hotelsbooking/presentation/detail_screen/detail_screen.dart';
 
 // ignore_for_file: must_be_immutable
 class FavoriteScreen extends StatelessWidget {
@@ -15,6 +24,7 @@ class FavoriteScreen extends StatelessWidget {
           key: key,
         );
   GlobalKey<NavigatorState> navigatorKey = GlobalKey();
+
   static Widget builder(BuildContext context) {
     return BlocProvider<FavoriteBloc>(
       create: (context) => FavoriteBloc(FavoriteState(
@@ -31,11 +41,30 @@ class FavoriteScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: appTheme.whiteA700,
         resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: Text(
+            'My Favorite',
+            style: TextStyle(
+                fontSize: 16,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.bold),
+          ),
+          centerTitle: true,
+          actions: [
+            IconButton(
+              icon: Icon(Icons.filter_list),
+              onPressed: () {
+                // Xử lý khi nhấn nút lọc
+              },
+            ),
+          ],
+        ),
         body: Container(
           width: double.maxFinite,
           padding: EdgeInsets.only(
             left: 14.h,
-            top: 56.h,
+           // top: 12.h,
             right: 14.h,
           ),
           child: Column(
@@ -65,10 +94,10 @@ class FavoriteScreen extends StatelessWidget {
             ],
           ),
         ),
-        // bottomNavigationBar: SizedBox(
-        // width: double.maxFinite,
-        // child: _buildBottomNavigation(context),
-        // ),
+        bottomNavigationBar: SizedBox(
+          width: double.maxFinite,
+          child: _buildBottomNavigation(context),
+        ),
       ),
     );
   }
@@ -118,8 +147,12 @@ class FavoriteScreen extends StatelessWidget {
       width: double.maxFinite,
       child: CustomBottomBar(
         onChanged: (BottomBarEnum type) {
-          Navigator.pushNamed(
-              navigatorKey.currentContext!, getCurrentRoute(type));
+          final route = getCurrentRoute(type);
+          // Navigator.pushNamed (
+          //     navigatorKey.currentContext!, getCurrentRoute (type));
+          if (route.isNotEmpty) {
+            Navigator.of(context).pushNamed(route);
+          }
         },
       ),
     );
@@ -129,15 +162,41 @@ class FavoriteScreen extends StatelessWidget {
   String getCurrentRoute(BottomBarEnum type) {
     switch (type) {
       case BottomBarEnum.Home:
-        return "/";
+        return AppRoutes.homeOneInitialPage;
       case BottomBarEnum.Mybooking:
-        return "/";
+        return AppRoutes.mybookingScreen;
       case BottomBarEnum.Favorite:
-        return "/";
+        return AppRoutes.favoriteScreen;
       case BottomBarEnum.Myprofile:
-        return "/";
+        return AppRoutes.myprofileScreen;
       default:
         return "/";
+    }
+  }
+
+  ///Add Default Widgets
+
+//Handling page based on route
+  Widget getCurrentPage(
+    BuildContext context,
+    String currentRoute,
+  ) {
+    switch (currentRoute) {
+      case AppRoutes.homeOneInitialPage:
+        return HomeOneInitialPage.builder(context);
+      case AppRoutes.myprofileScreen:
+        return MyprofilePage.builder(context);
+      case AppRoutes.mybookingScreen:
+        return MybookingScreen.builder(context);
+      case AppRoutes.favoriteScreen:
+        return FavoriteScreen.builder(context);
+      case AppRoutes.editProfileScreen:
+        return EditprofileScreen.builder(context);
+      case AppRoutes.detailScreen:
+        return DetailsScreen.builder(context);
+
+      default:
+        return DefaultWidgets();
     }
   }
 }
