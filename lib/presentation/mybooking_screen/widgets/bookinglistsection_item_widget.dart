@@ -9,6 +9,7 @@ class BookinglistsectionItemWidget extends StatelessWidget {
           key: key,
         );
   BookinglistsectionItemModel bookinglistsectionItemModelObj;
+
   @override
   Widget build(BuildContext context) {
     return Container(

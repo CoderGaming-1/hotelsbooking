@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import '../../../core/app_export.dart';
 import '../models/detailslist_item_model.dart';
+
 // ignore_for_file: must_be_immutable
 class DetailslistItemWidget extends StatelessWidget {
-  DetailslistItemWidget(this.detailslistItemModelObj, {Key? key}) :super(key: key, );
+  DetailslistItemWidget(this.detailslistItemModelObj, {Key? key})
+      : super(
+          key: key,
+        );
   DetailslistItemModel detailslistItemModelObj;
+
   @override
-  Widget build (BuildContext context) {
+  Widget build(BuildContext context) {
     return SizedBox(
       width: 98.h,
       child: CustomImageView(

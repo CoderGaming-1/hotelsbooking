@@ -11,10 +11,12 @@ class BookinglistsectionItemModel extends Equatable {
     fourhundredsixt = fourhundredsixt ?? "(463)";
     id = id ?? "";
   }
+
   String? imageOne;
   String? fifty;
   String? fourhundredsixt;
   String? id;
+
   BookinglistsectionItemModel copywith({
     String? imageOne,
     String? fifty,

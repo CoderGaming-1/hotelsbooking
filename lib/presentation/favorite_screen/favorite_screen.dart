@@ -64,6 +64,7 @@ class FavoriteScreen extends StatelessWidget {
           width: double.maxFinite,
           padding: EdgeInsets.only(
             left: 14.h,
+            top: 56.h,
            // top: 12.h,
             right: 14.h,
           ),

@@ -8,9 +8,11 @@ class FavoritegridItemModel extends Equatable {
     alicesprings = alicesprings ?? "Alice Springs NT 0870, Australia";
     id = id ?? "";
   }
+
   String? muongthanh;
   String? alicesprings;
   String? id;
+
   FavoritegridItemModel copywith({
     String? muongthanh,
     String? alicesprings,

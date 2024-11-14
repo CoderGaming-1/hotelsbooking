@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 /// and is typically used to hold data that is passed between different parts
 class EditprofileModel extends Equatable {
   EditprofileModel();
+
   EditprofileModel copyWith() {
     return EditprofileModel();
   }

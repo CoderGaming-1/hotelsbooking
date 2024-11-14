@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 extension ImageTypeExtension on String {
   ImageType get imageType {
     if (this.startsWith('http') || this.startsWith('https')) {
@@ -15,7 +16,9 @@ extension ImageTypeExtension on String {
     }
   }
 }
+
 enum ImageType { svg, png, network, file, unknown }
+
 class CustomImageView extends StatelessWidget {
   CustomImageView({
     this.imagePath,
@@ -30,6 +33,7 @@ class CustomImageView extends StatelessWidget {
     this.border,
     this.placeHolder = 'assets/images/image_not_found.png',
   });
+
   ///[imagePath] is required parameter for showing image
   final String? imagePath;
   final double? height;
@@ -42,12 +46,14 @@ class CustomImageView extends StatelessWidget {
   final EdgeInsetsGeometry? margin;
   final BorderRadius? radius;
   final BoxBorder? border;
+
   @override
   Widget build(BuildContext context) {
     return alignment != null
         ? Align(alignment: alignment!, child: _buildWidget())
         : _buildWidget();
   }
+
   Widget _buildWidget() {
     return Padding(
       padding: margin ?? EdgeInsets.zero,
@@ -57,6 +63,7 @@ class CustomImageView extends StatelessWidget {
       ),
     );
   }
+
   ///build the image with border radius
   _buildCircleImage() {
     if (radius != null) {
@@ -68,7 +75,8 @@ class CustomImageView extends StatelessWidget {
       return _buildImageWithBorder();
     }
   }
- _buildImageWithBorder() {
+
+  _buildImageWithBorder() {
     if (border != null) {
       return Container(
         decoration: BoxDecoration(
@@ -81,6 +89,7 @@ class CustomImageView extends StatelessWidget {
       return _buildImageView();
     }
   }
+
   Widget _buildImageView() {
     if (imagePath != null) {
       switch (imagePath!.imageType) {

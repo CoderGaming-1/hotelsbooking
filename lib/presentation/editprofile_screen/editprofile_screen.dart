@@ -18,10 +18,11 @@ class EditprofileScreen extends StatelessWidget {
           key: key,
         );
   GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+
   static Widget builder(BuildContext context) {
     return BlocProvider<EditprofileBloc>(
       create: (context) => EditprofileBloc(EditprofileState(
-        editprofileModelobj: EditprofileModel(),
+        editprofileModelObj: EditprofileModel(),
       ))
         ..add(EditprofileInitialEvent()),
       child: EditprofileScreen(),

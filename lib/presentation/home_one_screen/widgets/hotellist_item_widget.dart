@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:hotelsbooking/core/app_export.dart';
 import 'package:hotelsbooking/presentation/home_one_screen/models/hotellist_item_model.dart';
+
 // ignore_for_file: must_be_immutable
 class HotellistItemWidget extends StatelessWidget {
   HotellistItemWidget(this.hotellistItemModelObj, {Key? key})
-      : super(key: key,);
+      : super(
+          key: key,
+        );
   HotellistItemModel hotellistItemModelObj;
 
   @override
@@ -60,7 +63,7 @@ class HotellistItemWidget extends StatelessWidget {
                               hotellistItemModelObj.price!,
                               textAlign: TextAlign.center,
                               style:
-                              CustomTextStyles.labelMediumPoppinsBlack90001,
+                                  CustomTextStyles.labelMediumPoppinsBlack90001,
                             ),
                           ),
                           CustomImageView(
@@ -93,7 +96,6 @@ class HotellistItemWidget extends StatelessWidget {
                           )
                         ],
                       ),
-
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -104,7 +106,7 @@ class HotellistItemWidget extends StatelessWidget {
                               children: [
                                 CustomImageView(
                                   imagePath:
-                                  ImageConstant.imgAntDesignStarFilled,
+                                      ImageConstant.imgAntDesignStarFilled,
                                   height: 14.h,
                                   width: 14.h,
                                 ),
@@ -115,14 +117,13 @@ class HotellistItemWidget extends StatelessWidget {
                                 Text(
                                   hotellistItemModelObj.fourhundredsixt!,
                                   style:
-                                  CustomTextStyles.labelMediumBluegray400_1,
+                                      CustomTextStyles.labelMediumBluegray400_1,
                                 )
                               ],
                             ),
                           ),
                           SizedBox(height: 6.h),
                           Text(
-
                             hotellistItemModelObj.theastonvil!,
                             style: CustomTextStyles.labelLargePoppinsBlack900,
                           ),
@@ -137,13 +138,12 @@ class HotellistItemWidget extends StatelessWidget {
                                   width: 20.h,
                                 ),
                                 Align(
-                                  alignment: Alignment.bottomCenter,
-                                  child: Text(
-                                    hotellistItemModelObj.streetromeny!,
-                                    style:
-                                      CustomTextStyles.labelMediumBluegray400,
-                                  )
-                                )
+                                    alignment: Alignment.bottomCenter,
+                                    child: Text(
+                                      hotellistItemModelObj.streetromeny!,
+                                      style: CustomTextStyles
+                                          .labelMediumBluegray400,
+                                    ))
                               ],
                             ),
                           )

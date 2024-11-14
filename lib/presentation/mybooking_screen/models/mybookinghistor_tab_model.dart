@@ -5,7 +5,9 @@ import 'bookinglistsection_item_model.dart';
 // ignore_for_file: must_be_immutable
 class MybookinghistorTabModel extends Equatable {
   MybookinghistorTabModel({this.bookinglistsectionItemList = const []});
+
   List<BookinglistsectionItemModel> bookinglistsectionItemList;
+
   MybookinghistorTabModel copywith(
       {List<BookinglistsectionItemModel>? bookinglistsectionItemList}) {
     return MybookinghistorTabModel(

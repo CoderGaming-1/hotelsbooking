@@ -72,6 +72,19 @@ final Map<String, String> enUs = {
   "lbl_username": "Username",
   "msg_mail": "hoangphan5721@gmail.com",
 
+  // Search Screen
+  "lbl_299": "\$299",
+  "lbl_382": "\$382",
+  "lbl_382_299": "\$382 \$299",
+  "lbl_5_0_463": "5.0(463)",
+  "lbl_lastest": "Lastest",
+  "lbl_light_hotel": "Light Hotel",
+  "lbl_most_popular": "Most Popular",
+  "lbl_ts_hotel": "TS Hotel",
+  "msg_alice_springs_nt": "Alice Springs NT 0870, Australia",
+  "msg_danang_sac_hotel": "DaNang SAC Hotel",
+  "msg_muongthanh_hotel": "Muong Thanh Hotel",
+
   // From Details Screen
   "lbl_continue": "Continue",
   "lbl_from_detail": "From Detail",
@@ -103,7 +116,6 @@ final Map<String, String> enUs = {
   "lbl_guest": "Guest",
   "lbl_payment": "Payment",
   "lbl_phone": "Phone",
-  "lbl_price": "Price",
   "lbl_price_details": "Price Details",
   "lbl_promo": "Promo",
   "lbl_queen_room": "Queen Room",
@@ -128,4 +140,27 @@ final Map<String, String> enUs = {
   "msg_start_living_your":
   "Start living your best lifefrom day one\nBring a box full of hopes, dreams, ambitions... and of course, your personal belongings.",
   "msg_upper_indira_nagar": "Upper indira nagar, NT 0870, Bibwewadi",
+
+
+  // Filter Screen
+  "lbl_1": "1",
+  "lbl_2": "2",
+  "lbl_3": "3",
+  "lbl_4": "4",
+  "lbl_40_80": "\$40-\$80",
+  "lbl_5": "5",
+  "lbl_amsterdam": "Amsterdam",
+  "lbl_apply_filter": "Apply Filter",
+  "lbl_facilities" : "Facilities",
+  "lbl_filter_by": "Filter By",
+  "lbl_laundry": "Laundry",
+  "lbl_location": "Location",
+  "lbl_new_york": "New York",
+  "lbl_placeholder": "Placeholder",
+  "lbl_price":"Price",
+  "lbl_ratings": "Ratings",
+  "lbl_san_diego": "San Diego",
+  "lbl_swimming_pool": "Swimming Pool",
+  "lbl_tv": "Tv",
+  "msg_3_guest_2_adult": "3 Guest (2 Adult, 1 Children)",
 };

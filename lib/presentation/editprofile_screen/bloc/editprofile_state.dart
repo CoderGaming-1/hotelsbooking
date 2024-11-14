@@ -7,19 +7,20 @@ class EditprofileState extends Equatable {
       {this.userNameController,
       this.emailtwoController,
       this.phoneNumberController,
-      this.editprofileModelobj});
+      this.editprofileModelObj});
+
 
   TextEditingController? userNameController;
   TextEditingController? emailtwoController;
   TextEditingController? phoneNumberController;
-  EditprofileModel? editprofileModelobj;
+  EditprofileModel? editprofileModelObj;
 
   @override
   List<Object?> get props => [
         userNameController,
         emailtwoController,
         phoneNumberController,
-        editprofileModelobj
+    editprofileModelObj
       ];
 
   EditprofileState copywith({
@@ -33,7 +34,8 @@ class EditprofileState extends Equatable {
       emailtwoController: emailtwoController ?? this.emailtwoController,
       phoneNumberController:
           phoneNumberController ?? this.phoneNumberController,
-      editprofileModelobj: editprofileModelobj ?? this.editprofileModelobj,
+      editprofileModelObj: editprofileModelobj ?? this.editprofileModelObj,
+
     );
   }
 }

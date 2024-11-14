@@ -8,6 +8,9 @@ import 'package:hotelsbooking/presentation/editprofile_screen/editprofile_screen
 import 'package:hotelsbooking/presentation/detail_screen/detail_screen.dart';
 import 'package:hotelsbooking/presentation/from_details_screen/from_details_screen.dart';
 import 'package:hotelsbooking/presentation/checkout_screen/checkout_screen.dart';
+import 'package:hotelsbooking/presentation/filter_screen/filter_screen.dart';
+import 'package:hotelsbooking/presentation/search_screen/search_screen.dart';
+
 class AppRoutes {
   static const String onBoardingScreen = '/on_boarding_screen';
   static const String homeOneScreen = '/home_one_screen';
@@ -20,16 +23,21 @@ class AppRoutes {
   static const String detailScreen = '/detail_screen';
   static const String fromdetailsScreen = '/fromdetails_screen';
   static const String checkoutScreen = '/checkout_screen';
+  static const String filterScreen = '/filter_screen';
+  static const String searchScreen = '/search_screen';
+
   static Map<String, WidgetBuilder> get routes => {
-    checkoutScreen : CheckoutScreen.builder,
-    fromdetailsScreen: FromDetailsScreen.builder,
-    detailScreen: DetailsScreen.builder,
-    editProfileScreen: EditprofileScreen.builder,
-    onBoardingScreen: (context) => OnboardingScreen(),
-    homeOneScreen: HomeOneScreen.builder,
-    mybookingScreen: MybookingScreen.builder,
-    myprofileScreen: MyprofilePage.builder,
-    favoriteScreen : FavoriteScreen.builder,
-    initialRoute: (context) => OnboardingScreen(),
-  };
+        searchScreen: SearchScreen.builder,
+        filterScreen: FilterScreen.builder,
+        checkoutScreen: CheckoutScreen.builder,
+        fromdetailsScreen: FromDetailsScreen.builder,
+        detailScreen: DetailsScreen.builder,
+        editProfileScreen: EditprofileScreen.builder,
+        onBoardingScreen: (context) => OnboardingScreen(),
+        homeOneScreen: HomeOneScreen.builder,
+        mybookingScreen: MybookingScreen.builder,
+        myprofileScreen: MyprofilePage.builder,
+        favoriteScreen: FavoriteScreen.builder,
+        initialRoute: (context) => OnboardingScreen(),
+      };
 }

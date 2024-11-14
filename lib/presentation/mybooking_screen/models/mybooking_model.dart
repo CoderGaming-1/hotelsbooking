@@ -5,6 +5,7 @@ import '../../../core/app_export.dart';
 /// and is typically used to hold data that is passed between different parts of the application.
 class MybookingModel extends Equatable {
   MybookingModel();
+
   MybookingModel copywith() {
     return MybookingModel();
   }

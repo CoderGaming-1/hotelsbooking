@@ -24,6 +24,11 @@ class FavoritegridItemWidget extends StatelessWidget {
                 imagePath: ImageConstant.imgViewBuildingw,
                 height: 116.h,
                 width: double.maxFinite,
+              ),
+              CustomImageView(
+                imagePath: ImageConstant.imgFavorite,
+                height: 14.h,
+                width: 18.h,
                 radius: BorderRadius.circular(16),
               ),
               CustomImageView(
@@ -45,7 +50,6 @@ class FavoritegridItemWidget extends StatelessWidget {
           decoration: BoxDecoration(
             color: appTheme.whiteA700,
             borderRadius: BorderRadiusStyle.customBorderBL12,
-
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,

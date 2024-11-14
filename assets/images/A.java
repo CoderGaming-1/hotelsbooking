@@ -1,0 +1,1 @@
+static String imgSettings = '$imagePath/img_settings.png';
