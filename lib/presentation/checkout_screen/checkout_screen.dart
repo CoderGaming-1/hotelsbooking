@@ -9,15 +9,16 @@ import 'bloc/checkout_bloc.dart';
 import 'models/checkout_model.dart';
 import 'models/checkout_three_item_model.dart';
 import 'widgets/checkout_three_item_widget.dart';
+
 class CheckoutScreen extends StatelessWidget {
   const CheckoutScreen({Key? key})
-      :
-        super(key: key,);
+      : super(
+          key: key,
+        );
 
   static Widget builder(BuildContext context) {
     return BlocProvider<CheckoutBloc>(
-      create: (context) =>
-      CheckoutBloc(CheckoutState(
+      create: (context) => CheckoutBloc(CheckoutState(
         checkoutModelObj: CheckoutModel(),
       ))
         ..add(CheckoutInitialEvent()),
@@ -31,8 +32,6 @@ class CheckoutScreen extends StatelessWidget {
       child: Scaffold(
         appBar: _buildTopNavigation(context),
         body: SizedBox(
-
-
           child: SingleChildScrollView(
             child: Container(
               width: double.maxFinite,
@@ -77,7 +76,6 @@ class CheckoutScreen extends StatelessWidget {
       centerTitle: true,
       title: AppbarTitle(
         text: "lbl_checkout".tr,
-
       ),
     );
   }
@@ -113,7 +111,8 @@ class CheckoutScreen extends StatelessWidget {
                   imagePath: ImageConstant.imgImage7,
                   height: 84.h,
                   width: 86.h,
-                  radius: BorderRadius.circular(4.h,
+                  radius: BorderRadius.circular(
+                    4.h,
                   ),
                 )
               ],
@@ -130,7 +129,8 @@ class CheckoutScreen extends StatelessWidget {
                     children: [
                       Text(
                         "lbl_asteria_hostel".tr,
-                        style: CustomTextStyles.titleSmallPlusJakartaSansBlack900,
+                        style:
+                            CustomTextStyles.titleSmallPlusJakartaSansBlack900,
                       ),
                       Padding(
                         padding: EdgeInsets.only(left: 24.h),
@@ -143,17 +143,18 @@ class CheckoutScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 6.h),
-                Text("msg_ram_nagar_nt_0872".tr,
+                Text(
+                  "msg_ram_nagar_nt_0872".tr,
                   style: CustomTextStyles
                       .labelLargePlusJakartaSansOnPrimaryContainer,
                 ),
                 SizedBox(height: 6.h),
                 SizedBox(
                   width: double.maxFinite,
-                  child:
-                  Row(
+                  child: Row(
                     children: [
-                      CustomRatingBar(initialRating: 5,
+                      CustomRatingBar(
+                        initialRating: 5,
                       ),
                       Padding(
                         padding: EdgeInsets.only(left: 4.h),
@@ -173,7 +174,6 @@ class CheckoutScreen extends StatelessWidget {
       ),
     );
   }
-
 
   Widget _buildBookingDetails(BuildContext context) {
     return Container(
@@ -212,7 +212,7 @@ class CheckoutScreen extends StatelessWidget {
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemCount:
-                  checkoutModelObj?.checkoutThreeItemList.length ?? 0,
+                      checkoutModelObj?.checkoutThreeItemList.length ?? 0,
                   itemBuilder: (context, index) {
                     CheckoutThreeItemModel model =
                         checkoutModelObj?.checkoutThreeItemList[index] ??
@@ -232,7 +232,6 @@ class CheckoutScreen extends StatelessWidget {
               "lbl_price_details".tr,
               style: CustomTextStyles.labelLargePlusJakartaSansBlack90001,
             ),
-
           ),
           SizedBox(height: 8.h),
           Container(
@@ -316,7 +315,8 @@ class CheckoutScreen extends StatelessWidget {
                     vertical: 8.h,
                   ),
                   decoration: BoxDecoration(
-                    color: appTheme.onPrimaryContainer,),
+                    color: appTheme.onPrimaryContainer,
+                  ),
                   child: Text(
                     "lbl_total_price".tr,
                     textAlign: TextAlign.left,
@@ -325,7 +325,8 @@ class CheckoutScreen extends StatelessWidget {
                 ),
                 Padding(
                   padding: EdgeInsets.only(right: 4.h),
-                  child: Text("lbl_141_50".tr,
+                  child: Text(
+                    "lbl_141_50".tr,
                     style: CustomTextStyles.titleSmallMedium,
                   ),
                 )
@@ -336,7 +337,6 @@ class CheckoutScreen extends StatelessWidget {
       ),
     );
   }
-
 
   Widget _buildPromoSection(BuildContext context) {
     return SizedBox(

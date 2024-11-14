@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:hotelsbooking/core/app_export.dart';
+
 /// A class to help manage themes and colors within the application.
 class ThemeHelper {
   // The current app theme, fetched from shared preferences or a default value.
   final String _appTheme = PrefUtils().getThemeData() ?? 'lightCode';
+
   /// Supported custom colors mapped by theme name.
   final Map<String, LightCodeColors> _supportedCustomColor = {
     'lightCode': LightCodeColors(),
   };
+
   /// Supported color schemes mapped by theme name.
   final Map<String, ColorScheme> _supportedColorScheme = {
     'lightCode': MyColorSchemes.lightCodeColorScheme,
   };
+
   /// Get the custom colors for the current theme.
   LightCodeColors _getThemeColors() {
     return _supportedCustomColor[_appTheme] ?? LightCodeColors();
   }
+
   /// Get the theme data for the current theme.
   ThemeData _getThemeData() {
     final colorScheme =
@@ -27,74 +32,99 @@ class ThemeHelper {
       scaffoldBackgroundColor: _getThemeColors().whiteA700,
     );
   }
+
   /// Public method to get the current theme colors.
   LightCodeColors themeColor() => _getThemeColors();
+
   /// Public method to get the current theme data.
   ThemeData themeData() => _getThemeData();
 }
+
 /// Utility class to define text themes based on a color scheme.
 class TextThemes {
   static TextTheme textTheme(ColorScheme colorScheme) => TextTheme(
-    bodySmall: TextStyle(
-      color: appTheme.blueGray900.withOpacity(0.14),
-      fontSize: 12,
-      fontFamily: 'Inter',
-      fontWeight: FontWeight.w400,
-    ),
-    headlineSmall: TextStyle(
-      color: appTheme.black90001.withOpacity(0.5),
-      fontSize: 24,
-      fontFamily: 'Poppins',
-      fontWeight: FontWeight.w500,
-    ),
-    labelLarge: TextStyle(
-      color: appTheme.blueGray900.withOpacity(0.14),
-      fontSize: 12,
-      fontFamily: 'Inter',
-      fontWeight: FontWeight.w500,
-    ),
-    labelMedium: TextStyle(
-      color: appTheme.amberA200,
-      fontSize: 10,
-      fontFamily: 'Plus Jakarta Sans',
-      fontWeight: FontWeight.w700,
-    ),
-    titleMedium: TextStyle(
-      color: appTheme.black900,
-      fontSize: 16,
-      fontFamily: 'Poppins',
-      fontWeight: FontWeight.w700,
-    ),
-    titleSmall: TextStyle(
-      color: appTheme.black900,
-      fontSize: 14,
-      fontFamily: 'Poppins',
-      fontWeight: FontWeight.w600,
-    ),
-  );
+        bodySmall: TextStyle(
+          color: appTheme.blueGray900.withOpacity(0.14),
+          fontSize: 12,
+          fontFamily: 'Inter',
+          fontWeight: FontWeight.w400,
+        ),
+        headlineSmall: TextStyle(
+          color: appTheme.black90001.withOpacity(0.5),
+          fontSize: 24,
+          fontFamily: 'Poppins',
+          fontWeight: FontWeight.w500,
+        ),
+        labelLarge: TextStyle(
+          color: appTheme.blueGray900.withOpacity(0.14),
+          fontSize: 12,
+          fontFamily: 'Inter',
+          fontWeight: FontWeight.w500,
+        ),
+        labelMedium: TextStyle(
+          color: appTheme.amberA200,
+          fontSize: 10,
+          fontFamily: 'Plus Jakarta Sans',
+          fontWeight: FontWeight.w700,
+        ),
+        titleMedium: TextStyle(
+          color: appTheme.black900,
+          fontSize: 16,
+          fontFamily: 'Poppins',
+          fontWeight: FontWeight.w700,
+        ),
+        titleSmall: TextStyle(
+          color: appTheme.black900,
+          fontSize: 14,
+          fontFamily: 'Poppins',
+          fontWeight: FontWeight.w600,
+        ),
+      );
 }
+
 /// Class containing custom colors for the lightCode theme.
 class LightCodeColors {
   Color get amberA200 => const Color(0xFFFFD33C);
+
   Color get black900 => const Color(0xFF0F0F0F);
+
   Color get black90001 => const Color(0xFF000000);
+
   Color get blueGray400 => const Color(0xFF878787);
+
   Color get blueGray900 => const Color(0xFF252831);
+
   Color get cyan600 => const Color(0xFF06B3C4);
+
   Color get gray900 => const Color(0xFF0D1634);
+
   Color get gray9000f => const Color(0x0F121212);
+
   Color get red500 => const Color(0xFFE74C3C);
+
   Color get whiteA700 => const Color(0xFFFFFFFF);
+
   Color get blueGray10033 => const Color(0x33D8D8D8);
+
   Color get primary => const Color(0xFF06B3C4);
+
   Color get primaryContainer => const Color(0xFFFFFFFF);
+
   Color get errorContainer => const Color(0xFF000000);
+
   Color get onPrimary => const Color(0xFF0F0F0F);
+
   Color get onPrimaryContainer => const Color(0x19878787);
+
   Color get gray50B2 => const Color(0xB2F5F5FF);
 
+  Color get blueGray9000a => const Color(0x0A1B1B4D);
+
   Color get blueGray100 => const Color(0xFFD9D9D9);
+
+  Color get blueGray100D8 => const Color(0xD8D8D8D8);
 }
+
 /// Define your custom color scheme here.
 class MyColorSchemes {
   static const ColorScheme lightCodeColorScheme = ColorScheme(
@@ -111,9 +141,10 @@ class MyColorSchemes {
     onError: Colors.white,
   );
 }
-LightCodeColors get appTheme => ThemeHelper().themeColor();
-ThemeData get theme => ThemeHelper().themeData();
 
+LightCodeColors get appTheme => ThemeHelper().themeColor();
+
+ThemeData get theme => ThemeHelper().themeData();
 
 // import 'package:flutter/material.dart';
 // import 'package:hotelsbooking/core/app_export.dart';

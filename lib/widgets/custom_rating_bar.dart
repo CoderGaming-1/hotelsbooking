@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:hotelsbooking/core/app_export.dart';
+
 // ignore_for_file: must_be_immutable
 class CustomRatingBar extends StatelessWidget {
-  CustomRatingBar({Key? key,
-    this.alignment,
-    this.ignoreGestures,
-    this.initialRating,
-    this.itemSize,
-    this.itemCount,
-    this.color,
-    this.unselectedColor,
-    this.onRatingUpdate})
+  CustomRatingBar(
+      {Key? key,
+      this.alignment,
+      this.ignoreGestures,
+      this.initialRating,
+      this.itemSize,
+      this.itemCount,
+      this.color,
+      this.unselectedColor,
+      this.onRatingUpdate})
       : super(
-    key: key,
-  );
+          key: key,
+        );
   final Alignment? alignment;
   final bool? ignoreGestures;
   final double? initialRating;
@@ -29,12 +31,11 @@ class CustomRatingBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return alignment != null
         ? Align(
-        alignment: alignment ?? Alignment.center, child: ratingBarWidget)
+            alignment: alignment ?? Alignment.center, child: ratingBarWidget)
         : ratingBarWidget;
   }
 
-  Widget get ratingBarWidget =>
-      RatingBar.builder(
+  Widget get ratingBarWidget => RatingBar.builder(
         ignoreGestures: ignoreGestures ?? false,
         initialRating: initialRating ?? 0,
         minRating: 0,

@@ -4,15 +4,19 @@ import 'bloc/mybooking_bloc.dart';
 import 'models/bookinglistsection_item_model.dart';
 import 'models/mybookinghistor_tab_model.dart';
 import 'widgets/bookinglistsection_item_widget.dart';
+
 class MybookinghistorTabPage extends StatefulWidget {
   const MybookinghistorTabPage({Key? key})
       : super(
-    key: key, );
+          key: key,
+        );
+
   @override
   MybookinghistorTabPageState createState() => MybookinghistorTabPageState();
-  static Widget builder (BuildContext context) {
+
+  static Widget builder(BuildContext context) {
     return BlocProvider<MybookingBloc>(
-      create: (context) => MybookingBloc (MybookingState(
+      create: (context) => MybookingBloc(MybookingState(
         mybookinghistorTabModelObj: MybookinghistorTabModel(),
       ))
         ..add(MybookingInitialEvent()),
@@ -20,15 +24,15 @@ class MybookinghistorTabPage extends StatefulWidget {
     );
   }
 }
+
 class MybookinghistorTabPageState extends State<MybookinghistorTabPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(24.h),
       child: Column(
-        children: [_buildBookingListSection(context)],),
-
-
+        children: [_buildBookingListSection(context)],
+      ),
     );
   }
 
@@ -36,7 +40,7 @@ class MybookinghistorTabPageState extends State<MybookinghistorTabPage> {
   Widget _buildBookingListSection(BuildContext context) {
     return Expanded(
       child:
-      BlocSelector<MybookingBloc, MybookingState, MybookinghistorTabModel?>(
+          BlocSelector<MybookingBloc, MybookingState, MybookinghistorTabModel?>(
         selector: (state) => state.mybookinghistorTabModelObj,
         builder: (context, mybookinghistorTabModelobj) {
           return ListView.separated(
@@ -45,14 +49,15 @@ class MybookinghistorTabPageState extends State<MybookinghistorTabPage> {
             shrinkWrap: true,
             separatorBuilder: (context, index) {
               return SizedBox(
-                height: 24.h,);
+                height: 24.h,
+              );
             },
             itemCount:
-            mybookinghistorTabModelobj?.bookinglistsectionItemList.length ??
-                0,
+                mybookinghistorTabModelobj?.bookinglistsectionItemList.length ??
+                    0,
             itemBuilder: (context, index) {
               BookinglistsectionItemModel model = mybookinghistorTabModelobj
-                  ?.bookinglistsectionItemList[index] ??
+                      ?.bookinglistsectionItemList[index] ??
                   BookinglistsectionItemModel();
               return BookinglistsectionItemWidget(
                 model,

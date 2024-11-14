@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import '../../core/app_export.dart';
+
 class AppbarTitle extends StatelessWidget {
   AppbarTitle({Key? key, required this.text, this.onTap, this.margin})
       : super(
-    key: key,
-  );
+          key: key,
+        );
   final String text;
   final Function? onTap;
   final EdgeInsetsGeometry? margin;
@@ -20,7 +21,8 @@ class AppbarTitle extends StatelessWidget {
         child: Text(
           text,
           style: theme.textTheme.titleMedium!.copyWith(
-            color: theme.colorScheme.onErrorContainer.withOpacity(1),),
+            color: theme.colorScheme.onErrorContainer.withOpacity(1),
+          ),
         ),
       ),
     );

@@ -3,18 +3,25 @@ import 'package:equatable/equatable.dart';
 import '../../../core/app_export.dart';
 import '../../../data/models/selectionPopupModel/selection_popup_model.dart';
 import '../models/from_details_model.dart';
+
 part 'from_details_event.dart';
+
 part 'from_details_state.dart';
+
 /// A bloc that manages the state of a FromDetails according to the event that is dispatched to it.
 class FromDetailsBloc extends Bloc<FromDetailsEvent, FromDetailsState> {
-  FromDetailsBloc(FromDetailsState initialState): super(initialState) {
+  FromDetailsBloc(FromDetailsState initialState) : super(initialState) {
     on<FromDetailsInitialEvent>(_onInitialize);
     on<ChangeCheckBoxEvent>(_changeCheckBox);
     on<ChangeCheckBox1Event>(_changeCheckBox1);
     on<ChangeCheckBox2Event>(_changeCheckBox2);
     on<ChangeDateEvent>(_changeDate);
   }
-  _onInitialize(FromDetailsInitialEvent event, Emitter<FromDetailsState> emit,) async {
+
+  _onInitialize(
+    FromDetailsInitialEvent event,
+    Emitter<FromDetailsState> emit,
+  ) async {
     emit(
       state.copyWith(
         dateController: TextEditingController(),
@@ -25,74 +32,88 @@ class FromDetailsBloc extends Bloc<FromDetailsEvent, FromDetailsState> {
       ),
     );
     emit(
-        state.copyWith(
+      state.copyWith(
         fromDetailsModelObj: state.fromDetailsModelObj?.copyWith(
-          dropdownItemList: fillDropdownItemList (),
-          dropdownItemList1: fillDropdownItemList1(), ),
+          dropdownItemList: fillDropdownItemList(),
+          dropdownItemList1: fillDropdownItemList1(),
         ),
+      ),
     );
     // Future.delayed (const Duration(milliseconds: 3000), () {
     //   NavigatorService.popAndPushNamed (AppRoutes.checkoutScreen,);
     // });
   }
+
   _changeCheckBox(
-      ChangeCheckBoxEvent event, Emitter<FromDetailsState> emit,
-      ) {
+    ChangeCheckBoxEvent event,
+    Emitter<FromDetailsState> emit,
+  ) {
     emit(state.copyWith(
       hotelUpdatesCheckbox: event.value,
     ));
   }
+
   _changeCheckBox1(
-  ChangeCheckBox1Event event,
-  Emitter<FromDetailsState> emit,
-      ){
-  emit(state.copyWith(
-  emailUpdatesCheckbox: event.value, ));
-  }
-  _changeCheckBox2(
-  ChangeCheckBox2Event event, Emitter<FromDetailsState> emit,
-  ) {emit(state.copyWith(
-  termsOfServiceCheckbox: event.value,
-  ) );
-  }
-  List<SelectionPopupModel> fillDropdownItemList() {
-  return [
-  SelectionPopupModel(
-  id: 1,
-  title: "Item One",
-  isSelected: true,
-  ),
-  SelectionPopupModel (
-  id: 2,
-  title: "Item Two",
-  ),
-  SelectionPopupModel(
-  id: 3,
-  title: "Item Three",
-  )];}
-  List<SelectionPopupModel> fillDropdownItemList1() {
-  return [
-  SelectionPopupModel (
-  id: 1,
-  title: "Item One",
-  isSelected: true, ),
-  SelectionPopupModel(
-  id: 2,
-  title: "Item Two",
-  ),
-  SelectionPopupModel(
-  id: 3,
-  title: "Item Three",
-  )
-  ];
-  }
-  _changeDate(
-  ChangeDateEvent event,
-  Emitter<FromDetailsState> emit,
-      ){
+    ChangeCheckBox1Event event,
+    Emitter<FromDetailsState> emit,
+  ) {
     emit(state.copyWith(
-    fromDetailsModelObj: state.fromDetailsModelObj?.copyWith(
-    selectedDate: event.date,
-)));
-}
+      emailUpdatesCheckbox: event.value,
+    ));
+  }
+
+  _changeCheckBox2(
+    ChangeCheckBox2Event event,
+    Emitter<FromDetailsState> emit,
+  ) {
+    emit(state.copyWith(
+      termsOfServiceCheckbox: event.value,
+    ));
+  }
+
+  List<SelectionPopupModel> fillDropdownItemList() {
+    return [
+      SelectionPopupModel(
+        id: 1,
+        title: "Item One",
+        isSelected: true,
+      ),
+      SelectionPopupModel(
+        id: 2,
+        title: "Item Two",
+      ),
+      SelectionPopupModel(
+        id: 3,
+        title: "Item Three",
+      )
+    ];
+  }
+
+  List<SelectionPopupModel> fillDropdownItemList1() {
+    return [
+      SelectionPopupModel(
+        id: 1,
+        title: "Item One",
+        isSelected: true,
+      ),
+      SelectionPopupModel(
+        id: 2,
+        title: "Item Two",
+      ),
+      SelectionPopupModel(
+        id: 3,
+        title: "Item Three",
+      )
+    ];
+  }
+
+  _changeDate(
+    ChangeDateEvent event,
+    Emitter<FromDetailsState> emit,
+  ) {
+    emit(state.copyWith(
+        fromDetailsModelObj: state.fromDetailsModelObj?.copyWith(
+      selectedDate: event.date,
+    )));
+  }
 }

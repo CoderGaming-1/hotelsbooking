@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import '../../../core/app_export.dart';
+
 /// This class is used in the [detailslist_item_widget] screen.
 // ignore_for_file: must_be_immutable
 class DetailslistItemModel extends Equatable {
@@ -7,8 +8,10 @@ class DetailslistItemModel extends Equatable {
     image = image ?? ImageConstant.imgImage9;
     id = id ?? "";
   }
+
   String? image;
   String? id;
+
   DetailslistItemModel copyWith({
     String? image,
     String? id,
@@ -18,7 +21,7 @@ class DetailslistItemModel extends Equatable {
       id: id ?? this.id,
     );
   }
-    @override
-    List<Object?> get props =>
-    [image, id];
-  }
+
+  @override
+  List<Object?> get props => [image, id];
+}

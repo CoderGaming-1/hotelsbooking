@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hotelsbooking/core/app_export.dart';
+
 class AppbarTrailingImage extends StatelessWidget {
   AppbarTrailingImage({Key? key, this.imagePath, this.onTap, this.margin})
       : super(
-    key: key,
-  );
+          key: key,
+        );
   final String? imagePath;
   final Function? onTap;
   final EdgeInsetsGeometry? margin;

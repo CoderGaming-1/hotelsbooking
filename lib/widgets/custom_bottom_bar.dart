@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:hotelsbooking/core/app_export.dart';
+
 enum BottomBarEnum { Home, Mybooking, Favorite, Myprofile }
+
 // ignore_for_file: must_be_immutable
 class CustomBottomBar extends StatefulWidget {
   CustomBottomBar({this.onChanged});
+
   Function(BottomBarEnum)? onChanged;
+
   @override
   CustomBottomBarState createState() => CustomBottomBarState();
 }
+
 // ignore_for_file: must_be_immutable
 class CustomBottomBarState extends State<CustomBottomBar> {
   int selectedIndex = 0;
@@ -63,7 +68,8 @@ class CustomBottomBarState extends State<CustomBottomBar> {
                   imagePath: bottomMenuList[index].icon,
                   height: 24.h,
                   width: 24.h,
-                  color: Color(0XFF252831),),
+                  color: Color(0XFF252831),
+                ),
                 SizedBox(height: 4.h),
                 Text(
                   bottomMenuList[index].title ?? "",
@@ -80,8 +86,6 @@ class CustomBottomBarState extends State<CustomBottomBar> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   CustomImageView(
-
-
                     imagePath: bottomMenuList[index].activeIcon,
                     height: 24.h,
                     width: double.maxFinite,
@@ -109,39 +113,41 @@ class CustomBottomBarState extends State<CustomBottomBar> {
     );
   }
 }
+
 // ignore_for_file: must_be_immutable
-    class BottomMenuModel {
-    BottomMenuModel(
-    {required this.icon,
-    required this.activeIcon,
-    this.title,
-    required this.type});
-    String icon;
-    String activeIcon;
-    String? title;
-    BottomBarEnum type;
-    }
+class BottomMenuModel {
+  BottomMenuModel(
+      {required this.icon,
+      required this.activeIcon,
+      this.title,
+      required this.type});
+
+  String icon;
+  String activeIcon;
+  String? title;
+  BottomBarEnum type;
+}
 
 class DefaultWidget extends StatelessWidget {
   @override
-  Widget build (BuildContext context) {
+  Widget build(BuildContext context) {
     return Container(
-        color: Color(0xffffffff),
-    padding: EdgeInsets.all(10),
-    child: Center(
-    child: Column (
-    crossAxisAlignment: CrossAxisAlignment.start,
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-    Text(
-    'Please replace the respective Widget here',
-    style: TextStyle(
-    fontSize: 18,
-    ),
-    )
-    ],
-    ),
-    ),
+      color: Color(0xffffffff),
+      padding: EdgeInsets.all(10),
+      child: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Please replace the respective Widget here',
+              style: TextStyle(
+                fontSize: 18,
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }

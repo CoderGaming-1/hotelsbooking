@@ -2,17 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:hotelsbooking/core/app_export.dart';
 import 'package:hotelsbooking/data/models/selectionPopupModel/selection_popup_model.dart';
 import 'package:hotelsbooking/widgets/custom_drop_down.dart';
+
 class AppbarTitleDropdown extends StatelessWidget {
   AppbarTitleDropdown(
       {Key? key,
-        required this.hintText,
-        required this.items,
-        required this.onTap,
-        this.margin})
-      : super(key: key,);
+      required this.hintText,
+      required this.items,
+      required this.onTap,
+      this.margin})
+      : super(
+          key: key,
+        );
   final String? hintText;
   final List<SelectionPopupModel> items;
-  final Function (SelectionPopupModel) onTap;
+  final Function(SelectionPopupModel) onTap;
   final EdgeInsetsGeometry? margin;
 
   @override

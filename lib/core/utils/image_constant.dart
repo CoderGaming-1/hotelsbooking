@@ -7,6 +7,12 @@ class ImageConstant {
   static String imgArrowdown = '$imagePath/arrow_down.png';
   static String imgMessageTextSquare02 = '$imagePath/img_message_text_square_02.png';
   static String imgIcon = '$imagePath/img_icon.png';
+  static String img1 = '$imagePath/img1.jfif';
+  static String img2 = '$imagePath/img2.jfif';
+  static String img3 = '$imagePath/img3.jfif';
+  static String img4 = '$imagePath/img4.jfif';
+  static String img5 = '$imagePath/img5.jfif';
+
 //   static String imgContrast = '$imagePath/img_contrast.png';
 //   static String imgSettings04 = '$imagePath/img_settings04.png';
   static String imgImageDefaultProperty1 = '$imagePath/img_image_default_property1.png';
@@ -69,7 +75,7 @@ static String imageNotFound = 'assets/images/image_not_found.PNG';
   static String imgEmail = '$imagePath/img_email.png';
   // static String imgPhone = '$imagePath/img_phone.png';
   // static String imgArrowLeft = '$imagePath/imgArrowLeft.png';
-
+  static String imgViewBuildingW = '$imagePath/img_view_building_w.png';
   // Details images
   static String imgSettings = '$imagePath/img_settings.png';
   static String imgThumbsup = '$imagePath/img_thumbsup.png';
@@ -80,4 +86,7 @@ static String imageNotFound = 'assets/images/image_not_found.PNG';
 
 
   static String imgDiscount = '$imagePath/img_discount.png';
+
+  //Filter Screen
+  static String imgArrowdownOnprimarycontainer = '$imagePath/arrow_down.png';
 }

@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+
 /// This class is used in the [favoritegrid_item_widget] screen.
 // ignore_for_file: must_be_immutable
 class FavoritegridItemModel extends Equatable {
@@ -7,18 +8,23 @@ class FavoritegridItemModel extends Equatable {
     alicesprings = alicesprings ?? "Alice Springs NT 0870, Australia";
     id = id ?? "";
   }
+
   String? muongthanh;
   String? alicesprings;
   String? id;
+
   FavoritegridItemModel copywith({
     String? muongthanh,
     String? alicesprings,
     String? id,
   }) {
     return FavoritegridItemModel(
-      muongthanh: muongthanh ?? this.muongthanh, alicesprings: alicesprings ?? this.alicesprings, id: id ?? this.id,
+      muongthanh: muongthanh ?? this.muongthanh,
+      alicesprings: alicesprings ?? this.alicesprings,
+      id: id ?? this.id,
     );
   }
+
   @override
   List<Object?> get props => [muongthanh, alicesprings, id];
 }
