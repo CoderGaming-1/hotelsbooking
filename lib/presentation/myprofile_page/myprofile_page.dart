@@ -39,7 +39,17 @@ class MyprofilePage extends StatelessWidget {
         return SafeArea(
           child: Scaffold(
             backgroundColor: appTheme.whiteA700,
-            appBar: _buildTopNavigation(context),
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              title: Text(
+                'My Profile',
+                style: TextStyle(
+                    fontSize: 20,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.bold),
+              ),
+              centerTitle: true,
+            ),
             body: Container(
               width: double.maxFinite,
               padding: EdgeInsets.only(
@@ -72,7 +82,7 @@ class MyprofilePage extends StatelessWidget {
                   _buildChangePasswordSection(context),
                   SizedBox(height: 12.h),
                   _buildSecuritySection(context),
-                  SizedBox(height: 20.h),
+                  Expanded(child: SizedBox()),
                   CustomElevatedButton(
                     text: "lbl_logout".tr,
                     leftIcon: Container(
@@ -85,7 +95,7 @@ class MyprofilePage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 72.h),
+                  SizedBox(height: 12.h),
                   _buildBottomNavigation(context)
                 ],
               ),

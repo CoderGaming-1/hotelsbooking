@@ -127,9 +127,10 @@ class LightCodeColors {
 
 /// Define your custom color scheme here.
 class MyColorSchemes {
-  static const ColorScheme lightCodeColorScheme = ColorScheme(
+  static final LightCodeColors lightCodeColors = LightCodeColors();
+  static ColorScheme lightCodeColorScheme = ColorScheme(
     brightness: Brightness.light,
-    primary: Colors.blue,
+    primary: lightCodeColors.primary,
     onPrimary: Colors.white,
     secondary: Colors.green,
     onSecondary: Colors.white,

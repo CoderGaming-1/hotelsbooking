@@ -15,29 +15,29 @@ class CustomBottomBar extends StatefulWidget {
 
 // ignore_for_file: must_be_immutable
 class CustomBottomBarState extends State<CustomBottomBar> {
-  int selectedIndex = 0;
+  static int selectedIndex = 0;
   List<BottomMenuModel> bottomMenuList = [
     BottomMenuModel(
-      icon: ImageConstant.imgNavHome,
-      activeIcon: ImageConstant.imgNavHome,
+      icon: Icons.home,
+      activeIcon: Icons.home,
       title: "lbl_home".tr,
       type: BottomBarEnum.Home,
     ),
     BottomMenuModel(
-      icon: ImageConstant.imgNavMyBooking,
-      activeIcon: ImageConstant.imgNavMyBooking,
+      icon: Icons.event_note,
+      activeIcon: Icons.event_note,
       title: "lbl_my_booking".tr,
       type: BottomBarEnum.Mybooking,
     ),
     BottomMenuModel(
-      icon: ImageConstant.imgNavFavorite,
-      activeIcon: ImageConstant.imgNavFavorite,
+      icon: Icons.favorite,
+      activeIcon: Icons.favorite,
       title: "lbl_favorite".tr,
       type: BottomBarEnum.Favorite,
     ),
     BottomMenuModel(
-      icon: ImageConstant.imgNavMyProfile,
-      activeIcon: ImageConstant.imgNavMyProfile,
+      icon: Icons.person,
+      activeIcon: Icons.person,
       title: "lbl_my_profile".tr,
       type: BottomBarEnum.Myprofile,
     )
@@ -46,7 +46,11 @@ class CustomBottomBarState extends State<CustomBottomBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 88.h,
+      height: 80.h,
+      padding: EdgeInsets.only(
+        bottom: 16.h,
+        top: 12.h,
+      ),
       decoration: BoxDecoration(
         color: Color(0XFFFFFFFF),
       ),
@@ -59,42 +63,45 @@ class CustomBottomBarState extends State<CustomBottomBar> {
         currentIndex: selectedIndex,
         type: BottomNavigationBarType.fixed,
         items: List.generate(bottomMenuList.length, (index) {
-          return BottomNavigationBarItem(
-            icon: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                CustomImageView(
-                  imagePath: bottomMenuList[index].icon,
-                  height: 24.h,
-                  width: 24.h,
-                  color: Color(0XFF252831),
-                ),
-                SizedBox(height: 4.h),
-                Text(
-                  bottomMenuList[index].title ?? "",
-                  style: theme.textTheme.labelLarge!.copyWith(
-                    color: Color(0X24252831),
+          bool isSelected ;// Kiểm tra nếu mục đang được chọn
+          if(index == selectedIndex) {
+            isSelected = true;
+          } else isSelected = false;
+            return BottomNavigationBarItem(
+              icon: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(
+                    bottomMenuList[index].icon,
+                    size: 24.h,
+                    color: isSelected ? Color(0XFF06B3C4) : Colors.black.withOpacity(0.1), // Đổi màu khi được chọn
+                  ),
+                  SizedBox(height: 4.h),
+                  Text(
+                    bottomMenuList[index].title ?? "",
+                    style: TextStyle( fontSize: 12, fontFamily: 'Poppins',
+                      color: isSelected ? Color(0XFF06B3C4
+                          ) : Colors.black.withOpacity(0.1), // Đổi màu khi được chọn
                   ),
                 )
               ],
             ),
             activeIcon: SizedBox(
-              width: 34.h,
+              width: 62.h,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  CustomImageView(
-                    imagePath: bottomMenuList[index].activeIcon,
-                    height: 24.h,
-                    width: double.maxFinite,
+                  Icon(
+                    bottomMenuList[index].activeIcon,
+                    size: 24.h,
                     color: Color(0XFF06B3C4),
                   ),
                   SizedBox(height: 4.h),
                   Text(
                     bottomMenuList[index].title ?? "",
-                    style: CustomTextStyles.labelLargeCyan600.copyWith(
+                    style: TextStyle( fontSize: 12, fontFamily: 'Poppins', fontWeight: FontWeight.w700,
                       color: Color(0XFF06B3C4),
                     ),
                   )
@@ -105,9 +112,10 @@ class CustomBottomBarState extends State<CustomBottomBar> {
           );
         }),
         onTap: (index) {
-          selectedIndex = index;
+          setState(() {
+            selectedIndex = index; // Cập nhật selectedIndex khi nhấn vào
+          });
           widget.onChanged?.call(bottomMenuList[index].type);
-          setState(() {});
         },
       ),
     );
@@ -118,12 +126,12 @@ class CustomBottomBarState extends State<CustomBottomBar> {
 class BottomMenuModel {
   BottomMenuModel(
       {required this.icon,
-      required this.activeIcon,
-      this.title,
-      required this.type});
+        required this.activeIcon,
+        this.title,
+        required this.type});
 
-  String icon;
-  String activeIcon;
+  IconData icon;
+  IconData activeIcon;
   String? title;
   BottomBarEnum type;
 }

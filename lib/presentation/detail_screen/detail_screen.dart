@@ -104,7 +104,7 @@ class DetailsScreen extends StatelessWidget {
       leading: AppbarLeadingIconbutton(
         imagePath: ImageConstant.imgArrowLeft,
         margin: EdgeInsets.only(
-          left: 24.h,
+          left: 16.h,
           top: 8.h,
           bottom: 8.h,
         ),
@@ -113,8 +113,12 @@ class DetailsScreen extends StatelessWidget {
         },
       ),
       centerTitle: true,
-      title: AppbarTitle(
-        text: "lbl_details".tr,
+      title: Text(
+          'Details',
+          style: TextStyle(
+              fontSize: 20,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.bold),
       ),
       actions: [
         AppbarTrailingIconbutton(

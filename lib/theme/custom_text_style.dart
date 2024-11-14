@@ -217,6 +217,7 @@ class CustomTextStyles {
       theme.textTheme.labelMedium!.plusJakartaSans.copyWith(
         color: appTheme.amberA200,
         fontWeight: FontWeight.w700,
+        fontSize: 10.h
       );
 
   static TextStyle get labelMediumPlusJakartaSansBlack900Bold =>

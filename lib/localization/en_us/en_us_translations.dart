@@ -11,8 +11,8 @@ final Map<String, String> enUs = {
   "lbl_favorite": "Favorite",
   "lbl_hello_hoangphan": "Hello, Hoang Phan!",
   "lbl_home": "Home",
-  "lbl_my_booking": "My Booking",
-  "lbl_my_profile": "My Profile",
+  "lbl_my_booking": "Booking",
+  "lbl_my_profile": "Profile",
   "lbl_nearby_hotels": "Nearby Hotels",
   "lbl_see_all": "See All",
   "msg_chenango_new_york": "Da Nang, Viet Nam",
@@ -45,6 +45,7 @@ final Map<String, String> enUs = {
   "lbl_general": "General",
   "lbl_logout": "Logout",
   "lbl_security": "Security",
+  "lbl_my_profile": "Profile",
 
 
   // MyBooking Screen
@@ -133,7 +134,7 @@ final Map<String, String> enUs = {
   "lbl_book_now": "Book Now",
   "lbl_breakfast": "BREAKFAST",
   "lbl_description": "Description",
-  "lbl_details": "DETAILS",
+  "lbl_details": "Details",
   "lbl_free_wifi": "Free Wifi",
   "lbl_preview": "Preview",
   "msg_contact_98674456xx": "CONTACT TO OUR SERVICE CUSTOMER",

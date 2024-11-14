@@ -24,11 +24,6 @@ class FavoritegridItemWidget extends StatelessWidget {
                 imagePath: ImageConstant.imgViewBuildingw,
                 height: 116.h,
                 width: double.maxFinite,
-              ),
-              CustomImageView(
-                imagePath: ImageConstant.imgFavorite,
-                height: 14.h,
-                width: 18.h,
                 radius: BorderRadius.circular(16),
               ),
               CustomImageView(
@@ -88,29 +83,25 @@ class FavoritegridItemWidget extends StatelessWidget {
               SizedBox(height: 4.h),
               Text(
                 favoritegridItemModelObj.muongthanh!,
-                style: theme.textTheme.labelLarge,
+                style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold, fontFamily: 'Poppins'),
               ),
               SizedBox(height: 4.h),
               Text(
                 favoritegridItemModelObj.alicesprings!,
-                style: theme.textTheme.bodySmall,
+                style: TextStyle(color: Color(0xFF939393), fontSize: 12, fontWeight: FontWeight.w500, fontFamily: 'Inter'),
               ),
               SizedBox(height: 10.h),
               Container(
                 padding: EdgeInsets.symmetric(
                   horizontal: 4.h,
-                  vertical: 2.h,
-                ),
-                decoration: BoxDecoration(
-                  color: appTheme.whiteA700,
-                  borderRadius: BorderRadiusStyle.roundedBorder8,
+                  vertical: 4.h,
                 ),
                 child: RichText(
                   text: TextSpan(
                     children: [
                       TextSpan(
                         text: "lbl_382".tr,
-                        style: theme.textTheme.labelMedium,
+                        style: TextStyle(color: Colors.black, fontFamily: 'Poppins', fontWeight: FontWeight.w600, fontSize: 14.h),
                       ),
                       TextSpan(
                         text: " ", // Space TextSpan
@@ -118,7 +109,7 @@ class FavoritegridItemWidget extends StatelessWidget {
                       ),
                       TextSpan(
                         text: "lbl_299".tr,
-                        style: theme.textTheme.labelSmall,
+                        style: TextStyle(color: Color(0xFFE53F3F), fontFamily: 'Poppins', fontWeight: FontWeight.w600, fontSize: 12.h),
                       )
                     ],
                   ),

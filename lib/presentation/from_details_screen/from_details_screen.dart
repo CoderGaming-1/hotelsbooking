@@ -90,9 +90,11 @@ class FromDetailsScreen extends StatelessWidget {
         },
       ),
       centerTitle: true,
-      title: AppbarTitle(
-        text: "lbl_from_detail".tr,
-      ),
+      title: Text("lbl_from_detail".tr,
+        style: TextStyle(
+            fontSize: 20,
+            fontFamily: 'Poppins',
+            fontWeight: FontWeight.bold),),
     );
   }
 

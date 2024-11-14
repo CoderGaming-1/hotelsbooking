@@ -179,8 +179,8 @@ class CheckoutScreen extends StatelessWidget {
     return Container(
       width: double.maxFinite,
       padding: EdgeInsets.symmetric(
-        horizontal: 4.h,
-        vertical: 6.h,
+        horizontal: 10.h,
+        vertical: 10.h,
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadiusStyle.roundedBorder20,

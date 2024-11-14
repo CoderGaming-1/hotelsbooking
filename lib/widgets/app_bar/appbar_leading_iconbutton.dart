@@ -32,9 +32,7 @@ class AppbarLeadingIconbutton extends StatelessWidget {
           width: width ?? 40.h,
           padding: EdgeInsets.all(8.h),
           decoration: IconButtonStyleHelper.none,
-          child: CustomImageView(
-            imagePath: ImageConstant.imgArrowLeft,
-          ),
+          child:Icon(Icons.arrow_back_ios_new, color: Colors.black,),
         ),
       ),
     );

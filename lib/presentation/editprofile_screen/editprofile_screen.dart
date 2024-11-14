@@ -63,7 +63,7 @@ class EditprofileScreen extends StatelessWidget {
                   Spacer(),
                   CustomElevatedButton(
                     height: 48.h,
-                    text: "Save Changes".tr,
+                    text: "Save_Changes".tr,
                     margin: EdgeInsets.only(
                       left: 16.h,
                       right: 22.h,
@@ -72,7 +72,7 @@ class EditprofileScreen extends StatelessWidget {
                     buttonTextStyle:
                         CustomTextStyles.titleMediumPrimaryContainer,
                   ),
-                  SizedBox(height: 40.h)
+                  //SizedBox(height: 40.h)
                 ],
               ),
             ),
