@@ -13,3 +13,4 @@ export 'package:hotelsbooking/theme/custom_text_style.dart';
 export 'package:hotelsbooking/theme/theme_helper.dart';
 export 'package:hotelsbooking/widgets/custom_image_view.dart';
 export 'package:hotelsbooking/theme/bloc/theme_bloc.dart';
+export 'package:hotelsbooking/core/utils/vector_constant.dart';

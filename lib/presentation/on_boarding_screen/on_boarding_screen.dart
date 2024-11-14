@@ -55,7 +55,7 @@ class OnboardingScreen extends StatelessWidget{
                 ),
                 TextButton(
                   onPressed: (){
-                    Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => HomeOneScreen(),),);
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx) => HomeOneScreen(),),);
                   },
                   style: TextButton.styleFrom(
                     foregroundColor: Colors.transparent, // Fully transparent foreground

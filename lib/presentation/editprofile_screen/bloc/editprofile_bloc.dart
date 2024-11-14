@@ -12,7 +12,7 @@ class EditprofileBloc extends Bloc<EditprofileEvent, EditprofileState> {
   EditprofileBloc(EditprofileState initialstate) : super(initialstate) {
     on<EditprofileInitialEvent>(_onInitialize);
   }
-
+  
   _onInitialize(
     EditprofileInitialEvent event,
     Emitter<EditprofileState> emit,

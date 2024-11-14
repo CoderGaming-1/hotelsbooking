@@ -51,6 +51,17 @@ class MybookingScreenState extends State<MybookingScreen>
     return SafeArea(
       child: Scaffold(
         backgroundColor: appTheme.whiteA700,
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: Text(
+            'My Booking',
+            style: TextStyle(
+                fontSize: 20,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.bold),
+          ),
+          centerTitle: true,
+        ),
         body: SizedBox(
           width: double.maxFinite,
           child: Column(

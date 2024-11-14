@@ -9,6 +9,7 @@ class EditprofileState extends Equatable {
       this.phoneNumberController,
       this.editprofileModelObj});
 
+
   TextEditingController? userNameController;
   TextEditingController? emailtwoController;
   TextEditingController? phoneNumberController;
@@ -34,6 +35,7 @@ class EditprofileState extends Equatable {
       phoneNumberController:
           phoneNumberController ?? this.phoneNumberController,
       editprofileModelObj: editprofileModelobj ?? this.editprofileModelObj,
+
     );
   }
 }

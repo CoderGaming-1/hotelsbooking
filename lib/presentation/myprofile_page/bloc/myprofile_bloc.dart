@@ -11,7 +11,7 @@ class MyprofileBloc extends Bloc<MyprofileEvent, MyprofileState> {
   MyprofileBloc(MyprofileState initialstate) : super(initialstate) {
     on<MyprofileInitialEvent>(_onInitialize);
   }
-
+  
   _onInitialize(
     MyprofileInitialEvent event,
     Emitter<MyprofileState> emit,

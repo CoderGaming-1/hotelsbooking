@@ -289,7 +289,7 @@ class HomeOneInitialPageState extends State<HomeOneInitialPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "msg_recomended_hotel".tr,
+                  "msg_recommended_hotel".tr,
                   style: theme.textTheme.titleMedium,
                 ),
                 Text(
