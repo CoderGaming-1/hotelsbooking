@@ -133,28 +133,13 @@ class SearchScreenState extends State<SearchScreen>
                     alignment: Alignment.center,
                     width: double.maxFinite,
                     margin: EdgeInsets.only(right: 6.h),
-                    decoration: tabIndex == 0
-                        ? BoxDecoration(
-                            color: appTheme.whiteA700,
-                            borderRadius: BorderRadius.circular(
-                              10.h,
-                            ),
-                            border: Border.all(
-                              color: appTheme.black900,
-                              width: 1.h,
-                            ))
-                        : BoxDecoration(
-                            color: appTheme.whiteA700,
-                            borderRadius: BorderRadius.circular(
-                              10.h,
-                            ),
-                            border: Border.all(
-                              color: appTheme.black900,
-                              width: 1.h,
-                            ),
-                          ),
-                    child: Text(
-                      "lbl_lastest".tr,
+                    decoration: BoxDecoration(
+                      color: appTheme.whiteA700,
+                      borderRadius: BorderRadius.circular(10.h),
+                      border: Border.all(
+                        color: appTheme.black900,
+                        width: 1.h,
+                      ),
                     ),
                   ),
                 ),
@@ -164,41 +149,25 @@ class SearchScreenState extends State<SearchScreen>
                     alignment: Alignment.center,
                     width: double.maxFinite,
                     margin: EdgeInsets.only(left: 6.h),
-                    decoration: tabIndex == 1
-                        ? BoxDecoration(
-                            color: appTheme.whiteA700,
-                            borderRadius: BorderRadius.circular(
-                              10.h,
-                            ),
-                            border: Border.all(
-                              color: appTheme.black900,
-                              width: 1.h,
-                            ))
-                        : BoxDecoration(
-                            color: appTheme.whiteA700,
-                            borderRadius: BorderRadius.circular(
-                              10.h,
-                            ),
-                            border: Border.all(
-                              color: appTheme.black900,
-                              width: 1.h,
-                            ),
-                          ),
-                    child: Text(
-                      "lbl_most_popular".tr,
+                    decoration: BoxDecoration(
+                      color: appTheme.whiteA700,
+                      borderRadius: BorderRadius.circular(10.h),
+                      border: Border.all(
+                        color: appTheme.black900,
+                        width: 1.h,
+                      ),
                     ),
                   ),
-                )
+                ),
               ],
               indicatorColor: Colors.transparent,
-              onTap: (index) {
-                tabIndex = index;
-                setState(() {});
-              },
+              // Remove the onTap callback to disable tab switching.
             ),
-          )
+          ),
         ],
       ),
     );
   }
+
+
 }
