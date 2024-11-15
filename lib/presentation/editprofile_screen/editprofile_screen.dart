@@ -114,12 +114,18 @@ class EditprofileScreen extends StatelessWidget {
           //   child: CustomImageView(
           //     imagePath: ImageConstant.imgArrowLeft,),
           // )
-          CustomImageView(
-            imagePath: ImageConstant.imgArrowLeft,
-            height: 35.h,
-            width: 35.h,
-            fit: BoxFit.contain,
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, '/myprofile_screen');
+            },
+            child: CustomImageView(
+              imagePath: ImageConstant.imgArrowLeft,
+              height: 35.h,
+              width: 35.h,
+              fit: BoxFit.contain,
+            ),
           ),
+
         ],
       ),
     );

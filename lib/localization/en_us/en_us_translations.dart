@@ -4,7 +4,7 @@ final Map<String, String> enUs = {
   "lbl_364": "(364)",
   "lbl_38_day":"\$38/Day",
   "lbl_463": "(463)",
-  "lbl 4 9": "4.9",
+  "lbl_4_9": "4.9",
   "lbl_5_0": "5.0",
   "lbl_asteria_hostel": "Asteria hostel",
   "lbl_discover_your": "Discover your\n",

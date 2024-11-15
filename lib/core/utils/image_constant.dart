@@ -13,6 +13,28 @@ class ImageConstant {
   static String img4 = '$imagePath/img4.jfif';
   static String img5 = '$imagePath/img5.jfif';
 
+  static String img_1 = '$imagePath/img_1.jfif';
+  static String img_2 = '$imagePath/img_2.jfif';
+  static String img_3 = '$imagePath/img_3.jfif';
+  static String img_4 = '$imagePath/img_4.jfif';
+  static String img_5 = '$imagePath/img_5.jfif';
+  static String img_6 = '$imagePath/img_6.jfif';
+  static String img_7 = '$imagePath/img_7.jfif';
+  static String img_8 = '$imagePath/img_8.jfif';
+  static String img_9 = '$imagePath/img_9.jfif';
+  static String img_10 = '$imagePath/img_10.jfif';
+  static String img_11= '$imagePath/img_11.jfif';
+  static String img_12 = '$imagePath/img_12.jfif';
+  static String img_13 = '$imagePath/img_13.jfif';
+  static String img_14 = '$imagePath/img_14.jfif';
+  static String img_15 = '$imagePath/img_15.jfif';
+  static String img_16 = '$imagePath/img_16.jfif';
+  static String img_17 = '$imagePath/img_17.jfif';
+  static String img_18 = '$imagePath/img_18.jfif';
+  static String img_19 = '$imagePath/img_19.jfif';
+
+
+
 //   static String imgContrast = '$imagePath/img_contrast.png';
 //   static String imgSettings04 = '$imagePath/img_settings04.png';
   static String imgImageDefaultProperty1 = '$imagePath/img_image_default_property1.png';

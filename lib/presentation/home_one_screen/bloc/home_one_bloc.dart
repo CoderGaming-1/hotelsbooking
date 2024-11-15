@@ -58,7 +58,7 @@ class HomeOneBloc extends Bloc<HomeOneEvent, HomeOneState> {
           theastonvil: "Azure Coast Hotel",
           streetromeny: "45 Caldera Road"),
       HotellistItemModel(
-          dayOne: ImageConstant.imgImage3,
+          dayOne: ImageConstant.img_1,
           dayThree: ImageConstant.imgHeart,
           fifty: "4.9",
           fourhundredsixt: "(364)",

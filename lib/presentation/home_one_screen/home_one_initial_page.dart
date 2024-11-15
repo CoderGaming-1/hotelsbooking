@@ -71,40 +71,6 @@ class HomeOneInitialPageState extends State<HomeOneInitialPage> {
 
   @override
   Widget build(BuildContext context) {
-    // return Container(
-    //   width: double.maxFinite,
-    //   decoration: BoxDecoration(
-    //     color: appTheme.whiteA700,
-    //   ),
-    //   child: Column(
-    //     children: [
-    //       SizedBox(
-    //         width: double.maxFinite,
-    //         child: _buildAppBar(context),
-    //       ),
-    //       Expanded(
-    //         child: SingleChildScrollView(
-    //           child: SizedBox(
-    //             width: double.maxFinite,
-    //             child: Column(
-    //               children: [
-    //                 SizedBox(height: 8.h),
-    //                 _buildWelcomeSection(context),
-    //                 SizedBox(height: 12.h),
-    //                 _buildHotelList(context),
-    //                 SizedBox(height: 12.h),
-    //                 _buildNearbyHotels(context),
-    //                 SizedBox(height: 12.h),
-    //                 _buildBottomNavigation(context)
-    //               ],
-    //             ),
-    //           ),
-    //         ),
-    //       )
-    //     ],
-    //   ),
-    // );
-
     return Stack(
       children: [
         Container(
@@ -131,11 +97,11 @@ class HomeOneInitialPageState extends State<HomeOneInitialPage> {
                         SizedBox(height: 12.h),
                         _buildNearbyHotels(context),
                         SizedBox(height: 15.h),
-                        _buildNearbyHotels(context),
+                        _buildPopular(context),
                         SizedBox(height: 15.h),
-                        _buildNearbyHotels(context),
+                        _buildDiscounted(context),
                         SizedBox(height: 15.h),
-                        _buildNearbyHotels(context),
+                        _buildSaving(context),
                         SizedBox(height: 15.h),
                       ],
                     ),
@@ -337,116 +303,6 @@ class HomeOneInitialPageState extends State<HomeOneInitialPage> {
     );
   }
 
-  /// Section Widget
-  // Widget _buildNearbyHotels(BuildContext context) {
-  //   return Container(
-  //     width: double.maxFinite,
-  //     margin: EdgeInsets.symmetric(horizontal: 20.h),
-  //     child: Column(
-  //       crossAxisAlignment: CrossAxisAlignment.start,
-  //       children: [
-  //         Padding(
-  //           padding: EdgeInsets.only(left: 10.h),
-  //           child: Text(
-  //             "lbl_nearby_hotels".tr,
-  //             style: CustomTextStyles.titleMediumPlusJakartaSans,
-  //           ),
-  //         ),
-  //         SizedBox(
-  //           width: double.maxFinite,
-  //           child: Row(
-  //             children: [
-  //               Container(
-  //                 height: 108.h,
-  //                 width: 108.h,
-  //                 decoration: BoxDecoration(
-  //                   color: appTheme.whiteA700,
-  //                   borderRadius: BorderRadiusStyle.roundedBorder14,
-  //                   boxShadow: [
-  //                     BoxShadow(
-  //                       color: appTheme.gray9000f.withOpacity(0.04),
-  //                       spreadRadius: 2.h,
-  //                       blurRadius: 2.h,
-  //                       offset: Offset(
-  //                         4,
-  //                         4,
-  //                       ),
-  //                     )
-  //                   ],
-  //                 ),
-  //                 child: Stack(
-  //                   alignment: Alignment.center,
-  //                   children: [
-  //                     CustomImageView(
-  //                       imagePath: ImageConstant.imgImage7,
-  //                       height: 84.h,
-  //                       width: 84.h,
-  //                       radius: BorderRadius.circular(
-  //                         4.h,
-  //                       ),
-  //                     )
-  //                   ],
-  //                 ),
-  //               ),
-  //               SizedBox(width: 4.h),
-  //               Expanded(
-  //                 child: Column(
-  //                   crossAxisAlignment: CrossAxisAlignment.start,
-  //                   children: [
-  //                     SizedBox(
-  //                       width: double.maxFinite,
-  //                       child: Row(
-  //                         children: [
-  //                           Text(
-  //                             "lbl_asteria_hostel".tr,
-  //                             style: CustomTextStyles.titleSmallPlusJakartaSans,
-  //                           ),
-  //                           Padding(
-  //                             padding: EdgeInsets.only(left: 24.h),
-  //                             child: Text(
-  //                               "lbl_25_day".tr,
-  //                               style: CustomTextStyles.titleSmallInterCyan600,
-  //                             ),
-  //                           )
-  //                         ],
-  //                       ),
-  //                     ),
-  //                     SizedBox(height: 6.h),
-  //                     Text(
-  //                       "msg_ram_nagar_nt_0872".tr,
-  //                       style: CustomTextStyles
-  //                           .labelLargePlusJakartaSansBluegray400,
-  //                     ),
-  //                     SizedBox(height: 6.h),
-  //                     SizedBox(
-  //                       width: double.maxFinite,
-  //                       child: Row(
-  //                         children: [
-  //                           CustomRatingBar(
-  //                             initialRating: 4,
-  //                           ),
-  //                           Padding(
-  //                             padding: EdgeInsets.only(left: 4.h),
-  //                             child: Text(
-  //                               "lbl_5_0".tr,
-  //                               style: CustomTextStyles
-  //                                   .labelLargePlusJakartaSansBlack900,
-  //                             ),
-  //                           )
-  //                         ],
-  //                       ),
-  //                     )
-  //                   ],
-  //                 ),
-  //               )
-  //             ],
-  //           ),
-  //         )
-  //       ],
-  //     ),
-  //   );
-  // }
-
   Widget _buildNearbyHotels(BuildContext context) {
     return Container(
       width: double.maxFinite,
@@ -456,184 +312,133 @@ class HomeOneInitialPageState extends State<HomeOneInitialPage> {
         children: [
           Padding(
             padding: EdgeInsets.only(left: 12.h),
-            child: Text("lbl_nearby_hotels".tr,
+            child: Text(
+              "lbl_nearby_hotels".tr,
               style: CustomTextStyles.titleMediumPlusJakartaSans,
             ),
           ),
           SizedBox(height: 20.h),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              CustomImageView(
-                imagePath: ImageConstant.imgViewBuildingw,
-                height: 116.h,
-                width: 154.h,
-              ),
-              SizedBox(width: 26.h),
-              CustomImageView(
-                imagePath: ImageConstant.imgViewBuildingw,
-                height: 116.h,
-                width: 154.h,
-              )
-            ],
-          ),
-          SizedBox(
-            width: double.maxFinite,
+
+          // Horizontal scrollable row of hotels
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
             child: Row(
               children: [
-                Expanded(
-                  child: Container(
-                    width: double.maxFinite,
-                    padding: EdgeInsets.symmetric(vertical: 8.h),
-                    decoration: BoxDecoration(
-                      color: appTheme.whiteA700,
-                      borderRadius: BorderRadiusStyle.customBorderBL12,
-                      boxShadow: [
-                        BoxShadow(
-                          color: appTheme.blueGray9000a,
-                          spreadRadius: 2.h,
-                          blurRadius: 2.h,
-                          offset: Offset(
-                            0,
-                            2,
-                          ),
-                        )
-                      ],
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          width: double.maxFinite,
-                          child: _buildRatedOne(
-                            context,
-                            ratingText: "lbl_5_0_463".tr,
-                          ),
-                        ),
-                        SizedBox(height: 4.h),
-                        Text(
-
-
-                          "msg_muongthanh_hotel".tr,
-                          style: CustomTextStyles.labelLargePoppinsBlack900,
-                        ),
-                        SizedBox(height: 4.h),
-                        Text(
-                          "msg_alice_springs_nt".tr,
-                          style: theme.textTheme.bodySmall,
-                        ),
-                        SizedBox(height: 10.h),
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 4.h,
-                            vertical: 2.h,
-                          ),
-                          decoration: BoxDecoration(
-                            color: appTheme.whiteA700,
-                            borderRadius: BorderRadiusStyle.roundedBorder8,
-                          ),
-                          child: RichText(
-                            text: TextSpan(
-                              children: [
-                                TextSpan(
-                                  text: "lbl_382".tr,
-                                  style: theme.textTheme.labelMedium,),
-                                TextSpan(
-                                  text: "lbl_299".tr,
-                                  style: theme.textTheme.labelSmall,
-                                )
-                              ],
-                            ),
-                            textAlign: TextAlign.left,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
+                _buildHotelCard(
+                  context,
+                  ImageConstant.img_18,
+                  _buildRatedOne(context, ratingText: "lbl_5_0_463".tr),
+                  "The Emerald Garden".tr,
+                  "msg_alice_springs_nt".tr,
+                  "382\$".tr,
+                  "299\$".tr,
                 ),
                 SizedBox(width: 26.h),
-                Expanded(
-                  child: Container(
-                    width: double.maxFinite,
-                    padding: EdgeInsets.symmetric(vertical: 8.h),
-                    decoration: BoxDecoration(
-                      color: appTheme.whiteA700,
-                      borderRadius: BorderRadiusStyle.customBorderBL12,
-                      boxShadow: [
-                        BoxShadow(
-                          color: appTheme.blueGray9000a,
-                          spreadRadius: 2.h,
-                          blurRadius: 2.h,
-                          offset: Offset(
-                            0,
-                            2,
-                          ),
-                        )
-                      ],
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          width: double.maxFinite,
-                          child: _buildRatedOne(
-                            context,
-                            ratingText: "lbl_5_0_463".tr,
+                _buildHotelCard(
+                  context,
+                  ImageConstant.img1,
+                  _buildRatedOne(context, ratingText: "lbl_5_0_463".tr),
+                  "Desert Mirage Hotel".tr,
+                  "the Crystal Cove, Miami Beach".tr,
+                  "500\$".tr,
+                  "399\$".tr,
+                ),
+                SizedBox(width: 26.h),
+                _buildHotelCard(
+                  context,
+                  ImageConstant.img_2,
+                  _buildRatedOne(context, ratingText: "lbl_4_8_320".tr),
+                  "Historic Plaza Hotel".tr,
+                  "Serene Lakeview District, Seattle".tr,
+                  "450\$".tr,
+                  "349\$".tr,
+                ),
 
-
-                          ),
-                        ),
-                        SizedBox(height: 4.h),
-                        Text("lbl_light_hotel".tr,
-                          style: CustomTextStyles.labelLargePoppinsBlack900,),
-                        SizedBox(height: 4.h),
-                        Text("msg_alice_springs_nt".tr,
-                          style: theme.textTheme.bodySmall,
-                        ),
-                        SizedBox(height: 10.h),
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 4.h,
-                            vertical: 2.h,
-                          ),
-                          decoration: BoxDecoration(
-                            color: appTheme.whiteA700,
-                            borderRadius: BorderRadiusStyle.roundedBorder8,
-                          ),
-                          child: RichText(
-                            text: TextSpan(
-                              children: [
-                                TextSpan(
-                                    text: "lbl_382".tr,
-                                    style: theme.textTheme.labelMedium
-                                ),
-                                TextSpan(
-                                  text: "lbl_299".tr,
-                                  style: theme.textTheme.labelSmall,
-                                )
-                              ],
-                            ),
-                            textAlign: TextAlign.left,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                )
+                SizedBox(width: 26.h),
+                _buildHotelCard(
+                  context,
+                  ImageConstant.img_3,
+                  _buildRatedOne(context, ratingText: "lbl_4_8_320".tr),
+                  "Silver Sky Hotel".tr,
+                  "the Golden Sands, Santa Monica Bay".tr,
+                  "450\$".tr,
+                  "267\$".tr,
+                ),
+                SizedBox(width: 26.h),
+                _buildHotelCard(
+                  context,
+                  ImageConstant.img_4,
+                  _buildRatedOne(context, ratingText: "lbl_4_8_320".tr),
+                  "Azure Waves Hotel".tr,
+                  "the Golden Sands, Santa Monica Bay".tr,
+                  "450\$".tr,
+                  "349\$".tr,
+                ),
+                // Add more hotels as needed...
               ],
             ),
-          )
+          ),
         ],
       ),
     );
   }
 
+  Widget _buildHotelCard(BuildContext context, String imagePath, Widget ratingWidget, String hotelName, String location, String originalPrice, String discountedPrice) {
+    return Container(
+      width: 154.h,
+      padding: EdgeInsets.symmetric(vertical: 8.h),
+      decoration: BoxDecoration(
+        color: appTheme.whiteA700,
+        borderRadius: BorderRadiusStyle.customBorderBL12,
+        boxShadow: [
+          BoxShadow(
+            color: appTheme.blueGray9000a,
+            spreadRadius: 2.h,
+            blurRadius: 2.h,
+            offset: Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CustomImageView(
+            imagePath: imagePath,
+            height: 116.h,
+            width: 154.h,
+          ),
+          SizedBox(height: 4.h),
 
-  Widget _buildNearbyHotels(BuildContext context) {
+          // Use the ratingWidget here
+          ratingWidget,
+
+          SizedBox(height: 4.h),
+          Text(hotelName, style: CustomTextStyles.labelLargePoppinsBlack900),
+          SizedBox(height: 4.h),
+          Text(location, style: theme.textTheme.bodySmall),
+          SizedBox(height: 10.h),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 4.h, vertical: 2.h),
+            decoration: BoxDecoration(
+              color: appTheme.whiteA700,
+              borderRadius: BorderRadiusStyle.roundedBorder8,
+            ),
+            child: RichText(
+              text: TextSpan(
+                children: [
+                  TextSpan(text: originalPrice, style: theme.textTheme.labelMedium),
+                  TextSpan(text: discountedPrice, style: theme.textTheme.labelSmall),
+                ],
+              ),
+              textAlign: TextAlign.left,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPopular(BuildContext context) {
     return Container(
       width: double.maxFinite,
       margin: EdgeInsets.symmetric(horizontal: 18.h),
@@ -642,177 +447,243 @@ class HomeOneInitialPageState extends State<HomeOneInitialPage> {
         children: [
           Padding(
             padding: EdgeInsets.only(left: 12.h),
-            child: Text("lbl_nearby_hotels".tr,
+            child: Text(
+              "Top Popular Destinations",
               style: CustomTextStyles.titleMediumPlusJakartaSans,
             ),
           ),
           SizedBox(height: 20.h),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              CustomImageView(
-                imagePath: ImageConstant.imgViewBuildingw,
-                height: 116.h,
-                width: 154.h,
-              ),
-              SizedBox(width: 26.h),
-              CustomImageView(
-                imagePath: ImageConstant.imgViewBuildingw,
-                height: 116.h,
-                width: 154.h,
-              )
-            ],
-          ),
-          SizedBox(
-            width: double.maxFinite,
+
+          // Horizontal scrollable row of hotels
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
             child: Row(
               children: [
-                Expanded(
-                  child: Container(
-                    width: double.maxFinite,
-                    padding: EdgeInsets.symmetric(vertical: 8.h),
-                    decoration: BoxDecoration(
-                      color: appTheme.whiteA700,
-                      borderRadius: BorderRadiusStyle.customBorderBL12,
-                      boxShadow: [
-                        BoxShadow(
-                          color: appTheme.blueGray9000a,
-                          spreadRadius: 2.h,
-                          blurRadius: 2.h,
-                          offset: Offset(
-                            0,
-                            2,
-                          ),
-                        )
-                      ],
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          width: double.maxFinite,
-                          child: _buildRatedOne(
-                            context,
-                            ratingText: "lbl_5_0_463".tr,
-                          ),
-                        ),
-                        SizedBox(height: 4.h),
-                        Text(
-                          "msg_muongthanh_hotel".tr,
-                          style: CustomTextStyles.labelLargePoppinsBlack900,
-                        ),
-                        SizedBox(height: 4.h),
-                        Text(
-                          "msg_alice_springs_nt".tr,
-                          style: theme.textTheme.bodySmall,
-                        ),
-                        SizedBox(height: 10.h),
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 4.h,
-                            vertical: 2.h,
-                          ),
-                          decoration: BoxDecoration(
-                            color: appTheme.whiteA700,
-                            borderRadius: BorderRadiusStyle.roundedBorder8,
-                          ),
-                          child: RichText(
-                            text: TextSpan(
-                              children: [
-                                TextSpan(
-                                  text: "lbl_382".tr,
-                                  style: theme.textTheme.labelMedium,),
-                                TextSpan(
-                                  text: "lbl_299".tr,
-                                  style: theme.textTheme.labelSmall,
-                                )
-                              ],
-                            ),
-                            textAlign: TextAlign.left,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
+                _buildHotelCard(
+                  context,
+                  ImageConstant.img_1,
+                  _buildRatedOne(context, ratingText: "lbl_5_0_463".tr),
+                  "Seaview Grand Hotel".tr,
+                  "Miami, FL".tr,
+                  "382\$".tr,
+                  "299\$".tr,
                 ),
                 SizedBox(width: 26.h),
-                Expanded(
-                  child: Container(
-                    width: double.maxFinite,
-                    padding: EdgeInsets.symmetric(vertical: 8.h),
-                    decoration: BoxDecoration(
-                      color: appTheme.whiteA700,
-                      borderRadius: BorderRadiusStyle.customBorderBL12,
-                      boxShadow: [
-                        BoxShadow(
-                          color: appTheme.blueGray9000a,
-                          spreadRadius: 2.h,
-                          blurRadius: 2.h,
-                          offset: Offset(
-                            0,
-                            2,
-                          ),
-                        )
-                      ],
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          width: double.maxFinite,
-                          child: _buildRatedOne(
-                            context,
-                            ratingText: "lbl_5_0_463".tr,
-                          ),
-                        ),
-                        SizedBox(height: 4.h),
-                        Text("lbl_light_hotel".tr,
-                          style: CustomTextStyles.labelLargePoppinsBlack900,),
-                        SizedBox(height: 4.h),
-                        Text("msg_alice_springs_nt".tr,
-                          style: theme.textTheme.bodySmall,
-                        ),
-                        SizedBox(height: 10.h),
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 4.h,
-                            vertical: 2.h,
-                          ),
-                          decoration: BoxDecoration(
-                            color: appTheme.whiteA700,
-                            borderRadius: BorderRadiusStyle.roundedBorder8,
-                          ),
-                          child: RichText(
-                            text: TextSpan(
-                              children: [
-                                TextSpan(
-                                    text: "lbl_382".tr,
-                                    style: theme.textTheme.labelMedium
-                                ),
-                                TextSpan(
-                                  text: "lbl_299".tr,
-                                  style: theme.textTheme.labelSmall,
-                                )
-                              ],
-                            ),
-                            textAlign: TextAlign.left,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                )
+                _buildHotelCard(
+                  context,
+                  ImageConstant.img_5,
+                  _buildRatedOne(context, ratingText: "lbl_5_0_463".tr),
+                  "Mountain Peak Resort".tr,
+                  "Aspen, CO".tr,
+                  "500\$".tr,
+                  "399\$".tr,
+                ),
+                SizedBox(width: 26.h),
+                _buildHotelCard(
+                  context,
+                  ImageConstant.img_6,
+                  _buildRatedOne(context, ratingText: "lbl_4_8_320".tr),
+                  "City Lights Hotel".tr,
+                  "New York, NY".tr,
+                  "510\$".tr,
+                  "349\$".tr,
+                ),
+                SizedBox(width: 26.h),
+                _buildHotelCard(
+                  context,
+                  ImageConstant.img_7,
+                  _buildRatedOne(context, ratingText: "lbl_4_8_320".tr),
+                  "The Elegant Rosewood Manor".tr,
+                  "New York, NY".tr,
+                  "750\$".tr,
+                  "320\$".tr,
+                ),
+                SizedBox(width: 26.h),
+                _buildHotelCard(
+                  context,
+                  ImageConstant.img_8,
+                  _buildRatedOne(context, ratingText: "lbl_4_8_320".tr),
+                  "Sunset Oasis Suites".tr,
+                  "New York, NY".tr,
+                  "850\$".tr,
+                  "259\$".tr,
+                ),
+                // Add more hotels as needed...
               ],
             ),
-          )
+          ),
         ],
       ),
     );
   }
+
+  Widget _buildDiscounted(BuildContext context) {
+    return Container(
+      width: double.maxFinite,
+      margin: EdgeInsets.symmetric(horizontal: 18.h),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsets.only(left: 12.h),
+            child: Text(
+              "Top Discounted Attraction Tickets",
+              style: CustomTextStyles.titleMediumPlusJakartaSans,
+            ),
+          ),
+          SizedBox(height: 20.h),
+
+          // Horizontal scrollable row of hotels
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                _buildHotelCard(
+                  context,
+                  ImageConstant.img_7,
+                  _buildRatedOne(context, ratingText: "lbl_5_0_463".tr),
+                  "The Royal Palace".tr,
+                  "near Coral Lagoon, Kauai".tr,
+                  "382\$".tr,
+                  "299\$".tr,
+                ),
+                SizedBox(width: 26.h),
+                _buildHotelCard(
+                  context,
+                  ImageConstant.img_8,
+                  _buildRatedOne(context, ratingText: "lbl_5_0_463".tr),
+                  "Sunset Bay Inn".tr,
+                  " the White Sand Shores, Key West".tr,
+                  "500\$".tr,
+                  "399\$".tr,
+                ),
+                SizedBox(width: 26.h),
+                _buildHotelCard(
+                  context,
+                  ImageConstant.img_9,
+                  _buildRatedOne(context, ratingText: "lbl_4_8_320".tr),
+                  "Pinewood Haven".tr,
+                  "at the Iconic Bayfront, San Diego".tr,
+                  "450\$".tr,
+                  "349\$".tr,
+                ),
+                SizedBox(width: 26.h),
+                _buildHotelCard(
+                  context,
+                  ImageConstant.img_10,
+                  _buildRatedOne(context, ratingText: "lbl_4_8_320".tr),
+                  "Royal Harbor Inn".tr,
+                  "near Coral Lagoon, Kauai".tr,
+                  "450\$".tr,
+                  "349\$".tr,
+                ),
+                SizedBox(width: 26.h),
+                _buildHotelCard(
+                  context,
+                  ImageConstant.img_11,
+                  _buildRatedOne(context, ratingText: "lbl_4_8_320".tr),
+                  "Cascading Falls Resort".tr,
+                  "near the Majestic Canyon, Sedona".tr,
+                  "450\$".tr,
+                  "349\$".tr,
+                ),
+                // Add more hotels as needed...
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSaving(BuildContext context) {
+    return Container(
+      width: double.maxFinite,
+      margin: EdgeInsets.symmetric(horizontal: 18.h),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsets.only(left: 12.h),
+            child: Text(
+              "Year-end Hotel Bookings With Savings",
+              style: CustomTextStyles.titleMediumPlusJakartaSans,
+            ),
+          ),
+          SizedBox(height: 20.h),
+
+          // Horizontal scrollable row of hotels
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                _buildHotelCard(
+                  context,
+                  ImageConstant.img_12,
+                  _buildRatedOne(context, ratingText: "lbl_5_0_463".tr),
+                  "Historic Plaza Hotel".tr,
+                  "at the Scenic Rocky Ridge, Colorado Springs".tr,
+                  "382\$".tr,
+                  "299\$".tr,
+                ),
+                SizedBox(width: 26.h),
+                _buildHotelCard(
+                  context,
+                  ImageConstant.img_13,
+                  _buildRatedOne(context, ratingText: "lbl_5_0_463".tr),
+                  "Riverfront Luxury Suites".tr,
+                  " Glamorous Marina District, Los Angeles".tr,
+                  "500\$".tr,
+                  "399\$".tr,
+                ),
+                SizedBox(width: 26.h),
+                _buildHotelCard(
+                  context,
+                  ImageConstant.img_14,
+                  _buildRatedOne(context, ratingText: "lbl_4_8_320".tr),
+                  "Silver Sky Hotel".tr,
+                  "Heart of Alpine Village, Banff".tr,
+                  "450\$".tr,
+                  "349\$".tr,
+                ),
+                SizedBox(width: 26.h),
+                _buildHotelCard(
+                  context,
+                  ImageConstant.img_15,
+                  _buildRatedOne(context, ratingText: "lbl_4_7_289".tr),
+                  "Cedar Hills Hotel".tr,
+                  " White Sand Shores, Key West".tr,
+                  "420\$".tr,
+                  "330\$".tr,
+                ),
+                SizedBox(width: 26.h),
+                _buildHotelCard(
+                  context,
+                  ImageConstant.img_16,
+                  _buildRatedOne(context, ratingText: "lbl_4_6_250".tr),
+                  "Golden Gate Lodge".tr,
+                  "the Majestic Canyon, Sedona".tr,
+                  "400\$".tr,
+                  "310\$".tr,
+                ),
+                SizedBox(width: 26.h),
+                _buildHotelCard(
+                  context,
+                  ImageConstant.img_17,
+                  _buildRatedOne(context, ratingText: "lbl_4_5_200".tr),
+                  "Palm Grove Resort".tr,
+                  "Chicago, IL".tr,
+                  "380\$".tr,
+                  "299\$".tr,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
 
 
   /// Common widget
@@ -823,7 +694,7 @@ class HomeOneInitialPageState extends State<HomeOneInitialPage> {
     return Row(
       children: [
         CustomImageView(
-          imagePath: ImageConstant.imgSignal,
+          imagePath: ImageConstant.imgAntDesignStarFilled,
           height: 14.h,
           width: 14.h,
         ),
@@ -831,11 +702,11 @@ class HomeOneInitialPageState extends State<HomeOneInitialPage> {
           text: TextSpan(
             children: [
               TextSpan(
-                text: "lbl 5_0".tr,
+                text: "lbl_5_0".tr,
                 style: CustomTextStyles.labelMediumPlusJakartaSansAmberA200Bold,
               ),
               TextSpan(
-                text: "lbl 463".tr,
+                text: "lbl_463".tr,
                 style: CustomTextStyles.labelMediumPlusJakartaSansBlack900Bold,
               )
             ],

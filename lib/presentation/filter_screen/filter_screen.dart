@@ -18,10 +18,8 @@ class FilterScreen extends StatelessWidget {
 
   static Widget builder(BuildContext context) {
     return BlocProvider<FilterBloc>(
-      create: (context) =>
-      FilterBloc(
-          FilterState(
-            filterModelObj: FilterModel(),
+      create: (context) => FilterBloc(FilterState(
+        filterModelObj: FilterModel(),
       ))
         ..add(FilterInitialEvent()),
       child: FilterScreen(),
@@ -64,30 +62,28 @@ class FilterScreen extends StatelessWidget {
                   _buildGuestSelection(context),
                   SizedBox(height: 22.h),
                   _buildPriceTitle(context),
-                        Container(
-                            width: double.maxFinite,
-                            margin: EdgeInsets.only(
-                              left: 20.h,
-                              right: 14.h,
-                            ),
-                            child: SliderTheme (
-                        data: SliderThemeData(
-                        trackShape: RoundedRectSliderTrackShape(),
-                        activeTrackColor: appTheme.blueGray100D8,
-                        thumbColor: appTheme.blueGray100D8,
-                        thumbShape: RoundSliderThumbShape(),
-                      ),
-                      child: Slider(
-                        value: 0.0,
-                        min: 0.0,
-                        max: 100.0,
-                        onChanged: (value) {
+                  // Container(
+                  //   width: double.maxFinite,
+                  //   margin: EdgeInsets.only(
+                  //     left: 20.h,
+                  //     right: 14.h,
+                  //   ),
+                  //   child: SliderTheme(
+                  //     data: SliderThemeData(
+                  //       trackShape: RoundedRectSliderTrackShape(),
+                  //       activeTrackColor: appTheme.blueGray100D8,
+                  //       thumbColor: appTheme.blueGray100D8,
+                  //       thumbShape: RoundSliderThumbShape(),
+                  //     ),
+                  //     child: Slider(
+                  //       value: 0.0,
+                  //       min: 0.0,
+                  //       max: 100.0,
+                  //       onChanged: (value) {},
+                  //     ),
+                  //   ),
+                  // ),
 
-
-                        },
-                      ),
-                    ),
-                  ),
                   // Container(
                   //   width: double.maxFinite,
                   //   margin: EdgeInsets.only(left: 20.h, right: 14.h),
@@ -108,6 +104,61 @@ class FilterScreen extends StatelessWidget {
                   //     ),
                   //   ),
                   // ),
+                  Container(
+                    width: double.maxFinite,
+                    margin: EdgeInsets.only(
+                      left: 20.h,
+                      right: 14.h,
+                    ),
+                    child: Row(
+                      children: [
+                        // Minimum Price Text Field
+                        Expanded(
+                          child: TextField(
+                            decoration: InputDecoration(
+                              hintText: 'Minimum - Price',
+                              hintStyle: TextStyle(
+                                color: Colors.grey,
+                                // Set the placeholder text color to gray
+                                fontSize: 14.0,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              contentPadding: EdgeInsets.symmetric(
+                                vertical: 10.0,
+                                horizontal: 12.0,
+                              ),
+                            ),
+                            keyboardType: TextInputType.number,
+                          ),
+                        ),
+                        SizedBox(width: 10.0), // Space between text fields
+                        // Maximum Price Text Field
+                        Expanded(
+                          child: TextField(
+                            decoration: InputDecoration(
+                              hintText: 'Maximum - Price',
+                              hintStyle: TextStyle(
+                                color: Colors.grey, // Set the placeholder text color to gray
+                                fontSize: 14.0,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              contentPadding: EdgeInsets.symmetric(
+                                vertical: 10.0,
+                                horizontal: 12.0,
+                              ),
+                            ),
+                            keyboardType: TextInputType.number,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+
                   SizedBox(height: 42.h),
                   _buildLocationSelection(context),
                   SizedBox(height: 20.h),
@@ -219,7 +270,7 @@ class FilterScreen extends StatelessWidget {
   //   );
   // }
   Widget _buildPriceTitle(BuildContext context) {
-    RangeValues _priceRange = RangeValues(40, 80);
+    // RangeValues _priceRange = RangeValues(40, 80);
     return Container(
       width: double.maxFinite,
       margin: EdgeInsets.only(left: 22.h, right: 10.h),
@@ -230,10 +281,10 @@ class FilterScreen extends StatelessWidget {
             "lbl_price".tr,
             style: CustomTextStyles.titleSmallSemiBold,
           ),
-          Text(
-            "${_priceRange.start}\$ - ${_priceRange.end}\$",
-            style: CustomTextStyles.titleSmallInterPrimary,
-          ),
+          // Text(
+          //   "${_priceRange.start}\$ - ${_priceRange.end}\$",
+          //   style: CustomTextStyles.titleSmallInterPrimary,
+          // ),
         ],
       ),
     );
