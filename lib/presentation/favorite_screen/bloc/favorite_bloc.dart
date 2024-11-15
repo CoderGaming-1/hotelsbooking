@@ -13,7 +13,7 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
   FavoriteBloc(FavoriteState initialState) : super(initialState) {
     on<FavoriteInitialEvent>(_onInitialize);
   }
-
+  
   _onInitialize(
     FavoriteInitialEvent event,
     Emitter<FavoriteState> emit,

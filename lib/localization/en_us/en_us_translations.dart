@@ -19,7 +19,7 @@ final Map<String, String> enUs = {
   "msg_discover_your_perfect": "Discover your\nperfect place to stay",
   "msg_perfect_place_to": "perfect place to stay",
   "msg_ram_nagar_nt_0872": "Ram Nagar NT 0872, Katraj",
-  "msg_recomended_hotel": "Recomended Hotel",
+  "msg_recommended_hotel": "Recommended Hotel",
   "msg_search_your_hotel": "Search your hotel",
   "msg_stanza_living_hostel": "STANZA LIVING HOSTEL",
   "msg_streetrome_ny_13440": "StreetRome, NY 13440",
@@ -33,12 +33,12 @@ final Map<String, String> enUs = {
   "lbl_log_in_as_guest" : "Log in as guest",
 
   // MyFavorite Screen
-  "lbl_299": "\$299",
-  "lbl_382": "\$382",
-  "lbl_382_299": "\$382 \$299",
+  "lbl_299": r"$299",
+  "lbl_382": r"$382 ",
+  "lbl_382_299": r"$382 $299",
   "lbl_5_0_463": "5.0(463)",
   "msg_alice_springs_nt": "Alice Springs NT 0870, Australia",
-  "msg_the_aston_vill_hotel": "The Aston Vill Hotel",
+  "msg_the_aston_villa_hotel": "The Aston Villa Hotel",
 // MyProfile Screen
   "lbl_change_password": "Change Password",
   "lbl_edit_profile": "Edit Profile",
@@ -128,9 +128,9 @@ final Map<String, String> enUs = {
 
   // Details Screen
   "lbl_dates" : "Dates",
-  "lbl 38 day": "\$38/Day",
-  "lbl 5 0": "5.0",
-  "lbl book now": "Book Now",
+  "lbl_38_day": "\$38/Day",
+  "lbl_5_0": "5.0",
+  "lbl_book_now": "Book Now",
   "lbl_breakfast": "BREAKFAST",
   "lbl_description": "Description",
   "lbl_details": "DETAILS",

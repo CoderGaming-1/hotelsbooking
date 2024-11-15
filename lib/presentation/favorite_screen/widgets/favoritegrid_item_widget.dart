@@ -29,6 +29,12 @@ class FavoritegridItemWidget extends StatelessWidget {
                 imagePath: ImageConstant.imgFavorite,
                 height: 14.h,
                 width: 18.h,
+                radius: BorderRadius.circular(16),
+              ),
+              CustomImageView(
+                imagePath: ImageConstant.imgFavorite,
+                height: 18.h,
+                width: 20.h,
                 alignment: Alignment.topRight,
                 margin: EdgeInsets.only(
                   top: 8.h,
@@ -44,17 +50,6 @@ class FavoritegridItemWidget extends StatelessWidget {
           decoration: BoxDecoration(
             color: appTheme.whiteA700,
             borderRadius: BorderRadiusStyle.customBorderBL12,
-            boxShadow: [
-              BoxShadow(
-                color: appTheme.blueGray400,
-                spreadRadius: 2.h,
-                blurRadius: 2.h,
-                offset: Offset(
-                  0,
-                  2,
-                ),
-              )
-            ],
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -66,7 +61,7 @@ class FavoritegridItemWidget extends StatelessWidget {
                 child: Row(
                   children: [
                     CustomImageView(
-                      imagePath: ImageConstant.imgSignal,
+                      imagePath: ImageConstant.imgAntDesignStarFilled,
                       height: 14.h,
                       width: 14.h,
                     ),
@@ -79,7 +74,7 @@ class FavoritegridItemWidget extends StatelessWidget {
                                 .labelMediumPlusJakartaSansAmberA200Bold,
                           ),
                           TextSpan(
-                            text: "lbl _463".tr,
+                            text: "lbl_463".tr,
                             style: CustomTextStyles
                                 .labelMediumPlusJakartaSansBlack900Bold,
                           )
@@ -114,11 +109,15 @@ class FavoritegridItemWidget extends StatelessWidget {
                   text: TextSpan(
                     children: [
                       TextSpan(
-                        text: "lbl 382".tr,
+                        text: "lbl_382".tr,
                         style: theme.textTheme.labelMedium,
                       ),
                       TextSpan(
-                        text: "lbl 299".tr,
+                        text: " ", // Space TextSpan
+                        style: theme.textTheme.labelMedium,
+                      ),
+                      TextSpan(
+                        text: "lbl_299".tr,
                         style: theme.textTheme.labelSmall,
                       )
                     ],

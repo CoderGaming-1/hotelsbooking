@@ -41,11 +41,31 @@ class FavoriteScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: appTheme.whiteA700,
         resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: Text(
+            'My Favorite',
+            style: TextStyle(
+                fontSize: 16,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.bold),
+          ),
+          centerTitle: true,
+          actions: [
+            IconButton(
+              icon: Icon(Icons.filter_list),
+              onPressed: () {
+                // Xử lý khi nhấn nút lọc
+              },
+            ),
+          ],
+        ),
         body: Container(
           width: double.maxFinite,
           padding: EdgeInsets.only(
             left: 14.h,
             top: 56.h,
+           // top: 12.h,
             right: 14.h,
           ),
           child: Column(
