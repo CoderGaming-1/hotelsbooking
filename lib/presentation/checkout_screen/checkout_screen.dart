@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../core/app_export.dart';
+import '../../theme/custom_button_style.dart';
 import '../../widgets/app_bar/appbar_leading_iconbutton.dart';
 import '/../widgets/app_bar/appbar_title.dart';
 import '../../widgets/app_bar/custom_app_bar.dart';
@@ -394,8 +395,13 @@ class CheckoutScreen extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           CustomElevatedButton(
-            text: "lbl_payment".tr,
+            buttonStyle: CustomButtonStyles.onChoose,
+            text: 'Payment',
             margin: EdgeInsets.only(bottom: 12.h),
+            onPressed: () {
+              Navigator.pushNamed(
+                  context, '/home_one_initial_page'); // Navigate to mybooking_screen
+            },
           )
         ],
       ),

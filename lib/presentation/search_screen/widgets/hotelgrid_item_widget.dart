@@ -13,12 +13,31 @@ class HotelgridItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        CustomImageView(
-          imagePath: ImageConstant.imgViewBuildingw,
+        SizedBox(
           height: 116.h,
           width: double.maxFinite,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              CustomImageView(
+                imagePath: ImageConstant.imgViewBuildingw,
+                height: 116.h,
+                width: double.maxFinite,
+                radius: BorderRadius.circular(16),
+              ),
+              CustomImageView(
+                imagePath: ImageConstant.imgHeart,
+                height: 18.h,
+                width: 20.h,
+                alignment: Alignment.topRight,
+                margin: EdgeInsets.only(
+                  top: 8.h,
+                  right: 8.h,
+                ),
+              )
+            ],
+          ),
         ),
         Container(
           width: double.maxFinite,
@@ -26,17 +45,6 @@ class HotelgridItemWidget extends StatelessWidget {
           decoration: BoxDecoration(
             color: appTheme.whiteA700,
             borderRadius: BorderRadiusStyle.customBorderBL12,
-            boxShadow: [
-              BoxShadow(
-                color: appTheme.blueGray9000a,
-                spreadRadius: 2.h,
-                blurRadius: 2.h,
-                offset: Offset(
-                  0,
-                  2,
-                ),
-              )
-            ],
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -48,7 +56,7 @@ class HotelgridItemWidget extends StatelessWidget {
                 child: Row(
                   children: [
                     CustomImageView(
-                      imagePath: ImageConstant.imgSignal,
+                      imagePath: ImageConstant.imgAntDesignStarFilled,
                       height: 14.h,
                       width: 14.h,
                     ),
@@ -63,7 +71,7 @@ class HotelgridItemWidget extends StatelessWidget {
                           TextSpan(
                             text: "lbl_463".tr,
                             style: CustomTextStyles
-                                .labelLargePlusJakartaSansBlack90001,
+                                .labelMediumPlusJakartaSansBlack900Bold,
                           )
                         ],
                       ),
@@ -75,33 +83,33 @@ class HotelgridItemWidget extends StatelessWidget {
               SizedBox(height: 4.h),
               Text(
                 hotelgridItemModelObj.muongthanh!,
-                style: theme.textTheme.labelLarge,
+                style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold, fontFamily: 'Poppins'),
               ),
               SizedBox(height: 4.h),
               Text(
                 hotelgridItemModelObj.alicesprings!,
-                style: theme.textTheme.bodySmall,
+                style: TextStyle(color: Color(0xFF939393), fontSize: 12, fontWeight: FontWeight.w500, fontFamily: 'Inter'),
               ),
               SizedBox(height: 10.h),
               Container(
                 padding: EdgeInsets.symmetric(
                   horizontal: 4.h,
-                  vertical: 2.h,
-                ),
-                decoration: BoxDecoration(
-                  color: appTheme.whiteA700,
-                  borderRadius: BorderRadiusStyle.roundedBorder8,
+                  vertical: 4.h,
                 ),
                 child: RichText(
                   text: TextSpan(
                     children: [
                       TextSpan(
                         text: "lbl_382".tr,
+                        style: TextStyle(color: Colors.black, fontFamily: 'Poppins', fontWeight: FontWeight.w600, fontSize: 14.h),
+                      ),
+                      TextSpan(
+                        text: " ", // Space TextSpan
                         style: theme.textTheme.labelMedium,
                       ),
                       TextSpan(
                         text: "lbl_299".tr,
-                        style: theme.textTheme.labelSmall,
+                        style: TextStyle(color: Color(0xFFE53F3F), fontFamily: 'Poppins', fontWeight: FontWeight.w600, fontSize: 12.h),
                       )
                     ],
                   ),

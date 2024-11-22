@@ -78,7 +78,7 @@ class BookinglistsectionItemWidget extends StatelessWidget {
                                   text: TextSpan(
                                     children: [
                                       TextSpan(
-                                        text: "lbl 38".tr,
+                                        text: "lbl_38".tr,
                                         style:
                                             CustomTextStyles.labelMediumCyan600,
                                       ),

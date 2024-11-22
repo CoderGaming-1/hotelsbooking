@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../core/app_export.dart';
+import '../../theme/custom_button_style.dart';
 import '../../widgets/app_bar/appbar_title.dart';
 import '../../widgets/app_bar/appbar_trailing_image.dart';
 import '../../widgets/app_bar/custom_app_bar.dart';
@@ -84,7 +85,8 @@ class MyprofilePage extends StatelessWidget {
                   _buildSecuritySection(context),
                   Expanded(child: SizedBox()),
                   CustomElevatedButton(
-                    text: "lbl_logout".tr,
+                    buttonStyle: CustomButtonStyles.onChoose,
+                    text: 'Log Out',
                     leftIcon: Container(
                       margin: EdgeInsets.only(right: 10.h),
                       child: CustomImageView(
