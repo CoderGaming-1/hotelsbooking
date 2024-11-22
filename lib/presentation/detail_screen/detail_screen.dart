@@ -106,14 +106,16 @@ class DetailsScreen extends StatelessWidget {
       leading: AppbarLeadingIconbutton(
         imagePath: ImageConstant.imgArrowLeft,
         margin: EdgeInsets.only(
-          left: 16.h,
+          left: 25.h,
           top: 8.h,
           bottom: 8.h,
         ),
         onTap: () {
-          onTapArrowleftone(context);
+          Navigator.pop(context); // This will pop the current screen and go back
         },
       ),
+
+
       centerTitle: true,
       title: Text(
         'Details',
@@ -423,7 +425,7 @@ class DetailsScreen extends StatelessWidget {
   /// Section Widget
   Widget _buildBookNowButton(BuildContext context) {
     return CustomElevatedButton(
-      height: 52.h,
+      height: 48.h,
       text: "lbl_book_now".tr,
       margin: EdgeInsets.only(bottom: 12.h),
       buttonStyle: CustomButtonStyles.fillPrimary,
