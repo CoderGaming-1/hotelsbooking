@@ -9,7 +9,7 @@ import 'bloc/checkout_bloc.dart';
 import 'models/checkout_model.dart';
 import 'models/checkout_three_item_model.dart';
 import 'widgets/checkout_three_item_widget.dart';
-
+import 'package:hotelsbooking/theme/custom_button_style.dart';
 class CheckoutScreen extends StatelessWidget {
   const CheckoutScreen({Key? key})
       : super(
@@ -90,7 +90,7 @@ class CheckoutScreen extends StatelessWidget {
             height: 108.h,
             width: 108.h,
             decoration: BoxDecoration(
-              color: appTheme.onPrimaryContainer,
+              color: appTheme.primaryContainer,
               borderRadius: BorderRadiusStyle.roundedBorder12,
               boxShadow: [
                 BoxShadow(
@@ -109,8 +109,8 @@ class CheckoutScreen extends StatelessWidget {
               children: [
                 CustomImageView(
                   imagePath: ImageConstant.imgImage7,
-                  height: 84.h,
-                  width: 86.h,
+                  height: 190.h,
+                  width: 190.h,
                   radius: BorderRadius.circular(
                     4.h,
                   ),
@@ -237,7 +237,7 @@ class CheckoutScreen extends StatelessWidget {
           Container(
             margin: EdgeInsets.only(left: 2.h),
             decoration: BoxDecoration(
-              color: appTheme.onPrimaryContainer,
+              color: appTheme.primaryContainer,
             ),
             width: double.maxFinite,
             child: Row(
@@ -249,19 +249,19 @@ class CheckoutScreen extends StatelessWidget {
                     vertical: 8.h,
                   ),
                   decoration: BoxDecoration(
-                    color: appTheme.onPrimaryContainer,
+                    color: appTheme.primaryContainer,
                   ),
                   child: Text(
                     "lbl_price".tr,
                     textAlign: TextAlign.left,
-                    style: CustomTextStyles.titleSmallMedium,
+                    style: theme.textTheme.labelLarge,
                   ),
                 ),
                 Padding(
                   padding: EdgeInsets.only(right: 4.h),
                   child: Text(
                     "lbl_139_00".tr,
-                    style: CustomTextStyles.titleSmallMedium,
+                    style: theme.textTheme.labelLarge,
                   ),
                 )
               ],
@@ -270,7 +270,7 @@ class CheckoutScreen extends StatelessWidget {
           Container(
             margin: EdgeInsets.only(left: 2.h),
             decoration: BoxDecoration(
-              color: appTheme.onPrimaryContainer,
+              color: appTheme.primaryContainer,
             ),
             width: double.maxFinite,
             child: Row(
@@ -282,19 +282,19 @@ class CheckoutScreen extends StatelessWidget {
                     vertical: 8.h,
                   ),
                   decoration: BoxDecoration(
-                    color: appTheme.onPrimaryContainer,
+                    color: appTheme.primaryContainer,
                   ),
                   child: Text(
                     "lbl_admin_fee".tr,
                     textAlign: TextAlign.left,
-                    style: CustomTextStyles.titleSmallMedium,
+                    style: theme.textTheme.labelLarge,
                   ),
                 ),
                 Padding(
                   padding: EdgeInsets.only(right: 4.h),
                   child: Text(
                     "lbl_2_50".tr,
-                    style: CustomTextStyles.titleSmallMedium,
+                    style: theme.textTheme.labelLarge,
                   ),
                 )
               ],
@@ -303,7 +303,7 @@ class CheckoutScreen extends StatelessWidget {
           Container(
             margin: EdgeInsets.only(left: 2.h),
             decoration: BoxDecoration(
-              color: appTheme.onPrimaryContainer,
+              color: appTheme.primaryContainer,
             ),
             width: double.maxFinite,
             child: Row(
@@ -315,19 +315,19 @@ class CheckoutScreen extends StatelessWidget {
                     vertical: 8.h,
                   ),
                   decoration: BoxDecoration(
-                    color: appTheme.onPrimaryContainer,
+                    color: appTheme.primaryContainer,
                   ),
                   child: Text(
                     "lbl_total_price".tr,
                     textAlign: TextAlign.left,
-                    style: theme.textTheme.titleSmall,
+                    style: theme.textTheme.labelLarge,
                   ),
                 ),
                 Padding(
                   padding: EdgeInsets.only(right: 4.h),
                   child: Text(
                     "lbl_141_50".tr,
-                    style: CustomTextStyles.titleSmallMedium,
+                    style: theme.textTheme.labelLarge,
                   ),
                 )
               ],
@@ -346,13 +346,13 @@ class CheckoutScreen extends StatelessWidget {
         children: [
           Text(
             "lbl_promo".tr,
-            style: theme.textTheme.titleSmall,
+            style: CustomTextStyles.labelLargePlusJakartaSansBlack90001,
           ),
           SizedBox(height: 8.h),
           Container(
             padding: EdgeInsets.all(12.h),
             decoration: BoxDecoration(
-              color: appTheme.onPrimaryContainer,
+              color: appTheme.primaryContainer,
               borderRadius: BorderRadiusStyle.roundedBorder16,
             ),
             width: double.maxFinite,
@@ -361,8 +361,8 @@ class CheckoutScreen extends StatelessWidget {
               children: [
                 CustomImageView(
                   imagePath: ImageConstant.imgDiscount,
-                  height: 24.h,
-                  width: 26.h,
+                  height: 20.h,
+                  width: 20.h,
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 10.h),
@@ -376,7 +376,11 @@ class CheckoutScreen extends StatelessWidget {
                   imagePath: ImageConstant.imgArrowRight,
                   height: 24.h,
                   width: 26.h,
+                  onTap: () {
+                    Navigator.pushNamed(context,'/fromdetails_screen');
+                  },
                 )
+
               ],
             ),
           )
@@ -394,13 +398,18 @@ class CheckoutScreen extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           CustomElevatedButton(
+            buttonStyle: CustomButtonStyles.onChoose,
             text: "lbl_payment".tr,
             margin: EdgeInsets.only(bottom: 12.h),
+            onPressed: () {
+              Navigator.pushNamed(context, '/mybooking_screen'); // Navigate to mybooking_screen
+            },
           )
         ],
       ),
     );
   }
+
 
   /// Navigates to the previous screen.
   onTapArrowleftone(BuildContext context) {

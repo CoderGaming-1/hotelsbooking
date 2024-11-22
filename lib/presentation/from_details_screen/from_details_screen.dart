@@ -86,9 +86,11 @@ class FromDetailsScreen extends StatelessWidget {
           bottom: 8.h,
         ),
         onTap: () {
-          onTapArrowleftone(context);
+          // Optionally, you can handle additional logic here
+          Navigator.pushNamed(context, '/detail_screen');
         },
       ),
+
       centerTitle: true,
       title: Text("lbl_from_detail".tr,
         style: TextStyle(

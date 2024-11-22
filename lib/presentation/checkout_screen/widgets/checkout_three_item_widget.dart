@@ -18,7 +18,7 @@ class CheckoutThreeItemWidget extends StatelessWidget {
         vertical: 2.h,
       ),
       decoration: BoxDecoration(
-        color: appTheme.onPrimaryContainer,
+        color: appTheme.primaryContainer,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
