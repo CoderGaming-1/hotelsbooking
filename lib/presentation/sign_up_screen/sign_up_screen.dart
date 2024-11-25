@@ -1,7 +1,11 @@
+import 'dart:convert';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hotelsbooking/core/app_export.dart';
 import 'package:hotelsbooking/presentation/sign_in_screen/sign_in_screen.dart';
+import 'package:http/http.dart';
 
 class SignUpScreen extends StatefulWidget{
   const SignUpScreen({super.key});
@@ -11,6 +15,38 @@ class SignUpScreen extends StatefulWidget{
   }
 }
 class _SignUpScreenState extends State<SignUpScreen>{
+
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+
+  void signUp(String email, String password, String name) async{
+    try{
+      print(email);
+      print(password);
+      print(name);
+      Response response = await post(
+        Uri.parse('https://8f5c-42-115-115-73.ngrok-free.app/api/auth/register'),
+        body: {
+          'name' : name,
+          'email' : email,
+          'password': password,
+          'role' : "customer"
+        }
+      );
+      if(response.statusCode == 200){
+        print("Account created successfully");
+      } else{
+        print("failed");
+      }
+      print(jsonDecode(response.body.toString()));
+
+    } catch(e) {
+      print(e.toString());
+    }
+
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -48,7 +84,8 @@ class _SignUpScreenState extends State<SignUpScreen>{
                   child: Column(
                     children: [
                       //name
-                      const TextField(
+                      TextField(
+                        controller: nameController,
                         decoration: InputDecoration(
                           prefixIcon: const Icon(Icons.person_outline_outlined),
                           labelText: "Name",
@@ -60,7 +97,8 @@ class _SignUpScreenState extends State<SignUpScreen>{
                       ),
                       const SizedBox(height: 15,),
                       //email
-                      const TextField(
+                       TextField(
+                        controller: emailController,
                         decoration:  InputDecoration(
                           prefixIcon: const Icon(Icons.mail_outline_outlined),
                           labelText: "E-Mail",
@@ -96,7 +134,8 @@ class _SignUpScreenState extends State<SignUpScreen>{
                       ),
                       const SizedBox(height: 15,),
                       //password
-                      const TextField(
+                      TextField(
+                        controller: passwordController,
                         decoration: InputDecoration(
                             prefixIcon: const Icon(Icons.lock),
                             labelText: "Password",
@@ -111,7 +150,9 @@ class _SignUpScreenState extends State<SignUpScreen>{
                       // buttonSignIn
                       SizedBox(
                         width: double.infinity,
-                        child: ElevatedButton(onPressed: (){},
+                        child: ElevatedButton(onPressed: (){
+                          signUp(emailController.text.toString(), passwordController.text.toString(), nameController.text.toString());
+                        },
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: const Color(0xFF06B3C4),
                                 shape: RoundedRectangleBorder(
