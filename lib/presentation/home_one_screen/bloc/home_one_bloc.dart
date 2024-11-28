@@ -5,7 +5,8 @@ import 'package:hotelsbooking/data/models/selectionPopupModel/selection_popup_mo
 import 'package:hotelsbooking/presentation/home_one_screen/models/home_one_initial_model.dart';
 import 'package:hotelsbooking/presentation/home_one_screen/models/home_one_model.dart';
 import 'package:hotelsbooking/presentation/home_one_screen/models/hotellist_item_model.dart';
-
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 part 'home_one_event.dart';
 
 part 'home_one_state.dart';
@@ -25,79 +26,56 @@ class HomeOneBloc extends Bloc<HomeOneEvent, HomeOneState> {
       selectedDropDownValue: event.value,
     ));
   }
+  Future<List<dynamic>> fetchHotels() async {
+    String? baseUrl = SharedPreferencesHelper.getAPI();
+    final String apiUrl = '${baseUrl}/api/hotels/all'; // URL API
+    try {
+      final response = await http.get(Uri.parse(apiUrl));
 
-  List<HotellistItemModel> fillHotellistItemList() {
-    return [
-      HotellistItemModel(
-          dayOne: ImageConstant.imgImageDefaultProperty1,
-          price: "\$38/Day",
-          dayThree: ImageConstant.imgHeart,
-          fifty: "5.0",
-          fourhundredsixt: "(463)",
-          theastonvil: "The Aston Vil Hotel",
-          streetromeny: "StreetRome, NY 13440"),
-      HotellistItemModel(
-          dayOne: ImageConstant.img1,
-          dayThree: ImageConstant.imgHeart,
-          fifty: "4.9",
-          fourhundredsixt: "(258)",
-          theastonvil: "The Grand Palm Resort",
-          streetromeny: "50 Seaside Avenue"),
-      HotellistItemModel(
-          dayOne: ImageConstant.img2,
-          dayThree: ImageConstant.imgHeart,
-          fifty: "5.0",
-          fourhundredsixt: "(356)",
-          theastonvil: "Skyline Suites",
-          streetromeny: "123 Liberty Street"),
-      HotellistItemModel(
-          dayOne: ImageConstant.img3,
-          dayThree: ImageConstant.imgHeart,
-          fifty: "4.9",
-          fourhundredsixt: "(583)",
-          theastonvil: "Azure Coast Hotel",
-          streetromeny: "45 Caldera Road"),
-      HotellistItemModel(
-          dayOne: ImageConstant.img_1,
-          dayThree: ImageConstant.imgHeart,
-          fifty: "4.9",
-          fourhundredsixt: "(364)",
-          theastonvil: "STANZA LIVING HOSTEL",
-          streetromeny: "StreetRome, NY 13440"),
-
-      HotellistItemModel(
-          dayOne: ImageConstant.img4,
-          dayThree: ImageConstant.imgHeart,
-          fifty: "4.9",
-          fourhundredsixt: "(531)",
-          theastonvil: "Mountain Crest Lodge",
-          streetromeny: "789 Alpine Drive"),
-      HotellistItemModel(
-          dayOne: ImageConstant.img5,
-          dayThree: ImageConstant.imgHeart,
-          fifty: "5.0",
-          fourhundredsixt: "(943)",
-          theastonvil: "The Heritage Bay Hotel",
-          streetromeny: " 250 Harbour Road"),
-
-    ];
+      if (response.statusCode == 200) {
+        // Decode JSON response
+        final data = jsonDecode(response.body);
+        print(data);
+        return data; // Giả sử danh sách khách sạn nằm trong `hotels`
+      } else {
+        throw Exception('Failed to load hotels: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error fetching hotels: $e');
+      return [];
+    }
   }
-
+  late Future<List<dynamic>> hotels = fetchHotels();
   _onInitialize(
-    HomeOneInitialEvent event,
-    Emitter<HomeOneState> emit,
-  ) async {
-    emit(
-      state.copyWith(
-        searchController: TextEditingController(),
-      ),
-    );
-    emit(
-      state.copyWith(
+      HomeOneInitialEvent event,
+      Emitter<HomeOneState> emit,
+      ) async {
+    emit(state.copyWith(searchController: TextEditingController()));
+
+    try {
+      List<dynamic> fetchedHotels = await fetchHotels();
+
+      List<HotellistItemModel> hotelItems = fetchedHotels.map((hotel) {
+        return HotellistItemModel(
+          dayOne: ImageConstant.imgImageDefaultProperty1, // Dùng hình ảnh mặc định
+          price: "\$38/Day", // Thay đổi nếu API trả giá
+          dayThree: ImageConstant.imgHeart,
+          fifty: hotel['rating'].toString(), // Lấy từ API
+          fourhundredsixt: "(463)", // Thay đổi nếu API trả đánh giá
+          theastonvil: hotel['name'], // Tên khách sạn từ API
+          streetromeny: "${hotel['location']['city']}, ${hotel['location']['country']}", // Địa điểm từ API
+        );
+      }).toList();
+
+      emit(state.copyWith(
         homeOneInitialModelObj: state.homeOneInitialModelObj?.copyWith(
-          hotellistItemList: fillHotellistItemList(),
+          hotellistItemList: hotelItems,
         ),
-      ),
-    );
+      ));
+    } catch (e) {
+      print("Error fetching hotels: $e");
+      // Xử lý lỗi nếu cần
+    }
   }
+
 }

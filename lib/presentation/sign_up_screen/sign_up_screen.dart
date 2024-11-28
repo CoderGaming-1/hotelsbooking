@@ -7,44 +7,66 @@ import 'package:hotelsbooking/core/app_export.dart';
 import 'package:hotelsbooking/presentation/sign_in_screen/sign_in_screen.dart';
 import 'package:http/http.dart';
 
-class SignUpScreen extends StatefulWidget{
+class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return _SignUpScreenState();
   }
 }
-class _SignUpScreenState extends State<SignUpScreen>{
 
+class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController nameController = TextEditingController();
+  TextEditingController phoneNumberController = TextEditingController();
+  TextEditingController countryController = TextEditingController();
 
-  void signUp(String email, String password, String name) async{
-    try{
+  void signUp(String email, String password, String name, String country,
+      String phoneNumber) async {
+    try {
       print(email);
       print(password);
       print(name);
+      String? baseUrl = await SharedPreferencesHelper.getAPI();
       Response response = await post(
-        Uri.parse('https://8f5c-42-115-115-73.ngrok-free.app/api/auth/register'),
-        body: {
-          'name' : name,
-          'email' : email,
-          'password': password,
-          'role' : "customer"
-        }
-      );
-      if(response.statusCode == 200){
-        print("Account created successfully");
-      } else{
-        print("failed");
+          Uri.parse('${baseUrl}/api/auth/register'),
+          body: {
+            'name': name,
+            'email': email,
+            "country": country,
+            "phonenumber": phoneNumber,
+            'password': password,
+            'role': "customer"
+          });
+      if (response.statusCode == 201) {
+        notificationRegister("Account created successfully");
+        Navigator.pushNamed(context, '/home_one_screen');
+        final responseData = jsonDecode(response.body);
+        final userId = responseData['data']['_id'].toString();
+        await SharedPreferencesHelper.saveUserId(userId);
+        print(userId);
+      } else {
+        notificationRegister("Register failed");
+        print(response.statusCode);
       }
       print(jsonDecode(response.body.toString()));
-
-    } catch(e) {
+    } catch (e) {
       print(e.toString());
     }
+  }
 
+  void notificationRegister(String RegisterState) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          RegisterState,
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Color(0xFF06B3C4),
+      ),
+    );
   }
 
   @override
@@ -60,22 +82,30 @@ class _SignUpScreenState extends State<SignUpScreen>{
               //Tittle
               const Align(
                 alignment: Alignment.topLeft,
-                child:  Column(
+                child: Column(
                   children: [
-                    Text("Sign Up", style: TextStyle(color: Colors.black, fontSize: 40),),
+                    Text(
+                      "Sign Up",
+                      style: TextStyle(color: Colors.black, fontSize: 40),
+                    ),
                   ],
                 ),
               ),
               const Align(
                 alignment: Alignment.topLeft,
-                child:  Column(
+                child: Column(
                   children: [
-                    Text("Start Your Journey with affordable price", style: TextStyle(color: Colors.black, fontSize: 14),),
+                    Text(
+                      "Start Your Journey with affordable price",
+                      style: TextStyle(color: Colors.black, fontSize: 14),
+                    ),
                   ],
                 ),
               ),
 
-              const SizedBox(height: 30,),
+              const SizedBox(
+                height: 30,
+              ),
               //email
               //password
               Form(
@@ -95,11 +125,13 @@ class _SignUpScreenState extends State<SignUpScreen>{
                           // ),
                         ),
                       ),
-                      const SizedBox(height: 15,),
+                      const SizedBox(
+                        height: 15,
+                      ),
                       //email
-                       TextField(
+                      TextField(
                         controller: emailController,
-                        decoration:  InputDecoration(
+                        decoration: InputDecoration(
                           prefixIcon: const Icon(Icons.mail_outline_outlined),
                           labelText: "E-Mail",
                           hintText: "E-Mail",
@@ -108,9 +140,12 @@ class _SignUpScreenState extends State<SignUpScreen>{
                           // ),
                         ),
                       ),
-                      const SizedBox(height: 15,),
+                      const SizedBox(
+                        height: 15,
+                      ),
                       //phone number
-                      const TextField(
+                      TextField(
+                        controller: phoneNumberController,
                         decoration: InputDecoration(
                           prefixIcon: const Icon(Icons.phone_android_outlined),
                           labelText: "Phone number",
@@ -120,9 +155,12 @@ class _SignUpScreenState extends State<SignUpScreen>{
                           // ),
                         ),
                       ),
-                      const SizedBox(height: 15,),
+                      const SizedBox(
+                        height: 15,
+                      ),
                       //Address
-                      const TextField(
+                      TextField(
+                        controller: countryController,
                         decoration: InputDecoration(
                           prefixIcon: const Icon(Icons.location_on_sharp),
                           labelText: "Address",
@@ -132,7 +170,9 @@ class _SignUpScreenState extends State<SignUpScreen>{
                           // ),
                         ),
                       ),
-                      const SizedBox(height: 15,),
+                      const SizedBox(
+                        height: 15,
+                      ),
                       //password
                       TextField(
                         controller: passwordController,
@@ -143,34 +183,49 @@ class _SignUpScreenState extends State<SignUpScreen>{
                             // border: OutlineInputBorder(
                             //   borderRadius: BorderRadius.circular(12),
                             // ),
-                            suffixIcon: const IconButton(onPressed: null, icon: Icon(Icons.remove_red_eye))
-                        ),
+                            suffixIcon: const IconButton(
+                                onPressed: null,
+                                icon: Icon(Icons.remove_red_eye))),
                       ),
-                      const SizedBox(height: 15,),
+                      const SizedBox(
+                        height: 15,
+                      ),
                       // buttonSignIn
                       SizedBox(
                         width: double.infinity,
-                        child: ElevatedButton(onPressed: (){
-                          signUp(emailController.text.toString(), passwordController.text.toString(), nameController.text.toString());
-                        },
+                        child: ElevatedButton(
+                            onPressed: () {
+                              signUp(
+                                  emailController.text.toString(),
+                                  passwordController.text.toString(),
+                                  nameController.text.toString(),
+                                  countryController.text.toString(),
+                                  phoneNumberController.text.toString());
+                            },
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: const Color(0xFF06B3C4),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12),
                                 ),
-                                padding: const EdgeInsets.symmetric(vertical: 15)
-                            ),
-
-                            child: const Text("Create Account", style: TextStyle(color: Colors.white, fontSize: 16),)
-                        ),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 15)),
+                            child: const Text(
+                              "Create Account",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 16),
+                            )),
                       ),
                     ],
                   ),
                 ),
               ),
-              const SizedBox(height: 10,),
+              const SizedBox(
+                height: 10,
+              ),
               const Text("Or Sign Up With"),
-              const SizedBox(height: 10,),
+              const SizedBox(
+                height: 10,
+              ),
               //button login with facebook, google
               Row(
                 children: [
@@ -181,11 +236,14 @@ class _SignUpScreenState extends State<SignUpScreen>{
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          padding: const EdgeInsets.symmetric(vertical: 20)
-                      ),
-                      onPressed: (){},
-                      child: SvgPicture.asset("assets/images/ic_google.svg"),),),
-                  const SizedBox(width: 20,),
+                          padding: const EdgeInsets.symmetric(vertical: 20)),
+                      onPressed: () {},
+                      child: SvgPicture.asset("assets/images/ic_google.svg"),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  ),
                   Expanded(
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
@@ -193,25 +251,41 @@ class _SignUpScreenState extends State<SignUpScreen>{
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          padding: const EdgeInsets.symmetric(vertical: 20)
-                      ),
-                      onPressed: (){},
-                      child: SvgPicture.asset("assets/images/ic_facebook.svg"),),),
+                          padding: const EdgeInsets.symmetric(vertical: 20)),
+                      onPressed: () {},
+                      child: SvgPicture.asset("assets/images/ic_facebook.svg"),
+                    ),
+                  ),
                 ],
               ),
-              const SizedBox(height: 10,),
+              const SizedBox(
+                height: 10,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("Already Have an Account?", style: TextStyle(color: Colors.black),),
-                  TextButton(onPressed: (){
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx)=>const SignInScreen(),),);
-                  },
+                  const Text(
+                    "Already Have an Account?",
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (ctx) => const SignInScreen(),
+                        ),
+                      );
+                    },
                     style: TextButton.styleFrom(
-                      foregroundColor: Colors.transparent, // Fully transparent foreground
+                      foregroundColor: Colors.transparent,
+                      // Fully transparent foreground
                       overlayColor: Colors.transparent,
                     ),
-                    child: const Text("Sign In", style: TextStyle(color: Color(0xFF06B3C4),),
+                    child: const Text(
+                      "Sign In",
+                      style: TextStyle(
+                        color: Color(0xFF06B3C4),
+                      ),
                     ),
                   ),
                 ],

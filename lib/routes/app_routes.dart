@@ -11,6 +11,8 @@ import 'package:hotelsbooking/presentation/checkout_screen/checkout_screen.dart'
 import 'package:hotelsbooking/presentation/filter_screen/filter_screen.dart';
 import 'package:hotelsbooking/presentation/search_screen/search_screen.dart';
 
+import '../presentation/sign_up_screen/sign_up_screen.dart';
+
 class AppRoutes {
   static const String onBoardingScreen = '/on_boarding_screen';
   static const String homeOneScreen = '/home_one_screen';
@@ -25,6 +27,7 @@ class AppRoutes {
   static const String checkoutScreen = '/checkout_screen';
   static const String filterScreen = '/filter_screen';
   static const String searchScreen = '/search_screen';
+  static const String signUpScreen = '/sign_up_screen';
 
   static Map<String, WidgetBuilder> get routes => {
         searchScreen: SearchScreen.builder,
@@ -39,5 +42,6 @@ class AppRoutes {
         myprofileScreen: MyprofilePage.builder,
         favoriteScreen: FavoriteScreen.builder,
         initialRoute: (context) => OnboardingScreen(),
+        signUpScreen: (context) => SignUpScreen(),
       };
 }

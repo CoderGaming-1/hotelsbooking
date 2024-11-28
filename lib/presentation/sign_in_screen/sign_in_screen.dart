@@ -1,7 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hotelsbooking/presentation/forgot_password_screen/forgot_password_screen.dart';
 import 'package:hotelsbooking/presentation/sign_up_screen/sign_up_screen.dart';
+import 'package:http/http.dart';
+
+import '../../core/utils/shared_preferences_helper.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -13,11 +18,52 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  void signIn(String email, String password) async {
+    try {
+      print(email);
+      print(password);
+      String? baseUrl = SharedPreferencesHelper.getAPI();
+      Response response = await post(
+          Uri.parse('${baseUrl}/api/auth/login'),
+          body: {
+            'email': email,
+            'password': password,
+          });
+      if (response.statusCode == 200) {
+        notificationRegister("Login successfully");
+        Navigator.pushNamed(context, '/home_one_screen');
+        final responseData = jsonDecode(response.body);
+        final userId = responseData['data']['_id'].toString();
+        await SharedPreferencesHelper.saveUserId(userId);
+        print(userId);
+      } else {
+        notificationRegister("Login failed");
+        print(response.statusCode);
+      }
+      print(jsonDecode(response.body.toString()));
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 
+  void notificationRegister(String RegisterState) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          RegisterState,
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Color(0xFF06B3C4),
+      ),
+    );
+  }
 
 
   @override
   Widget build(BuildContext context) {
+    bool _isPasswordVisible = false;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -61,6 +107,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     children: [
                       //email
                       TextFormField(
+                        controller: emailController,
                         decoration: InputDecoration(
                           prefixIcon: const Icon(Icons.person_outline_outlined),
                           labelText: "E-Mail",
@@ -75,17 +122,29 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                       //password
                       TextFormField(
+                        controller: passwordController,
                         decoration: InputDecoration(
-                            prefixIcon: const Icon(Icons.lock),
-                            labelText: "Password",
-                            hintText: "Password",
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
+                          prefixIcon: const Icon(Icons.lock),
+                          labelText: "Password",
+                          hintText: "Password",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              // Chuyển đổi trạng thái hiển thị
+                              setState(() {
+                                _isPasswordVisible = !_isPasswordVisible;
+                              });
+                            },
+                            icon: Icon(
+                              _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
                             ),
-                            suffixIcon: const IconButton(
-                                onPressed: null,
-                                icon: Icon(Icons.remove_red_eye))),
+                          ),
+                        ),
+                        obscureText: !_isPasswordVisible, // Hiển thị dạng `****` nếu `_isPasswordVisible` là `false`
                       ),
+
                       const SizedBox(
                         height: 10,
                       ),
@@ -122,7 +181,9 @@ class _SignInScreenState extends State<SignInScreen> {
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              signIn(emailController.text.toString(), passwordController.text.toString());
+                            },
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: const Color(0xFF06B3C4),
                                 shape: RoundedRectangleBorder(

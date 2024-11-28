@@ -2,16 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:hotelsbooking/core/app_export.dart';
 import 'package:hotelsbooking/presentation/home_one_screen/models/hotellist_item_model.dart';
 
-// ignore_for_file: must_be_immutable
 class HotellistItemWidget extends StatelessWidget {
   HotellistItemWidget(this.hotellistItemModelObj, {Key? key})
       : super(
-          key: key,
-        );
-  HotellistItemModel hotellistItemModelObj;
+    key: key,
+  );
+
+  HotellistItemModel? hotellistItemModelObj; // Để đối tượng này có thể nhận giá trị null
 
   @override
   Widget build(BuildContext context) {
+    // Kiểm tra nếu hotellistItemModelObj là null
+    if (hotellistItemModelObj == null) {
+      return Center(child: Text('Không có dữ liệu khách sạn.'));
+    }
+
     return SizedBox(
       width: 218.h,
       child: Align(
@@ -22,18 +27,12 @@ class HotellistItemWidget extends StatelessWidget {
           child: Stack(
             alignment: Alignment.center,
             children: [
-              // CustomImageView(
-              //   imagePath: hotellistItemModelObj.dayOne!,
-              //   height: 268.h,
-              //   width: double.maxFinite,
-              //
-              // ),
               GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, '/detail_screen');
+                  Navigator.pushNamed(context, '/detail_screen', arguments: hotellistItemModelObj);
                 },
                 child: CustomImageView(
-                  imagePath: hotellistItemModelObj.dayOne!,
+                  imagePath: hotellistItemModelObj?.dayOne ?? '', // Sử dụng giá trị mặc định nếu là null
                   height: 268.h,
                   width: double.maxFinite,
                 ),
@@ -55,19 +54,9 @@ class HotellistItemWidget extends StatelessWidget {
                               horizontal: 8.h,
                               vertical: 2.h,
                             ),
-                            decoration: BoxDecoration(
-                              color: appTheme.whiteA700,
-                              borderRadius: BorderRadiusStyle.roundedBorder8,
-                            ),
-                            child: Text(
-                              hotellistItemModelObj.price!,
-                              textAlign: TextAlign.center,
-                              style:
-                                  CustomTextStyles.labelMediumPoppinsBlack90001,
-                            ),
                           ),
                           CustomImageView(
-                            imagePath: hotellistItemModelObj.dayThree!,
+                            imagePath: hotellistItemModelObj?.dayThree ?? '', // Sử dụng giá trị mặc định nếu là null
                             height: 20.h,
                             width: 20.h,
                           )
@@ -106,25 +95,20 @@ class HotellistItemWidget extends StatelessWidget {
                               children: [
                                 CustomImageView(
                                   imagePath:
-                                      ImageConstant.imgAntDesignStarFilled,
+                                  ImageConstant.imgAntDesignStarFilled,
                                   height: 14.h,
                                   width: 14.h,
                                 ),
                                 Text(
-                                  hotellistItemModelObj.fifty!,
+                                  hotellistItemModelObj?.fifty ?? '', // Sử dụng giá trị mặc định nếu là null
                                   style: theme.textTheme.labelMedium,
                                 ),
-                                Text(
-                                  hotellistItemModelObj.fourhundredsixt!,
-                                  style:
-                                      CustomTextStyles.labelMediumBluegray400_1,
-                                )
                               ],
                             ),
                           ),
                           SizedBox(height: 6.h),
                           Text(
-                            hotellistItemModelObj.theastonvil!,
+                            hotellistItemModelObj?.theastonvil ?? '', // Sử dụng giá trị mặc định nếu là null
                             style: CustomTextStyles.labelLargePoppinsBlack900,
                           ),
                           SizedBox(height: 6.h),
@@ -140,7 +124,7 @@ class HotellistItemWidget extends StatelessWidget {
                                 Align(
                                     alignment: Alignment.bottomCenter,
                                     child: Text(
-                                      hotellistItemModelObj.streetromeny!,
+                                      hotellistItemModelObj?.streetromeny ?? '', // Sử dụng giá trị mặc định nếu là null
                                       style: CustomTextStyles
                                           .labelMediumBluegray400,
                                     ))
