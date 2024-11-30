@@ -12,6 +12,7 @@ import 'package:hotelsbooking/presentation/editprofile_screen/editprofile_screen
 import 'package:hotelsbooking/presentation/favorite_screen/favorite_screen.dart';
 import 'package:hotelsbooking/presentation/mybooking_screen/mybooking_screen.dart';
 import 'package:hotelsbooking/presentation/myprofile_page/myprofile_page.dart';
+import 'package:hotelsbooking/presentation/mybooking_screen/mybookingbooked_tab_page.dart';
 
 class MybookingScreen extends StatefulWidget {
   const MybookingScreen({Key? key})
@@ -43,7 +44,7 @@ class MybookingScreenState extends State<MybookingScreen>
   @override
   void initState() {
     super.initState();
-    tabviewController = TabController(length: 2, vsync: this);
+    tabviewController = TabController(length: 3, vsync: this);
   }
 
   @override
@@ -73,8 +74,10 @@ class MybookingScreenState extends State<MybookingScreen>
                   child: TabBarView(
                     controller: tabviewController,
                     children: [
+
+                      MybookingbookedTabPage.builder(context),
+                      MybookinghistorTabPage.builder(context),
                       Container(),
-                      MybookinghistorTabPage.builder(context)
                     ],
                   ),
                 ),

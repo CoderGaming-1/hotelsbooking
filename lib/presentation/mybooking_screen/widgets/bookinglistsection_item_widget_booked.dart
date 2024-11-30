@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import '../../../core/app_export.dart';
-import '../models/bookinglistsection_item_model.dart';
+import '../models/bookinglistsection_item_model_booked.dart';
 
 // ignore_for_file: must_be_immutable
-class BookinglistsectionItemWidget extends StatelessWidget {
-  BookinglistsectionItemWidget(this.bookinglistsectionItemModelObj, {Key? key})
-      : super(
-    key: key,
-  );
-
-  BookinglistsectionItemModel bookinglistsectionItemModelObj;
+class BookinglistsectionItemWidgetBooked extends StatelessWidget {
+  BookinglistsectionItemWidgetBooked(this.bookinglistsectionItemModelBookedObj, {Key? key})
+      : super(key: key,);
+  BookinglistsectionItemModelBooked bookinglistsectionItemModelBookedObj;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,31 +16,23 @@ class BookinglistsectionItemWidget extends StatelessWidget {
         vertical: 14.h,
       ),
       decoration: BoxDecoration(
-        color: appTheme.blueGray400.withOpacity(0.1),
+        color: appTheme.blueGray200.withOpacity(0.2), // Different color for "Booked"
         borderRadius: BorderRadiusStyle.roundedBorder16,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          _buildHotelItem(
-            imagePath: ImageConstant.img_3,
-            title: "Hotel Ringle Belt",
-            location: "120 Washinton D.C, NT 124/22",
-            price: "\$55",
-          ),
-          SizedBox(height: 16.h),
-          _buildHotelItem(
-            imagePath: ImageConstant.img_6,
-            title: "Hotels Chaos Ordering",
-            location: "507 University St, Endicolt",
-            price: "\$90",
+          _buildBookedHotelItem(
+            imagePath: bookinglistsectionItemModelBookedObj.imageOne ?? ImageConstant.imgBookedPlaceholder,
+            title: "Booked Hotel Name",
+            location: "123 Main St, Booked City",
+            price: "\$70",
           ),
         ],
       ),
     );
   }
-
-  Widget _buildHotelItem({
+  Widget _buildBookedHotelItem({
     required String imagePath,
     required String title,
     required String location,
@@ -73,8 +62,7 @@ class BookinglistsectionItemWidget extends StatelessWidget {
                       children: [
                         Text(
                           title,
-                          style: CustomTextStyles
-                              .labelLargePoppinsBlack90001SemiBold_1,
+                          style: CustomTextStyles.labelLargePoppinsBlack90001SemiBold_1,
                         ),
                         SizedBox(height: 4.h),
                         Text(
@@ -90,47 +78,41 @@ class BookinglistsectionItemWidget extends StatelessWidget {
                                 children: [
                                   TextSpan(
                                     text: price,
-                                    style: CustomTextStyles
-                                        .labelMediumCyan600,
+                                    style: CustomTextStyles.labelMediumCyan600,
                                   ),
                                   TextSpan(
                                     text: "lbl_night".tr,
-                                    style: CustomTextStyles
-                                        .labelMediumBlack90001_1,
-                                  )
+                                    style: CustomTextStyles.labelMediumBlack90001_1,
+                                  ),
                                 ],
                               ),
                             ),
                             Row(
                               children: [
                                 CustomImageView(
-                                  imagePath:
-                                  bookinglistsectionItemModelObj.imageOne!,
+                                  imagePath: ImageConstant.imgCustomStar,
                                   height: 14.h,
                                   width: 14.h,
                                 ),
                                 SizedBox(width: 4.h),
                                 Text(
-                                  bookinglistsectionItemModelObj.fifty!,
-                                  style: CustomTextStyles
-                                      .labelMediumPlusJakartaSansAmberA200,
+                                  bookinglistsectionItemModelBookedObj.fifty!,
+                                  style: CustomTextStyles.labelMediumPlusJakartaSansAmberA200,
                                 ),
                                 SizedBox(width: 4.h),
                                 Text(
-                                  bookinglistsectionItemModelObj
-                                      .fourhundredsixt!,
-                                  style: CustomTextStyles
-                                      .labelMediumPlusJakartaSansBluegray400Bold,
+                                  bookinglistsectionItemModelBookedObj.fourhundredsixt!,
+                                  style: CustomTextStyles.labelMediumPlusJakartaSansBluegray400Bold,
                                 ),
                               ],
-                            )
+                            ),
                           ],
                         )
                       ],
                     ),
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -153,11 +135,10 @@ class BookinglistsectionItemWidget extends StatelessWidget {
                 children: [
                   Text(
                     "lbl_check_in".tr,
-                    style: CustomTextStyles
-                        .labelLargePlusJakartaSansBlack90001,
+                    style: CustomTextStyles.labelLargePlusJakartaSansBlack90001,
                   ),
                   Text(
-                    "lbl_12_june".tr,
+                    "lbl_15_june".tr, // Different date for "Booked"
                     style: theme.textTheme.titleSmall,
                   ),
                 ],
@@ -171,11 +152,10 @@ class BookinglistsectionItemWidget extends StatelessWidget {
                 children: [
                   Text(
                     "lbl_check_out".tr,
-                    style: CustomTextStyles
-                        .labelLargePlusJakartaSansGray800,
+                    style: CustomTextStyles.labelLargePlusJakartaSansGray800,
                   ),
                   Text(
-                    "lbl_15_june".tr,
+                    "lbl_18_june".tr, // Different date for "Booked"
                     style: theme.textTheme.titleSmall,
                   ),
                 ],

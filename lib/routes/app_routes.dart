@@ -10,7 +10,7 @@ import 'package:hotelsbooking/presentation/from_details_screen/from_details_scre
 import 'package:hotelsbooking/presentation/checkout_screen/checkout_screen.dart';
 import 'package:hotelsbooking/presentation/filter_screen/filter_screen.dart';
 import 'package:hotelsbooking/presentation/search_screen/search_screen.dart';
-
+import 'package:hotelsbooking/presentation/payment_screen/payment_screen.dart';
 import '../presentation/sign_up_screen/sign_up_screen.dart';
 
 class AppRoutes {
@@ -28,8 +28,9 @@ class AppRoutes {
   static const String filterScreen = '/filter_screen';
   static const String searchScreen = '/search_screen';
   static const String signUpScreen = '/sign_up_screen';
-
+  static const String paymentScreen = '/payment_screen';
   static Map<String, WidgetBuilder> get routes => {
+        paymentScreen: PaymentScreen.builder,
         searchScreen: SearchScreen.builder,
         filterScreen: FilterScreen.builder,
         checkoutScreen: CheckoutScreen.builder,

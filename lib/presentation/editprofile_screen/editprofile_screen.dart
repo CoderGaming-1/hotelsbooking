@@ -71,6 +71,9 @@ class EditprofileScreen extends StatelessWidget {
                     buttonStyle: CustomButtonStyles.fillPrimary,
                     buttonTextStyle:
                         CustomTextStyles.titleMediumPrimaryContainer,
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/payment_screen');
+                    },
                   ),
                   //SizedBox(height: 40.h)
                 ],
