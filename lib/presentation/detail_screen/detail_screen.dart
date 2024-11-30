@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hotelsbooking/presentation/home_one_screen/models/hotellist_item_model.dart';
 import '../../core/app_export.dart';
 import '../../theme/custom_button_style.dart';
 import '../../widgets/app_bar/appbar_leading_iconbutton.dart';
@@ -13,11 +14,11 @@ import 'models/detailslist_item_model.dart';
 import 'widgets/detailslist_item_widget.dart';
 
 class DetailsScreen extends StatelessWidget {
-  const DetailsScreen({Key? key})
+  const DetailsScreen({Key? key, this.hotelItem})
       : super(
           key: key,
         );
-
+  final HotellistItemModel? hotelItem;
   static Widget builder(BuildContext context) {
     return BlocProvider<DetailsBloc>(
       create: (context) => DetailsBloc(DetailsState(
@@ -50,10 +51,10 @@ class DetailsScreen extends StatelessWidget {
               children: [
                 _buildImageSection(context),
                 SizedBox(height: 12.h),
-                _buildTabsRow(context),
+                _buildTabsRow(context, hotelItem!),
                 SizedBox(height: 12.h),
-                _buildHotelInfoRow(context),
-                _buildUserInfoRow(context),
+                _buildHotelInfoRow(context, hotelItem!),
+                _buildUserInfoRow(context, hotelItem!),
                 SizedBox(height: 4.h),
                 Text(
                   "lbl_description".tr,
@@ -111,7 +112,7 @@ class DetailsScreen extends StatelessWidget {
           bottom: 8.h,
         ),
         onTap: () {
-          Navigator.pop(context); // This will pop the current screen and go back
+          Navigator.pushNamed(context, '/home_one_screen'); // This will pop the current screen and go back
         },
       ),
 
@@ -276,7 +277,7 @@ class DetailsScreen extends StatelessWidget {
   }
 
   /// Section Widget
-  Widget _buildReviewButton(BuildContext context) {
+  Widget _buildReviewButton(BuildContext context, HotellistItemModel hotelItem) {
     // return CustomElevatedButton(
     //   width: 72.h,
     //   text: "lbl_5_0".tr,
@@ -296,7 +297,7 @@ class DetailsScreen extends StatelessWidget {
         builder: (context, breakfastInputController) {
           return CustomTextFormField(
             controller: breakfastInputController,
-            hintText: "lbl_5_0".tr,
+            hintText: hotelItem.fifty,
             textInputAction: TextInputAction.done,
             prefix: Container(
               margin: EdgeInsets.fromLTRB(12.h, 8.h, 8.h, 8.h),
@@ -324,7 +325,7 @@ class DetailsScreen extends StatelessWidget {
   }
 
   /// Section Widget
-  Widget _buildTabsRow(BuildContext context) {
+  Widget _buildTabsRow(BuildContext context, HotellistItemModel hotelItem) {
     return SizedBox(
       width: double.maxFinite,
       child: Row(
@@ -333,14 +334,14 @@ class DetailsScreen extends StatelessWidget {
           SizedBox(width: 8.h),
           _buildBreakfastInput(context),
           SizedBox(width: 8.h),
-          _buildReviewButton(context)
+          _buildReviewButton(context, hotelItem)
         ],
       ),
     );
   }
 
   /// Section Widget
-  Widget _buildHotelInfoRow(BuildContext context) {
+  Widget _buildHotelInfoRow(BuildContext context, HotellistItemModel hotelItem) {
     return Container(
       width: double.maxFinite,
       margin: EdgeInsets.only(right: 8.h),
@@ -348,7 +349,7 @@ class DetailsScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            "msg_the_aston_vil_hotel".tr,
+            hotelItem.theastonvil!,
             // style: CustomTextStyles.titleMediumPlusJakartaSansOnPrimary,
             style: CustomTextStyles.titleMediumBlack900,
           ),
@@ -365,7 +366,7 @@ class DetailsScreen extends StatelessWidget {
   }
 
   /// Section Widget
-  Widget _buildUserInfoRow(BuildContext context) {
+  Widget _buildUserInfoRow(BuildContext context, HotellistItemModel hotelItem) {
     return SizedBox(
       width: double.maxFinite,
       child: Row(
@@ -378,7 +379,7 @@ class DetailsScreen extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(left: 8.h),
             child: Text(
-              "msg_upper_indira_nagar".tr,
+              hotelItem.streetromeny!,
               // style: CustomTextStyles.labelLargeOnPrimaryContainer,
               style: TextStyle(
                   color: Color(0xFF878787),

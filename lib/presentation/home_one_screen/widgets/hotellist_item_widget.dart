@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hotelsbooking/core/app_export.dart';
+import 'package:hotelsbooking/presentation/detail_screen/detail_screen.dart';
 import 'package:hotelsbooking/presentation/home_one_screen/models/hotellist_item_model.dart';
+
+import '../../detail_screen/bloc/details_bloc.dart';
+import '../../detail_screen/models/details_model.dart';
 
 class HotellistItemWidget extends StatelessWidget {
   HotellistItemWidget(this.hotellistItemModelObj, {Key? key})
@@ -29,7 +33,18 @@ class HotellistItemWidget extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, '/detail_screen', arguments: hotellistItemModelObj);
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (ctx) => BlocProvider<DetailsBloc>(
+                        create: (context) => DetailsBloc(
+                          DetailsState(
+                            detailsModelObj: DetailsModel(),
+                          ),
+                        )..add(DetailsInitialEvent()),
+                        child: DetailsScreen(hotelItem: hotellistItemModelObj!),
+                      ),
+                    ),
+                  );
                 },
                 child: CustomImageView(
                   imagePath: hotellistItemModelObj?.dayOne ?? '', // Sử dụng giá trị mặc định nếu là null
