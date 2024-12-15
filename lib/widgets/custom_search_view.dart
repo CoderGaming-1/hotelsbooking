@@ -192,6 +192,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:hotelsbooking/core/app_export.dart';
+import 'package:hotelsbooking/presentation/search_screen/search_screen.dart';
 
 extension SearchViewStyleHelper on CustomSearchView {
   static OutlineInputBorder get outlineCyan => OutlineInputBorder(
@@ -292,7 +293,7 @@ class CustomSearchView extends StatelessWidget {
             onChanged?.call(value);
           },
           onFieldSubmitted: (String value) {
-            Navigator.pushNamed(context, '/search_screen');
+            Navigator.push(context, MaterialPageRoute(builder: (ctx) => SearchScreen()));
           },
         ),
       );

@@ -32,15 +32,31 @@ class FilterScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: appTheme.whiteA700,
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          leading: IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context,'/home_one_initial_page');
+              },
+              icon: Icon(Icons.close)),
+          title: Text(
+            'Filter By',
+            style: TextStyle(
+                fontSize: 20,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.bold),
+          ),
+          centerTitle: true,
+        ),
         body: Container(
           width: double.maxFinite,
-          margin: EdgeInsets.only(top: 32.h),
+          margin: EdgeInsets.only(top: 18.h),
           child: SingleChildScrollView(
             child: Container(
               width: double.maxFinite,
               padding: EdgeInsets.only(
                 left: 8.h,
-                top: 24.h,
+                top: 20.h,
                 right: 8.h,
               ),
               decoration: BoxDecoration(
@@ -50,14 +66,6 @@ class FilterScreen extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  // CustomElevatedButton(
-                  // width: 80.h,
-                  // text: "lbl_filter_by".tr,
-                  Text(
-                    "lbl_filter_by".tr,
-                    style: CustomTextStyles.titleMediumBlack90001,
-                    // )
-                  ),
                   SizedBox(height: 8.h),
                   _buildGuestSelection(context),
                   SizedBox(height: 22.h),
@@ -140,7 +148,8 @@ class FilterScreen extends StatelessWidget {
                             decoration: InputDecoration(
                               hintText: 'Maximum - Price',
                               hintStyle: TextStyle(
-                                color: Colors.grey, // Set the placeholder text color to gray
+                                color: Colors.grey,
+                                // Set the placeholder text color to gray
                                 fontSize: 14.0,
                               ),
                               border: OutlineInputBorder(
@@ -157,7 +166,6 @@ class FilterScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-
 
                   SizedBox(height: 42.h),
                   _buildLocationSelection(context),

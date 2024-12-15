@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hotelsbooking/presentation/home_one_screen/models/hotellist_item_model.dart';
+import 'package:hotelsbooking/presentation/show_all_room_screen/show_all_room_screen.dart';
 import '../../core/app_export.dart';
 import '../../theme/custom_button_style.dart';
 import '../../widgets/app_bar/appbar_leading_iconbutton.dart';
@@ -450,7 +451,7 @@ class DetailsScreen extends StatelessWidget {
       buttonStyle: CustomButtonStyles.fillPrimary,
       buttonTextStyle: CustomTextStyles.labelMediumBlack90001,
       onPressed: () {
-        Navigator.pushNamed(context, '/fromdetails_screen');
+        Navigator.push(context, MaterialPageRoute(builder: (ctx) => ShowAllRoomScreen()));
       },
     );
   }
