@@ -2,30 +2,26 @@ import 'package:flutter/material.dart';
 import '../../core/app_export.dart';
 import 'bloc/mybooking_bloc.dart';
 import 'models/bookinglistsection_item_model.dart';
-import 'models/mybookinghistor_tab_model.dart';
+import 'models/mybookingbooked_tab_model.dart';
 import 'widgets/bookinglistsection_item_widget.dart';
 
-class MybookinghistorTabPage extends StatefulWidget {
-  const MybookinghistorTabPage({Key? key})
-      : super(
-          key: key,
-        );
+class MybookingbookedTabPage extends StatefulWidget {
+  const MybookingbookedTabPage({Key? key}) : super(key: key);
 
   @override
-  MybookinghistorTabPageState createState() => MybookinghistorTabPageState();
-
+  MybookingbookedTabPageState createState() => MybookingbookedTabPageState();
   static Widget builder(BuildContext context) {
     return BlocProvider<MybookingBloc>(
       create: (context) => MybookingBloc(MybookingState(
-        mybookinghistorTabModelObj: MybookinghistorTabModel(),
+        mybookingbookedTabModelObj: MybookingbookedTabModel(),
       ))
         ..add(MybookingInitialEvent()),
-      child: MybookinghistorTabPage(),
+      child: MybookingbookedTabPage(),
     );
   }
 }
 
-class MybookinghistorTabPageState extends State<MybookinghistorTabPage> {
+class MybookingbookedTabPageState extends State<MybookingbookedTabPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -40,9 +36,9 @@ class MybookinghistorTabPageState extends State<MybookinghistorTabPage> {
   Widget _buildBookingListSection(BuildContext context) {
     return Expanded(
       child:
-          BlocSelector<MybookingBloc, MybookingState, MybookinghistorTabModel?>(
-        selector: (state) => state.mybookinghistorTabModelObj,
-        builder: (context, mybookinghistorTabModelObj) {
+      BlocSelector<MybookingBloc, MybookingState, MybookingbookedTabModel?>(
+        selector: (state) => state.mybookingbookedTabModelObj,
+        builder: (context, mybookingbookedTabModelObj) {
           return ListView.separated(
             padding: EdgeInsets.zero,
             physics: BouncingScrollPhysics(),
@@ -52,13 +48,13 @@ class MybookinghistorTabPageState extends State<MybookinghistorTabPage> {
                 height: 24.h,
               );
             },
-            itemCount:
-                mybookinghistorTabModelObj?.bookinglistsectionItemList.length ??
-                    0,
+            itemCount: mybookingbookedTabModelObj
+                ?.bookinglistsectionItemList.length ??
+                0,
             itemBuilder: (context, index) {
-              BookinglistsectionItemModel model = mybookinghistorTabModelObj
-                      ?.bookinglistsectionItemList[index] ??
-                  BookinglistsectionItemModel();
+              BookinglistsectionItemModel model =
+                  mybookingbookedTabModelObj?.bookinglistsectionItemList[index] ??
+                      BookinglistsectionItemModel();
               return BookinglistsectionItemWidget(
                 model,
               );

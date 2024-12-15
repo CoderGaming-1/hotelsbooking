@@ -50,10 +50,12 @@ final Map<String, String> enUs = {
 
   // MyBooking Screen
   "lbl_12_june": "12 June",
+  "lbl_15_june": "15 June",
   "lbl_38": "\$38",
   "lbl_38_night": "\$38/night",
   "lbl_booked": "Booked",
   "lbl_check_in": "Check in\n",
+  "lbl_check_out": "Check out\n",
   "lbl_history": "History",
   "lbl_night": "/night",
   "msg_507_university_st_endicolt": "507 University St. Endicolt, NY 13760",
@@ -61,6 +63,7 @@ final Map<String, String> enUs = {
   "msg_zeyzang_resort_hotel": "Zeyzang Resort Hotel\n",
   "msg_zeyzang_resort_hotel_507":
   "Zeyzang Resort Hotel\n507 University St. Endicolt, NY 13760",
+
 
 
   // EditProfile Screen

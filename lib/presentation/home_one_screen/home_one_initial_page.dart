@@ -21,7 +21,7 @@ import 'package:hotelsbooking/presentation/home_one_screen/home_one_initial_page
 import 'package:hotelsbooking/presentation/home_one_screen/models/home_one_model.dart';
 import 'package:hotelsbooking/presentation/detail_screen/detail_screen.dart';
 import 'package:hotelsbooking/presentation/from_details_screen/from_details_screen.dart';
-
+import 'package:hotelsbooking/presentation/payment_screen/payment_screen.dart';
 class DefaultWidgets extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -771,6 +771,8 @@ class HomeOneInitialPageState extends State<HomeOneInitialPage> {
         return DetailsScreen.builder(context);
       case AppRoutes.fromdetailsScreen:
         return FromDetailsScreen.builder(context);
+      case AppRoutes.paymentScreen:
+        return PaymentScreen.builder(context);
       default:
         return DefaultWidgets();
     }

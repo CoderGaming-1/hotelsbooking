@@ -36,7 +36,21 @@ class FromDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: _buildTopNavigation(context),
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios_new), // Back icon
+            onPressed: () {
+              Navigator.pop(context); // Navigates to the previous screen
+            },
+          ),
+          title: Text(
+            'From Detail',
+            style: TextStyle(
+                fontSize: 20, fontFamily: 'Poppins', fontWeight: FontWeight.bold),
+          ),
+          centerTitle: true,
+        ),
         body: Form(
           key: _formkey,
           child: SizedBox(

@@ -8,7 +8,7 @@ class MybookinghistorTabModel extends Equatable {
 
   List<BookinglistsectionItemModel> bookinglistsectionItemList;
 
-  MybookinghistorTabModel copywith(
+  MybookinghistorTabModel copyWith(
       {List<BookinglistsectionItemModel>? bookinglistsectionItemList}) {
     return MybookinghistorTabModel(
       bookinglistsectionItemList:

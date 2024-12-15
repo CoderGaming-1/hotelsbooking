@@ -19,6 +19,7 @@ class DetailsScreen extends StatelessWidget {
           key: key,
         );
   final HotellistItemModel? hotelItem;
+
   static Widget builder(BuildContext context) {
     return BlocProvider<DetailsBloc>(
       create: (context) => DetailsBloc(DetailsState(
@@ -35,7 +36,21 @@ class DetailsScreen extends StatelessWidget {
         child: Scaffold(
       // backgroundColor: theme.colorScheme.primaryContainer,
       backgroundColor: appTheme.primaryContainer,
-      appBar: _buildTopNavigation(context),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios_new), // Back icon
+          onPressed: () {
+            Navigator.pop(context); // Navigates to the previous screen
+          },
+        ),
+        title: Text(
+          'Detail',
+          style: TextStyle(
+              fontSize: 20, fontFamily: 'Poppins', fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+      ),
       body: SizedBox(
         width: double.maxFinite,
         child: SingleChildScrollView(
@@ -68,10 +83,10 @@ class DetailsScreen extends StatelessWidget {
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                      color: Color(0xFF878787),
-                    fontSize: 12,
-                    fontFamily: 'Plus Jakarta Sans',
-                    fontWeight: FontWeight.w500),
+                        color: Color(0xFF878787),
+                        fontSize: 12,
+                        fontFamily: 'Plus Jakarta Sans',
+                        fontWeight: FontWeight.w500),
                   ),
                 ),
                 SizedBox(
@@ -112,11 +127,12 @@ class DetailsScreen extends StatelessWidget {
           bottom: 8.h,
         ),
         onTap: () {
-          Navigator.pushNamed(context, '/home_one_screen'); // This will pop the current screen and go back
+          Navigator.pushNamed(
+              // context, '/payment_screen'); // Navigate to mybooking_screen
+              context,
+              '/home_one_initial_page'); // This will pop the current screen and go back
         },
       ),
-
-
       centerTitle: true,
       title: Text(
         'Details',
@@ -277,7 +293,8 @@ class DetailsScreen extends StatelessWidget {
   }
 
   /// Section Widget
-  Widget _buildReviewButton(BuildContext context, HotellistItemModel hotelItem) {
+  Widget _buildReviewButton(
+      BuildContext context, HotellistItemModel hotelItem) {
     // return CustomElevatedButton(
     //   width: 72.h,
     //   text: "lbl_5_0".tr,
@@ -341,7 +358,8 @@ class DetailsScreen extends StatelessWidget {
   }
 
   /// Section Widget
-  Widget _buildHotelInfoRow(BuildContext context, HotellistItemModel hotelItem) {
+  Widget _buildHotelInfoRow(
+      BuildContext context, HotellistItemModel hotelItem) {
     return Container(
       width: double.maxFinite,
       margin: EdgeInsets.only(right: 8.h),
@@ -356,7 +374,7 @@ class DetailsScreen extends StatelessWidget {
           Align(
             alignment: Alignment.bottomCenter,
             child: Text(
-              "lbl_38_day".tr,
+              "200.000/Day".tr,
               style: CustomTextStyles.titleSmallInterPrimary,
             ),
           )

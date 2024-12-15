@@ -5,7 +5,13 @@ import '../../../core/app_export.dart';
 // ignore_for_file: must_be_immutable
 class BookinglistsectionItemModel extends Equatable {
   BookinglistsectionItemModel(
-      {this.imageOne, this.fifty, this.fourhundredsixt, this.id}) {
+      {
+        this.imageOne,
+        this.fifty,
+        this.fourhundredsixt,
+        this.id
+      })
+  {
     imageOne = imageOne ?? ImageConstant.imgAntDesignStarFilled;
     fifty = fifty ?? "5.0";
     fourhundredsixt = fourhundredsixt ?? "(463)";
@@ -17,7 +23,7 @@ class BookinglistsectionItemModel extends Equatable {
   String? fourhundredsixt;
   String? id;
 
-  BookinglistsectionItemModel copywith({
+  BookinglistsectionItemModel copyWith({
     String? imageOne,
     String? fifty,
     String? fourhundredsixt,

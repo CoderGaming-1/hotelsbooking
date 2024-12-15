@@ -3,22 +3,33 @@ part of 'mybooking_bloc.dart';
 /// Represents the state of Mybooking in the application.
 // ignore_for_file: must_be_immutable
 class MybookingState extends Equatable {
-  MybookingState({this.mybookinghistorTabModelObj, this.mybookingModelObj});
+  final MybookingModel? mybookingModelObj;
+  final MybookinghistorTabModel? mybookinghistorTabModelObj;
+  final MybookingbookedTabModel? mybookingbookedTabModelObj;
 
-  MybookingModel? mybookingModelObj;
-  MybookinghistorTabModel? mybookinghistorTabModelObj;
+  MybookingState({
+    this.mybookingModelObj,
+    this.mybookinghistorTabModelObj,
+    this.mybookingbookedTabModelObj,
+  });
 
-  @override
-  List<Object?> get props => [mybookinghistorTabModelObj, mybookingModelObj];
-
-  MybookingState copywith({
-    MybookinghistorTabModel? mybookinghistorTabModelObj,
+  MybookingState copyWith({
     MybookingModel? mybookingModelObj,
+    MybookinghistorTabModel? mybookinghistorTabModelObj,
+    MybookingbookedTabModel? mybookingbookedTabModelObj,
   }) {
     return MybookingState(
-      mybookinghistorTabModelObj:
-          mybookinghistorTabModelObj ?? this.mybookinghistorTabModelObj,
       mybookingModelObj: mybookingModelObj ?? this.mybookingModelObj,
+      mybookinghistorTabModelObj: mybookinghistorTabModelObj ?? this.mybookinghistorTabModelObj,
+      mybookingbookedTabModelObj: mybookingbookedTabModelObj ?? this.mybookingbookedTabModelObj,
     );
   }
+
+  @override
+  List<Object?> get props => [
+    mybookingModelObj,
+    mybookinghistorTabModelObj,
+    mybookingbookedTabModelObj,
+  ];
 }
+

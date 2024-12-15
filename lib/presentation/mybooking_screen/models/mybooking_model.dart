@@ -6,7 +6,7 @@ import '../../../core/app_export.dart';
 class MybookingModel extends Equatable {
   MybookingModel();
 
-  MybookingModel copywith() {
+  MybookingModel copyWith() {
     return MybookingModel();
   }
 

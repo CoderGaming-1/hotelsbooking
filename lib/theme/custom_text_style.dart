@@ -268,7 +268,7 @@ class CustomTextStyles {
 
   static TextStyle get titleSmallPlusJakartaSansBlack900 =>
       theme.textTheme.titleSmall!.plusJakartaSans.copyWith(
-        color: appTheme.black900,
+        color: Colors.black,
         fontWeight: FontWeight.w700,
       );
 
