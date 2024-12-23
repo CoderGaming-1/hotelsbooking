@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import '../../core/app_export.dart';
 import 'bloc/mybooking_bloc.dart';
-import 'models/bookinglistsection_item_model.dart';
+import 'models/bookinglistsection_item_model_booked.dart';
 import 'models/mybookinghistor_tab_model.dart';
-import 'widgets/bookinglistsection_item_widget.dart';
+import 'widgets/bookinglistsection_item_widget_booked.dart';
 
 class MybookinghistorTabPage extends StatefulWidget {
   const MybookinghistorTabPage({Key? key})
@@ -56,10 +56,9 @@ class MybookinghistorTabPageState extends State<MybookinghistorTabPage> {
                 mybookinghistorTabModelObj?.bookinglistsectionItemList.length ??
                     0,
             itemBuilder: (context, index) {
-              BookinglistsectionItemModel model = mybookinghistorTabModelObj
-                      ?.bookinglistsectionItemList[index] ??
-                  BookinglistsectionItemModel();
-              return BookinglistsectionItemWidget(
+              BookinglistsectionItemModelBooked model = mybookinghistorTabModelObj?.
+              bookinglistsectionItemList[index] ?? BookinglistsectionItemModelBooked();
+              return BookinglistsectionItemWidgetBooked(
                 model,
               );
             },

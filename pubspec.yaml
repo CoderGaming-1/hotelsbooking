@@ -9,6 +9,7 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  checkout_screen_ui: ^1.0.1
   url_launcher: ^6.1.5
   cached_network_image: ^3.3.1
   flutter_svg: ^2.0.10+1

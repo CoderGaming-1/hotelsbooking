@@ -400,8 +400,8 @@ class CheckoutScreen extends StatelessWidget {
             margin: EdgeInsets.only(bottom: 12.h),
             onPressed: () {
               Navigator.pushNamed(
-                  // context, '/payment_screen'); // Navigate to mybooking_screen
-                  context, '/home_one_initial_page');
+                  context, '/payment_screen'); // Navigate to mybooking_screen
+                  // context, '/home_one_initial_page');
             },
           )
         ],

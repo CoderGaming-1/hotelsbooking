@@ -26,22 +26,32 @@ class _SignInScreenState extends State<SignInScreen> {
       print(password);
       String? baseUrl = SharedPreferencesHelper.getAPI();
       Response response = await post(
-          Uri.parse('${baseUrl}/api/auth/login'),
-          body: {
-            'email': email,
-            'password': password,
-          });
+        Uri.parse('${baseUrl}/api/auth/login'),
+        body: {
+          'email': email,
+          'password': password,
+        },
+      );
+
       if (response.statusCode == 200) {
-        notificationRegister("Login successfully");
+        notificationRegister("Login successful");
         Navigator.pushNamed(context, '/home_one_screen');
+
         final responseData = jsonDecode(response.body);
         final userId = responseData['data']['_id'].toString();
+        final token = responseData['token']; // Assuming the token is in the 'token' field
+
+        // Save both token and userId to SharedPreferences
         await SharedPreferencesHelper.saveUserId(userId);
-        print(userId);
+        await SharedPreferencesHelper.saveToken(token);
+
+        print("User ID: $userId");
+        print("Token: $token");
       } else {
         notificationRegister("Login failed");
         print(response.statusCode);
       }
+
       print(jsonDecode(response.body.toString()));
     } catch (e) {
       print(e.toString());

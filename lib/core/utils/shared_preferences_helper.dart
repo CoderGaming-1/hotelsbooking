@@ -1,58 +1,156 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http; // For HTTP requests
-import 'dart:convert'; // Importing dart:convert for jsonEncode
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
 class SharedPreferencesHelper {
-  static const String _userIdKey = "_userId"; // Khóa lưu _id người dùng
-  // static const String _api = "http://192.168.0.100:5000"; // Khóa lưu API người dùng
-  static const String _api = "https://539f-42-118-113-41.ngrok-free.app/api/orders/create"; // Khóa lưu API người dùng
+  static const String _userIdKey = "_userId";
+  static const String _tokenKey = "_token";
+  static const String _api = "https://7a6f-42-115-115-73.ngrok-free.app";
 
+  // Save token
+  static Future<void> saveToken(String token) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_tokenKey, token);
+  }
 
-  // Lưu _id
+  // Get token
+  static Future<String?> getToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_tokenKey);
+  }
+
+  // Save userId
   static Future<void> saveUserId(String userId) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_userIdKey, userId);
   }
 
-  // Lấy _id
+  // Get userId
   static Future<String?> getUserId() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString(_userIdKey);
   }
 
-  // Xóa _id
+  // Clear userId
   static Future<void> clearUserId() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove(_userIdKey);
   }
-  // Lấy API
+
+  // Get API URL
   static String getAPI() {
     return _api;
   }
 
+  // Process payment
   Future<void> processPayment(String reservationId, String amount) async {
-    final prefs = await SharedPreferences.getInstance();
-    String? userId = prefs.getString(SharedPreferencesHelper._userIdKey);
+    String? userId = await getUserId();
+    if (userId == null) throw Exception("User ID is not available");
 
-    final String apiUrl = "https://539f-42-118-113-41.ngrok-free.app/api/orders/create/api/orders/create";
+    final String apiUrl = "https://7a6f-42-115-115-73.ngrok-free.app/api/orders/create";
 
     final Map<String, String> body = {
       "reservationId": reservationId,
       "amount": amount,
-      // You can also send userId if needed by adding it to the body
     };
 
     final response = await http.post(
       Uri.parse(apiUrl),
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: {"Content-Type": "application/json"},
       body: jsonEncode(body),
     );
 
     if (response.statusCode == 200) {
       print("Payment processed successfully: ${response.body}");
     } else {
-      print("Failed to process payment: ${response.body}");
+      throw Exception("Failed to process payment: ${response.body}");
+    }
+  }
+
+  // // Login method
+  // Future<void> login(String email, String password) async {
+  //   final String loginUrl = "https://7a6f-42-115-115-73.ngrok-free.app/api/auth/login";
+  //
+  //   try {
+  //     final response = await http.post(
+  //       Uri.parse(loginUrl),
+  //       headers: {"Content-Type": "application/json"},
+  //       body: jsonEncode({"email": email, "password": password}),
+  //     );
+  //
+  //     if (response.statusCode == 200) {
+  //       final Map<String, dynamic> responseData = jsonDecode(response.body);
+  //       if (responseData['success'] == true) {
+  //         String token = responseData['token'];
+  //         String userId = responseData['data']['_id'];
+  //
+  //         await saveToken(token);
+  //         await saveUserId(userId);
+  //         print("Login successful. Token: $token");
+  //       } else {
+  //         throw Exception("Login failed: ${responseData['message']}");
+  //       }
+  //     } else {
+  //       throw Exception("HTTP Error: ${response.statusCode} - ${response.body}");
+  //     }
+  //   } catch (e) {
+  //     throw Exception("Error during login: $e");
+  //   }
+  // }
+
+  // Fetch room and hotel IDs
+  Future<List<Map<String, String>>> fetchRoomAndHotelIds() async {
+    String? token = await SharedPreferencesHelper.getToken();
+    if (token == null) throw Exception("Token not found. Please log in first.");
+
+    final String apiUrl = "https://7a6f-42-115-115-73.ngrok-free.app/api/transaction/customer";
+
+    final response = await http.get(
+      Uri.parse(apiUrl),
+      headers: {
+        "Authorization": "Bearer $token",
+        "Content-Type": "application/json",
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> responseData = jsonDecode(response.body);
+      if (responseData['success'] == true) {
+        final List<dynamic> transactions = responseData['data'];
+        List<Map<String, String>> roomAndHotelIds = [];
+
+        for (var transaction in transactions) {
+          if (transaction.containsKey('roomId') && transaction['roomId'] != null) {
+            var roomIdData = transaction['roomId'];
+            if (roomIdData.containsKey('_id') && roomIdData.containsKey('hotel') && roomIdData['hotel'] != null) {
+              String roomId = roomIdData['_id'];
+              String hotelId = roomIdData['hotel']['_id'];
+              roomAndHotelIds.add({'roomId': roomId, 'hotelId': hotelId});
+              print("Hotel ID: $hotelId");
+            }
+          }
+        }
+
+        return roomAndHotelIds;
+      } else {
+        throw Exception("API responded with an error: ${responseData['message']}");
+      }
+    } else {
+      throw Exception("HTTP error: ${response.statusCode} - ${response.body}");
+    }
+  }
+
+
+
+  // Fetch hotel details
+  Future<Map<String, dynamic>> fetchHotelDetails(String hotelId) async {
+    final String apiUrl = "https://7a6f-42-115-115-73.ngrok-free.app/api/hotels/detailhotel/$hotelId";
+    final response = await http.get(Uri.parse(apiUrl));
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception("HTTP error: ${response.statusCode} - ${response.body}");
     }
   }
 }

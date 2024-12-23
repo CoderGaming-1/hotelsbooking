@@ -46,8 +46,9 @@ final Map<String, String> enUs = {
   "lbl_logout": "Logout",
   "lbl_security": "Security",
   "lbl_my_profile": "Profile",
-
-
+  "lbl_check_out": "Check out",
+  "lbl_15_june": "15 June",
+  "lbl_18_june": "18 June",
   // MyBooking Screen
   "lbl_12_june": "12 June",
   "lbl_38": "\$38",

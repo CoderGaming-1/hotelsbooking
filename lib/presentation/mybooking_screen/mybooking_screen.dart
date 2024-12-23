@@ -74,7 +74,6 @@ class MybookingScreenState extends State<MybookingScreen>
                   child: TabBarView(
                     controller: tabviewController,
                     children: [
-
                       MybookingbookedTabPage.builder(context),
                       MybookinghistorTabPage.builder(context),
                       Container(),
