@@ -33,6 +33,7 @@ class BookinglistsectionItemWidgetBooked extends StatelessWidget {
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> responseData = jsonDecode(response.body);
+      print(responseData);
       if (responseData['success'] == true) {
         final List<dynamic> transactions = responseData['data'];
         List<Map<String, String>> roomAndHotelIds = [];
@@ -48,7 +49,12 @@ class BookinglistsectionItemWidgetBooked extends StatelessWidget {
               String roomId = roomIdData['_id'];
               String hotelId = roomIdData['hotel']['_id'];
 
-              roomAndHotelIds.add({'roomId': roomId, 'hotelId': hotelId});
+              roomAndHotelIds.add({
+                'roomId': roomId,
+                'hotelId': hotelId,
+                'checkInDate': transaction['checkInDate'],
+                'checkOutDate': transaction['checkOutDate'],
+              });
               print("Room ID: $roomId, Hotel ID: $hotelId");
             }
           }
@@ -141,12 +147,17 @@ class BookinglistsectionItemWidgetBooked extends StatelessWidget {
             "${hotelDetails['location']['city']}, ${hotelDetails['location']['country']}";
         final int price = hotelDetails['rooms'][0]['price'] ?? 0;
 
+        String checkInDate = entry['checkInDate']!.split('T').first;
+        String checkOutDate = entry['checkOutDate']!.split('T').first;
+
         hotelWidgets.add(
           _buildBookedHotelItem(
             imagePath: bookinglistsectionItemModelBookedObj.imageOne ?? ImageConstant.img_1,
             title: hotelName,
             location: location,
             price: "\$${price.toString()}",
+            checkInDate: checkInDate,
+            checkOutDate: checkOutDate,
           ),
         );
       } catch (e) {
@@ -157,11 +168,14 @@ class BookinglistsectionItemWidgetBooked extends StatelessWidget {
     return hotelWidgets;
   }
 
+
   Widget _buildBookedHotelItem({
     required String imagePath,
     required String title,
     required String location,
     required String price,
+    required String checkInDate,
+    required String checkOutDate,
   }) {
     return Column(
       children: [
@@ -260,10 +274,10 @@ class BookinglistsectionItemWidgetBooked extends StatelessWidget {
                 children: [
                   Text(
                     "lbl_check_in".tr,
-                    style: CustomTextStyles.labelLargePlusJakartaSansBlack90001,
+                    style: CustomTextStyles.labelLargePlusJakartaSansGray800,
                   ),
                   Text(
-                    "lbl_15_june".tr, // Different date for "Booked"
+                    checkInDate,
                     style: theme.textTheme.titleSmall,
                   ),
                 ],
@@ -280,7 +294,7 @@ class BookinglistsectionItemWidgetBooked extends StatelessWidget {
                     style: CustomTextStyles.labelLargePlusJakartaSansGray800,
                   ),
                   Text(
-                    "lbl_18_june".tr, // Different date for "Booked"
+                    checkOutDate,
                     style: theme.textTheme.titleSmall,
                   ),
                 ],
