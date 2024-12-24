@@ -40,7 +40,7 @@ class FilterScreen extends StatelessWidget {
               },
               icon: Icon(Icons.close)),
           title: Text(
-            'Filter By',
+            'Search',
             style: TextStyle(
                 fontSize: 20,
                 fontFamily: 'Poppins',
@@ -66,65 +66,16 @@ class FilterScreen extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  SizedBox(height: 8.h),
-                  _buildGuestSelection(context),
-                  SizedBox(height: 22.h),
-                  _buildPriceTitle(context),
-                  // Container(
-                  //   width: double.maxFinite,
-                  //   margin: EdgeInsets.only(
-                  //     left: 20.h,
-                  //     right: 14.h,
-                  //   ),
-                  //   child: SliderTheme(
-                  //     data: SliderThemeData(
-                  //       trackShape: RoundedRectSliderTrackShape(),
-                  //       activeTrackColor: appTheme.blueGray100D8,
-                  //       thumbColor: appTheme.blueGray100D8,
-                  //       thumbShape: RoundSliderThumbShape(),
-                  //     ),
-                  //     child: Slider(
-                  //       value: 0.0,
-                  //       min: 0.0,
-                  //       max: 100.0,
-                  //       onChanged: (value) {},
-                  //     ),
-                  //   ),
-                  // ),
-
-                  // Container(
-                  //   width: double.maxFinite,
-                  //   margin: EdgeInsets.only(left: 20.h, right: 14.h),
-                  //   child: SliderTheme(
-                  //     data: SliderThemeData(
-                  //       trackShape: RoundedRectSliderTrackShape(),
-                  //       activeTrackColor: appTheme.blueGray100D8,
-                  //       thumbColor: appTheme.blueGray100D8,
-                  //       thumbShape: RoundSliderThumbShape(),
-                  //     ),
-                  //     child: RangeSlider(
-                  //       values: state.priceRange,
-                  //       min: 0,
-                  //       max: 100,
-                  //       onChanged: (newRange) {
-                  //         context.read<FilterBloc>().add(UpdatePriceRangeEvent(newRange: newRange));
-                  //       },
-                  //     ),
-                  //   ),
-                  // ),
+                  _buildLocationSelection(context),
                   Container(
                     width: double.maxFinite,
-                    margin: EdgeInsets.only(
-                      left: 20.h,
-                      right: 14.h,
-                    ),
                     child: Row(
                       children: [
                         // Minimum Price Text Field
                         Expanded(
                           child: TextField(
                             decoration: InputDecoration(
-                              hintText: 'Minimum - Price',
+                              hintText: DateTime.now().toString(),
                               hintStyle: TextStyle(
                                 color: Colors.grey,
                                 // Set the placeholder text color to gray
@@ -167,34 +118,10 @@ class FilterScreen extends StatelessWidget {
                     ),
                   ),
 
-                  SizedBox(height: 42.h),
-                  _buildLocationSelection(context),
-                  SizedBox(height: 20.h),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 16.h),
-                      child: Text(
-                        "lbl_facilities".tr,
-                        style: CustomTextStyles.titleSmallSemiBold,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 8.h),
-                  _buildWifiCheckbox(context),
-                  SizedBox(height: 8.h),
-                  _buildTvCheckbox(context),
-                  SizedBox(height: 8.h),
-                  _buildPoolCheckbox(context),
-                  SizedBox(height: 8.h),
-                  _buildLaundryCheckbox(context),
-                  SizedBox(height: 20.h),
-
-                  _buildRatingsFilter(context),
-                  SizedBox(height: 34.h),
+                  _buildGuestSelection(context),
                   CustomElevatedButton(
                     height: 48.h,
-                    text: "lbl_apply_filter".tr,
+                    text: "Search".tr,
                     margin: EdgeInsets.only(
                       left: 16.h,
                       right: 28.h,
@@ -227,10 +154,6 @@ class FilterScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "lbl_placeholder".tr,
-            style: CustomTextStyles.titleSmallSemiBold,
-          ),
           BlocSelector<FilterBloc, FilterState, FilterModel?>(
             selector: (state) => state.filterModelObj,
             builder: (context, filterModelObj) {
@@ -256,27 +179,6 @@ class FilterScreen extends StatelessWidget {
     );
   }
 
-  /// Section Widget
-  // Widget _buildPriceTitle(BuildContext context) {
-  //   return Container(
-  //     width: double.maxFinite,
-  //     margin: EdgeInsets.only(
-  //       left: 22.h,
-  //       right: 10.h,
-  //     ),
-  //     child: Row(
-  //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //       children: [
-  //         Text(
-  //           "lbl_price".tr,
-  //           style: CustomTextStyles.titleSmallSemiBold,),
-  //         Text("lbl_40_80".tr,
-  //           style: CustomTextStyles.titleSmallInterPrimary,
-  //         )
-  //       ],
-  //     ),
-  //   );
-  // }
   Widget _buildPriceTitle(BuildContext context) {
     // RangeValues _priceRange = RangeValues(40, 80);
     return Container(
@@ -289,10 +191,6 @@ class FilterScreen extends StatelessWidget {
             "lbl_price".tr,
             style: CustomTextStyles.titleSmallSemiBold,
           ),
-          // Text(
-          //   "${_priceRange.start}\$ - ${_priceRange.end}\$",
-          //   style: CustomTextStyles.titleSmallInterPrimary,
-          // ),
         ],
       ),
     );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hotelsbooking/core/app_export.dart';
 import 'package:hotelsbooking/data/models/selectionPopupModel/selection_popup_model.dart';
 import 'package:hotelsbooking/presentation/from_details_screen/from_details_screen.dart';
+import 'package:hotelsbooking/presentation/home_one_screen/widgets/searchCard.dart';
 import 'package:hotelsbooking/widgets/app_bar/appbar_title_dropdown.dart';
 import 'package:hotelsbooking/widgets/app_bar/appbar_trailing_image.dart';
 import 'package:hotelsbooking/widgets/app_bar/custom_app_bar.dart';
@@ -238,16 +239,17 @@ class HomeOneInitialPageState extends State<HomeOneInitialPage> {
             ),
           ),
           SizedBox(height: 14.h),
-          BlocSelector<HomeOneBloc, HomeOneState, TextEditingController?>(
-            selector: (state) => state.searchController,
-            builder: (context, searchController) {
-              return CustomSearchView(
-                controller: searchController,
-                hintText: "msg_search_your_hotel".tr,
-                contentPadding: EdgeInsets.fromLTRB(12.h, 16.h, 16.h, 16.h),
-              );
-            },
-          ),
+          SearchCard(),
+          // BlocSelector<HomeOneBloc, HomeOneState, TextEditingController?>(
+          //   selector: (state) => state.searchController,
+          //   builder: (context, searchController) {
+          //     return CustomSearchView(
+          //       controller: searchController,
+          //       hintText: "msg_search_your_hotel".tr,
+          //       contentPadding: EdgeInsets.fromLTRB(12.h, 16.h, 16.h, 16.h),
+          //     );
+          //   },
+          // ),
           SizedBox(height: 14.h),
           SizedBox(
             width: double.maxFinite,
