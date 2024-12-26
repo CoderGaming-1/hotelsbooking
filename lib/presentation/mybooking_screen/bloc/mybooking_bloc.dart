@@ -34,7 +34,7 @@ class MybookingBloc extends Bloc<MybookingEvent, MybookingState> {
   List<BookinglistsectionItemModel> fillBookinglistsectionItemList() {
     return [
       BookinglistsectionItemModel(
-          imageOne: ImageConstant.imgAntDesignStarFilled,
+          imageOne: ImageConstant.img_7,
           fifty: "5.0",
           fourhundredsixt: "(463)",
           // id: "1",

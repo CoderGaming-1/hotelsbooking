@@ -22,7 +22,7 @@ class BookinglistsectionItemWidgetBooked extends StatelessWidget {
       throw Exception("Token not found. Please log in first.");
     }
 
-    final String apiUrl = "{$baseUrl}/api/transaction/customer";
+    final String apiUrl = "$baseUrl/api/transaction/customer";
 
     final response = await http.get(
       Uri.parse(apiUrl),

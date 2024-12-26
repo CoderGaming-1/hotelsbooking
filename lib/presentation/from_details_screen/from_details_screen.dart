@@ -321,9 +321,10 @@ class FromDetailsScreen extends StatelessWidget {
   Future<Map<String, dynamic>?> bookRoom(String? roomId, DateTime checkInDate, DateTime checkOutDate) async {
     try {
       String? token = await SharedPreferencesHelper.getToken();
+      String? baseUrl = SharedPreferencesHelper.getAPI();
       print("Token : $token");
       final response = await http.post(
-        Uri.parse("https://25c1-2405-4802-6ee7-43b0-d9d2-2ec6-5918-682d.ngrok-free.app/api/reservations/book/$roomId"),
+        Uri.parse("{$baseUrl}/api/reservations/book/$roomId"),
         headers: {
           "Authorization": "Bearer $token",
           "Content-Type": "application/json",
