@@ -4,15 +4,20 @@ part of 'from_details_bloc.dart';
 // ignore_for_file: must_be_immutable
 class FromDetailsState extends Equatable {
   FromDetailsState(
-      {this.dateController,
-      this.phoneController,
-      this.selectedDropDownValue,
-      this.selectedDropDownValue1,
-      this.hotelUpdatesCheckbox = false,
-      this.emailUpdatesCheckbox = false,
-      this.termsOfServiceCheckbox = false,
-      this.fromDetailsModelObj});
-
+      {
+        this.dateController,
+        this.checkInController,
+        this.checkOutController,
+        this.phoneController,
+        this.selectedDropDownValue,
+        this.selectedDropDownValue1,
+        this.hotelUpdatesCheckbox = false,
+        this.emailUpdatesCheckbox = false,
+        this.termsOfServiceCheckbox = false,
+        this.fromDetailsModelObj
+      });
+  TextEditingController? checkInController;
+  TextEditingController? checkOutController;
   TextEditingController? dateController;
   TextEditingController? phoneController;
   SelectionPopupModel? selectedDropDownValue;
@@ -25,6 +30,8 @@ class FromDetailsState extends Equatable {
   @override
   List<Object?> get props => [
         dateController,
+        checkInController,
+        checkOutController,
         phoneController,
         selectedDropDownValue,
         selectedDropDownValue1,
@@ -37,6 +44,8 @@ class FromDetailsState extends Equatable {
   FromDetailsState copyWith({
     TextEditingController? dateController,
     TextEditingController? phoneController,
+    TextEditingController? checkInController,
+    TextEditingController? checkOutController,
     SelectionPopupModel? selectedDropDownValue,
     SelectionPopupModel? selectedDropDownValue1,
     bool? hotelUpdatesCheckbox,
@@ -47,6 +56,8 @@ class FromDetailsState extends Equatable {
     return FromDetailsState(
       phoneController: phoneController ?? this.phoneController,
       dateController: dateController ?? this.dateController,
+      checkInController: checkInController ?? this.checkInController,
+      checkOutController: checkOutController ?? this.checkOutController,
       selectedDropDownValue:
           selectedDropDownValue ?? this.selectedDropDownValue,
       selectedDropDownValue1:

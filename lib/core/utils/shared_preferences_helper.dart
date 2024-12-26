@@ -1,11 +1,14 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:hotelsbooking/presentation/forgot_password_screen/forgot_password_screen.dart';
+import 'package:hotelsbooking/presentation/sign_up_screen/sign_up_screen.dart';
 
 class SharedPreferencesHelper {
+  String? baseUrl = SharedPreferencesHelper.getAPI();
   static const String _userIdKey = "_userId";
   static const String _tokenKey = "_token";
-  static const String _api = "https://7a6f-42-115-115-73.ngrok-free.app";
+  static const String _api = "https://25c1-2405-4802-6ee7-43b0-d9d2-2ec6-5918-682d.ngrok-free.app";
 
   // Save token
   static Future<void> saveToken(String token) async {
@@ -47,7 +50,7 @@ class SharedPreferencesHelper {
     String? userId = await getUserId();
     if (userId == null) throw Exception("User ID is not available");
 
-    final String apiUrl = "https://7a6f-42-115-115-73.ngrok-free.app/api/orders/create";
+    final String apiUrl = "${baseUrl}/api/orders/create";
 
     final Map<String, String> body = {
       "reservationId": reservationId,
@@ -69,7 +72,7 @@ class SharedPreferencesHelper {
 
   // // Login method
   // Future<void> login(String email, String password) async {
-  //   final String loginUrl = "https://7a6f-42-115-115-73.ngrok-free.app/api/auth/login";
+  //   final String loginUrl = "https://25c1-2405-4802-6ee7-43b0-d9d2-2ec6-5918-682d.ngrok-free.app/api/auth/login";
   //
   //   try {
   //     final response = await http.post(
@@ -103,7 +106,7 @@ class SharedPreferencesHelper {
     String? token = await SharedPreferencesHelper.getToken();
     if (token == null) throw Exception("Token not found. Please log in first.");
 
-    final String apiUrl = "https://7a6f-42-115-115-73.ngrok-free.app/api/transaction/customer";
+    final String apiUrl = "${baseUrl}/api/transaction/customer";
 
     final response = await http.get(
       Uri.parse(apiUrl),
@@ -144,7 +147,7 @@ class SharedPreferencesHelper {
 
   // Fetch hotel details
   Future<Map<String, dynamic>> fetchHotelDetails(String hotelId) async {
-    final String apiUrl = "https://7a6f-42-115-115-73.ngrok-free.app/api/hotels/detailhotel/$hotelId";
+    final String apiUrl = "${baseUrl}/api/hotels/detailhotel/$hotelId";
     final response = await http.get(Uri.parse(apiUrl));
 
     if (response.statusCode == 200) {

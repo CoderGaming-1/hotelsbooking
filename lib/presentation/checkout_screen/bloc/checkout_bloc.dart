@@ -27,7 +27,7 @@ List<CheckoutThreeItemModel> fillCheckoutThreeItemList() {
     CheckoutThreeItemModel(
         dateOne: ImageConstant.imgCalendarmonth,
       datesTwo: "Dates",
-      nov2024: "12-15 Nov 2024"),
+      nov2024: "29-30 Nov 2024"),
     CheckoutThreeItemModel(
         dateOne: ImageConstant.imgPersonoutline,
       datesTwo: "Guest",

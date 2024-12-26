@@ -170,12 +170,12 @@ class BookinglistsectionItemWidget extends StatelessWidget {
               Column(
                 children: [
                   Text(
-                    "lbl_check_out".tr,
+                    "Check out\n",
                     style: CustomTextStyles
-                        .labelLargePlusJakartaSansGray800,
+                        .labelLargePlusJakartaSansBlack90001,
                   ),
                   Text(
-                    "lbl_15_june".tr,
+                    "15 June",
                     style: theme.textTheme.titleSmall,
                   ),
                 ],

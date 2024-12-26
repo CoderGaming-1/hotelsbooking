@@ -13,30 +13,51 @@ import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_text_form_field.dart';
 import 'bloc/from_details_bloc.dart';
 import 'models/from_details_model.dart';
-
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import '../../core/utils/shared_preferences_helper.dart';
 // ignore_for_file: must_be_immutable
 class FromDetailsScreen extends StatelessWidget {
-  FromDetailsScreen({Key? key})
-      : super(
-          key: key,
-        );
-  GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+  final String roomId; // Declare the roomId variable
 
+  // Add TextEditingController fields
+  final TextEditingController _checkInController = TextEditingController();
+  final TextEditingController _checkOutController = TextEditingController();
+  // FromDetailsScreen({Key? key}) : super(key: key,);
+  FromDetailsScreen({Key? key, required this.roomId}) : super(key: key);
+  GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+  DateTime? _checkInDate;
+  DateTime? _checkOutDate;
+  String? baseUrl = SharedPreferencesHelper.getAPI();
   static Widget builder(BuildContext context) {
+    final roomId = ModalRoute.of(context)?.settings.arguments as String? ?? '';
     return BlocProvider<FromDetailsBloc>(
       create: (context) => FromDetailsBloc(FromDetailsState(
         fromDetailsModelObj: FromDetailsModel(),
-      ))
-        ..add(FromDetailsInitialEvent()),
-      child: FromDetailsScreen(),
+      ))..add(FromDetailsInitialEvent()),
+      child: FromDetailsScreen(roomId: roomId),
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    print("ID room after I get : ${roomId}");
+    final fromDetailsBloc = context.read<FromDetailsBloc>();
     return SafeArea(
       child: Scaffold(
-        appBar: _buildTopNavigation(context),
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios_new),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          title: Text('From Detail',
+            style: TextStyle(fontSize: 20, fontFamily: 'Poppins', fontWeight: FontWeight.bold),
+          ),
+          centerTitle: true,
+        ),
         body: Form(
           key: _formkey,
           child: SizedBox(
@@ -51,14 +72,10 @@ class FromDetailsScreen extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    _buildDateSelection(context),
+                    _buildDateSelection(context, true), // For check-in date
                     SizedBox(height: 18.h),
-                    _buildGuestSelection(context),
-                    SizedBox(height: 18.h),
-                    _buildRoomTypeSelection(context),
-                    SizedBox(height: 18.h),
-                    _buildPhoneNumberInput(context),
-                    SizedBox(height: 42.h),
+                    _buildDateSelection(context, false), // For check-out date
+                    SizedBox(height: 100.h),
                     _buildHotelUpdatesCheckbox(context),
                     _buildEmailUpdatesCheckbox(context),
                     _buildTermsOfServiceCheckbox(context),
@@ -99,205 +116,49 @@ class FromDetailsScreen extends StatelessWidget {
             fontWeight: FontWeight.bold),),
     );
   }
-
-  /// Section Widget
-  Widget _buildDateSelection(BuildContext context) {
+  Widget _buildDateSelection(BuildContext context, bool isCheckIn) {
+    final controller = isCheckIn ? _checkInController : _checkOutController;
     return SizedBox(
       width: double.maxFinite,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "lbl_dates".tr,
-            style: theme.textTheme.titleSmall,
+            isCheckIn ? "lbl_check_in_date".tr : "lbl_check_out_date".tr,
+            style: Theme.of(context).textTheme.titleSmall,
           ),
           SizedBox(height: 8.h),
-          BlocSelector<FromDetailsBloc, FromDetailsState,
-              TextEditingController?>(
-            selector: (state) => state.dateController,
-            builder: (context, dateController) {
-              return CustomTextFormField(
-                readonly: true,
-                controller: dateController,
-                hintText: "lbl_select_date".tr,
-                prefix: Container(
-                  margin: EdgeInsets.fromLTRB(12.h, 12.h, 10.h, 12.h),
-                  child: CustomImageView(
-                    imagePath: ImageConstant.imgCalendarmonth,
-                    height: 24.h,
-                    width: 24.h,
-                    fit: BoxFit.contain,
-                  ),
-                ),
-                prefixConstraints: BoxConstraints(
-                  maxHeight: 48.h,
-                ),
-                suffix: Container(
-                  margin: EdgeInsets.fromLTRB(16.h, 12.h, 12.h, 12.h),
-                  child: CustomImageView(
-                    imagePath: ImageConstant.imgArrowdown,
-                    height: 24.h,
-                    width: 24.h,
-                    fit: BoxFit.contain,
-                  ),
-                ),
-                suffixConstraints: BoxConstraints(
-                  maxHeight: 48.h,
-                ),
-                contentPadding: EdgeInsets.all(12.h),
-                onTap: () {
-                  onTapDate(context);
-                },
-              );
+          CustomTextFormField(
+            readonly: true,
+            controller: controller,
+            hintText: isCheckIn
+                ? "lbl_select_check_in_date".tr
+                : "lbl_select_check_out_date".tr,
+            prefix: Container(
+              margin: EdgeInsets.fromLTRB(12.h, 12.h, 10.h, 12.h),
+              child: CustomImageView(
+                imagePath: ImageConstant.imgCalendarmonth,
+                height: 24.h,
+                width: 24.h,
+                fit: BoxFit.contain,
+              ),
+            ),
+            prefixConstraints: BoxConstraints(maxHeight: 48.h),
+            suffix: Container(
+              margin: EdgeInsets.fromLTRB(16.h, 12.h, 12.h, 12.h),
+              child: CustomImageView(
+                imagePath: ImageConstant.imgArrowdown,
+                height: 24.h,
+                width: 24.h,
+                fit: BoxFit.contain,
+              ),
+            ),
+            suffixConstraints: BoxConstraints(maxHeight: 48.h),
+            contentPadding: EdgeInsets.all(12.h),
+            onTap: () {
+              onTapDate(context, isCheckIn); // Open date picker
             },
-          )
-        ],
-      ),
-    );
-  }
-
-  /// Section Widget
-  Widget _buildGuestSelection(BuildContext context) {
-    return SizedBox(
-      width: double.maxFinite,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "lbl_guests".tr,
-            style: theme.textTheme.titleSmall,
           ),
-          SizedBox(height: 8.h),
-          BlocSelector<FromDetailsBloc, FromDetailsState, FromDetailsModel?>(
-            selector: (state) => state.fromDetailsModelObj,
-            builder: (context, fromDetailsModelObj) {
-              return CustomDropDown(
-                icon: Container(
-                  margin: EdgeInsets.only(left: 16.h),
-                  child: CustomImageView(
-                    imagePath: ImageConstant.imgArrowdown,
-                    height: 24.h,
-                    width: 24.h,
-                    fit: BoxFit.contain,
-                  ),
-                ),
-                iconSize: 24.h,
-                hintText: "msg_select_number_of".tr,
-                items: fromDetailsModelObj?.dropdownItemList ?? [],
-                prefix: Container(
-                  margin: EdgeInsets.fromLTRB(12.h, 12.h, 10.h, 12.h),
-                  child: CustomImageView(
-                    imagePath: ImageConstant.imgPersonoutline,
-                    height: 24.h,
-                    width: 24.h,
-                    fit: BoxFit.contain,
-                  ),
-                ),
-                prefixConstraints: BoxConstraints(
-                  maxHeight: 48.h,
-                ),
-                contentPadding: EdgeInsets.all(12.h),
-              );
-            },
-          )
-        ],
-      ),
-    );
-  }
-
-  /// Section Widget
-  Widget _buildRoomTypeSelection(BuildContext context) {
-    return SizedBox(
-      width: double.maxFinite,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "lbl_room_type".tr,
-            style: theme.textTheme.titleSmall,
-          ),
-          SizedBox(height: 8.h),
-          BlocSelector<FromDetailsBloc, FromDetailsState, FromDetailsModel?>(
-            selector: (state) => state.fromDetailsModelObj,
-            builder: (context, fromDetailsModelObj) {
-              return CustomDropDown(
-                icon: Container(
-                  margin: EdgeInsets.only(left: 16.h),
-                  child: CustomImageView(
-                    imagePath: ImageConstant.imgArrowdown,
-                    height: 24.h,
-                    width: 24.h,
-                    fit: BoxFit.contain,
-                  ),
-                ),
-                iconSize: 24.h,
-                hintText: "msg_select_room_type".tr,
-                items: fromDetailsModelObj?.dropdownItemList1 ?? [],
-                prefix: Container(
-                  margin: EdgeInsets.fromLTRB(12.h, 12.h, 10.h, 12.h),
-                  child: CustomImageView(
-                    imagePath: ImageConstant.imgMeetingroom,
-                    height: 24.h,
-                    width: 24.h,
-                    fit: BoxFit.contain,
-                  ),
-                ),
-                prefixConstraints: BoxConstraints(
-                  maxHeight: 48.h,
-                ),
-                contentPadding: EdgeInsets.all(12.h),
-              );
-            },
-          )
-        ],
-      ),
-    );
-  }
-
-  /// Section Widget
-  Widget _buildPhoneNumberInput(BuildContext context) {
-    return SizedBox(
-      width: double.maxFinite,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "lbl_number_phone".tr,
-            style: theme.textTheme.titleSmall,
-          ),
-          SizedBox(height: 8.h),
-          BlocSelector<FromDetailsBloc, FromDetailsState,
-              TextEditingController?>(
-            selector: (state) => state.phoneController,
-            builder: (context, phoneController) {
-              return CustomTextFormField(
-                controller: phoneController,
-                hintText: "msg_your_phone_number".tr,
-                textInputAction: TextInputAction.done,
-                textInputType: TextInputType.phone,
-                prefix: Container(
-                  margin: EdgeInsets.fromLTRB(12.h, 12.h, 10.h, 12.h),
-                  child: CustomImageView(
-                    imagePath: ImageConstant.imgPhone,
-                    height: 24.h,
-                    width: 24.h,
-                    fit: BoxFit.contain,
-                  ),
-                ),
-                prefixConstraints: BoxConstraints(
-                  maxHeight: 48.h,
-                ),
-                contentPadding: EdgeInsets.all(12.h),
-
-                // validator: (value) {
-                // if (!isValidPhone (value)) {
-                // return "err_msg_please_enter_valid_phone_number".tr;
-                // }
-                // return null;
-                // },
-              );
-            },
-          )
         ],
       ),
     );
@@ -390,10 +251,31 @@ class FromDetailsScreen extends StatelessWidget {
             buttonStyle: CustomButtonStyles.onChoose,
             text: "lbl_continue".tr,
             margin: EdgeInsets.only(bottom: 12.h),
-            onPressed: () {
-              Navigator.pushNamed(context, '/checkout_screen');
-            },
-          )
+          onPressed: () async {
+            String? token = await SharedPreferencesHelper.getToken();
+            print("Token : $token");
+          if (_checkInDate == null) {
+          print("Check-In date is null.");
+          return; // Prevent booking
+          }
+          if (_checkOutDate == null) {
+          print("Check-Out date is null.");
+          return; // Prevent booking
+          }
+
+          print("Check-In Date: $_checkInDate");
+          print("Check-Out Date: $_checkOutDate");
+
+          final response = await bookRoom(roomId as String, _checkInDate!, _checkOutDate!);
+          if (response != null) {
+          print("Booking Successful: $response");
+          Navigator.pushNamed(context, '/checkout_screen');
+          } else {
+          print("Booking Failed: Response is null");
+          }
+          },
+
+          ),
         ],
       ),
     );
@@ -408,18 +290,59 @@ class FromDetailsScreen extends StatelessWidget {
   /// current [fromDetailsModelObj] object if the user selects a valid date.
   ///
   /// This function returns a Future that completes with "void
-  Future<void> onTapDate(BuildContext context) async {
-    var initialState = BlocProvider.of<FromDetailsBloc>(context).state;
-    DateTime? dateTime = await showDatePicker(
-        context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime(1970),
-        lastDate: DateTime(
-            DateTime.now().year, DateTime.now().month, DateTime.now().day));
-    if (dateTime != null) {
-      context.read<FromDetailsBloc>().add(ChangeDateEvent(date: dateTime));
-      initialState.dateController?.text =
-          dateTime.format(pattern: dateTimeFormatPattern);
+  Future<void> onTapDate(BuildContext context, bool isCheckIn) async {
+  DateTime? dateTime = await showDatePicker(
+  context: context,
+  initialDate: DateTime.now(),
+  firstDate: DateTime(1970),
+  lastDate: DateTime(DateTime.now().year + 1, 12, 31), // Allow dates up to next year
+  );
+
+  if (dateTime != null) {
+  String formattedDate =
+  "${dateTime.year}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')}";
+
+  if (isCheckIn) {
+  _checkInDate = dateTime; // Assign selected date
+  _checkInController.text = formattedDate; // Update controller text
+  } else {
+  _checkOutDate = dateTime; // Assign selected date
+  _checkOutController.text = formattedDate; // Update controller text
+  }
+
+  // Debugging output
+  print("Selected ${isCheckIn ? 'Check-In' : 'Check-Out'} Date: $formattedDate");
+  } else {
+  print("Date selection was canceled.");
+  }
+  }
+
+
+  Future<Map<String, dynamic>?> bookRoom(String? roomId, DateTime checkInDate, DateTime checkOutDate) async {
+    try {
+      String? token = await SharedPreferencesHelper.getToken();
+      print("Token : $token");
+      final response = await http.post(
+        Uri.parse("https://25c1-2405-4802-6ee7-43b0-d9d2-2ec6-5918-682d.ngrok-free.app/api/reservations/book/$roomId"),
+        headers: {
+          "Authorization": "Bearer $token",
+          "Content-Type": "application/json",
+        },
+        body: jsonEncode({
+          "checkInDate": "${checkInDate.year}-${checkInDate.month.toString().padLeft(2, '0')}-${checkInDate.day.toString().padLeft(2, '0')}",
+          "checkOutDate": "${checkOutDate.year}-${checkOutDate.month.toString().padLeft(2, '0')}-${checkOutDate.day.toString().padLeft(2, '0')}",
+        }),
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return jsonDecode(response.body);
+      } else {
+        print("Error: ${response.body}");
+        return null;
+      }
+    } catch (e) {
+      print("Exception: $e");
+      return null;
     }
   }
+
 }

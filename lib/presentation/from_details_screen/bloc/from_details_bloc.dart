@@ -26,6 +26,8 @@ class FromDetailsBloc extends Bloc<FromDetailsEvent, FromDetailsState> {
       state.copyWith(
         dateController: TextEditingController(),
         phoneController: TextEditingController(),
+        checkInController: TextEditingController(),  // Add this line
+        checkOutController: TextEditingController(), // Add this line
         hotelUpdatesCheckbox: false,
         emailUpdatesCheckbox: false,
         termsOfServiceCheckbox: false,
@@ -75,16 +77,16 @@ class FromDetailsBloc extends Bloc<FromDetailsEvent, FromDetailsState> {
     return [
       SelectionPopupModel(
         id: 1,
-        title: "Item One",
+        title: "1",
         isSelected: true,
       ),
       SelectionPopupModel(
         id: 2,
-        title: "Item Two",
+        title: "2",
       ),
       SelectionPopupModel(
         id: 3,
-        title: "Item Three",
+        title: "3",
       )
     ];
   }
@@ -93,16 +95,16 @@ class FromDetailsBloc extends Bloc<FromDetailsEvent, FromDetailsState> {
     return [
       SelectionPopupModel(
         id: 1,
-        title: "Item One",
+        title: "Queen",
         isSelected: true,
       ),
       SelectionPopupModel(
         id: 2,
-        title: "Item Two",
+        title: "King",
       ),
       SelectionPopupModel(
         id: 3,
-        title: "Item Three",
+        title: "Deluxe",
       )
     ];
   }

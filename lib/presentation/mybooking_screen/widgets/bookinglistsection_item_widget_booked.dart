@@ -4,24 +4,25 @@ import '../models/bookinglistsection_item_model_booked.dart';
 import '../../../core/utils/shared_preferences_helper.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-
+import 'package:hotelsbooking/presentation/forgot_password_screen/forgot_password_screen.dart';
+import 'package:hotelsbooking/presentation/sign_up_screen/sign_up_screen.dart';
 
 class BookinglistsectionItemWidgetBooked extends StatelessWidget {
   BookinglistsectionItemWidgetBooked(this.bookinglistsectionItemModelBookedObj,
       {Key? key})
       : super(key: key);
-
+  String? baseUrl = SharedPreferencesHelper.getAPI();
   final BookinglistsectionItemModelBooked bookinglistsectionItemModelBookedObj;
 
   // Fetch roomId and hotelId
   Future<List<Map<String, String>>> fetchRoomAndHotelIds() async {
     String? token = await SharedPreferencesHelper.getToken();
+    String? baseUrl = SharedPreferencesHelper.getAPI();
     if (token == null) {
       throw Exception("Token not found. Please log in first.");
     }
 
-    final String apiUrl =
-        "https://7a6f-42-115-115-73.ngrok-free.app/api/transaction/customer";
+    final String apiUrl = "{$baseUrl}/api/transaction/customer";
 
     final response = await http.get(
       Uri.parse(apiUrl),
@@ -71,7 +72,7 @@ class BookinglistsectionItemWidgetBooked extends StatelessWidget {
 
   // Fetch hotel details
   Future<Map<String, dynamic>> fetchHotelDetails(String hotelId) async {
-    final String apiUrl = "https://7a6f-42-115-115-73.ngrok-free.app/api/hotels/detailhotel/$hotelId";
+    final String apiUrl = "${baseUrl}/api/hotels/detailhotel/$hotelId";
     final response = await http.get(
       Uri.parse(apiUrl),
       headers: {"Content-Type": "application/json"},

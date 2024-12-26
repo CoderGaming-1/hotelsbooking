@@ -58,3 +58,20 @@ class ChangeCheckBox2Event extends FromDetailsEvent {
   @override
   List<Object?> get props => [value];
 }
+class ChangeCheckInDateEvent extends FromDetailsEvent {
+  final DateTime date;
+
+  ChangeCheckInDateEvent({required this.date});
+
+  @override
+  List<Object?> get props => [date];
+}
+
+class ChangeCheckOutDateEvent extends FromDetailsEvent {
+  final DateTime date;
+
+  ChangeCheckOutDateEvent({required this.date});
+
+  @override
+  List<Object?> get props => [date];
+}

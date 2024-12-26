@@ -132,7 +132,7 @@ class MyColorSchemes {
     brightness: Brightness.light,
     primary: lightCodeColors.primary,
     onPrimary: Colors.white,
-    secondary: Colors.green,
+    secondary: lightCodeColors.primary.withOpacity(0.5),
     onSecondary: Colors.white,
     background: Colors.white,
     onBackground: Colors.black,

@@ -31,7 +31,21 @@ class CheckoutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: _buildTopNavigation(context),
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios_new), // Back icon
+            onPressed: () {
+              Navigator.pop(context); // Navigates to the previous screen
+            },
+          ),
+          title: Text(
+            'Check out',
+            style: TextStyle(
+                fontSize: 20, fontFamily: 'Poppins', fontWeight: FontWeight.bold),
+          ),
+          centerTitle: true,
+        ),
         body: SizedBox(
           child: SingleChildScrollView(
             child: Container(
@@ -47,7 +61,7 @@ class CheckoutScreen extends StatelessWidget {
                   SizedBox(height: 10.h),
                   _buildBookingDetails(context),
                   SizedBox(height: 10.h),
-                  _buildPromoSection(context),
+                  //_buildPromoSection(context),
                   SizedBox(height: 58.h)
                 ],
               ),
@@ -87,90 +101,90 @@ class CheckoutScreen extends StatelessWidget {
       width: double.maxFinite,
       child: Row(
         children: [
-          Container(
-            height: 108.h,
-            width: 108.h,
-            decoration: BoxDecoration(
-              color: appTheme.onPrimaryContainer,
-              borderRadius: BorderRadiusStyle.roundedBorder12,
-              boxShadow: [
-                BoxShadow(
-                  color: theme.colorScheme.onPrimary,
-                  spreadRadius: 2.h,
-                  blurRadius: 2.h,
-                  offset: Offset(
-                    4,
-                    4,
-                  ),
-                )
-              ],
-            ),
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                CustomImageView(
-                  imagePath: ImageConstant.imgImage7,
-                  height: 84.h,
-                  width: 86.h,
-                  radius: BorderRadius.circular(
-                    4.h,
-                  ),
-                )
-              ],
-            ),
-          ),
+          // Container(
+          //   height: 108.h,
+          //   width: 108.h,
+          //   decoration: BoxDecoration(
+          //     color: appTheme.onPrimaryContainer,
+          //     borderRadius: BorderRadiusStyle.roundedBorder12,
+          //     boxShadow: [
+          //       BoxShadow(
+          //         color: theme.colorScheme.onPrimary,
+          //         spreadRadius: 2.h,
+          //         blurRadius: 2.h,
+          //         offset: Offset(
+          //           4,
+          //           4,
+          //         ),
+          //       )
+          //     ],
+          //   ),
+          //   child: Stack(
+          //     alignment: Alignment.center,
+          //     children: [
+          //       CustomImageView(
+          //         imagePath: ImageConstant.imgImage7,
+          //         height: 84.h,
+          //         width: 86.h,
+          //         radius: BorderRadius.circular(
+          //           4.h,
+          //         ),
+          //       )
+          //     ],
+          //   ),
+          // ),
           SizedBox(width: 4.h),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: double.maxFinite,
-                  child: Row(
-                    children: [
-                      Text(
-                        "lbl_asteria_hostel".tr,
-                        style:
-                            CustomTextStyles.titleSmallPlusJakartaSansBlack900,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 24.h),
-                        child: Text(
-                          "lbl_25_day".tr,
-                          style: CustomTextStyles.titleSmallInterPrimary,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(height: 6.h),
-                Text(
-                  "msg_ram_nagar_nt_0872".tr,
-                  style: CustomTextStyles
-                      .labelLargePlusJakartaSansOnPrimaryContainer,
-                ),
-                SizedBox(height: 6.h),
-                SizedBox(
-                  width: double.maxFinite,
-                  child: Row(
-                    children: [
-                      CustomRatingBar(
-                        initialRating: 5,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 4.h),
-                        child: Text(
-                          "lbl_5_0".tr,
-                          style: CustomTextStyles
-                              .labelLargePlusJakartaSansBlack900,
-                        ),
-                      )
-                    ],
-                  ),
-                )
-              ],
-            ),
-          )
+          // Expanded(
+          //   child: Column(
+          //     crossAxisAlignment: CrossAxisAlignment.start,
+          //     children: [
+          //       SizedBox(
+          //         width: double.maxFinite,
+          //         child: Row(
+          //           children: [
+          //             Text(
+          //               "lbl_asteria_hostel".tr,
+          //               style:
+          //                   CustomTextStyles.titleSmallPlusJakartaSansBlack900,
+          //             ),
+          //             Padding(
+          //               padding: EdgeInsets.only(left: 24.h),
+          //               child: Text(
+          //                 "lbl_25_day".tr,
+          //                 style: CustomTextStyles.titleSmallInterPrimary,
+          //               ),
+          //             )
+          //           ],
+          //         ),
+          //       ),
+          //       SizedBox(height: 6.h),
+          //       Text(
+          //         "msg_ram_nagar_nt_0872".tr,
+          //         style: CustomTextStyles
+          //             .labelLargePlusJakartaSansOnPrimaryContainer,
+          //       ),
+          //       SizedBox(height: 6.h),
+          //       SizedBox(
+          //         width: double.maxFinite,
+          //         child: Row(
+          //           children: [
+          //             CustomRatingBar(
+          //               initialRating: 5,
+          //             ),
+          //             Padding(
+          //               padding: EdgeInsets.only(left: 4.h),
+          //               child: Text(
+          //                 "lbl_5_0".tr,
+          //                 style: CustomTextStyles
+          //                     .labelLargePlusJakartaSansBlack900,
+          //               ),
+          //             )
+          //           ],
+          //         ),
+          //       )
+          //     ],
+          //   ),
+          // )
         ],
       ),
     );
@@ -238,7 +252,7 @@ class CheckoutScreen extends StatelessWidget {
           Container(
             margin: EdgeInsets.only(left: 2.h),
             decoration: BoxDecoration(
-              color: appTheme.onPrimaryContainer,
+              color: Colors.white,
             ),
             width: double.maxFinite,
             child: Row(
@@ -248,9 +262,6 @@ class CheckoutScreen extends StatelessWidget {
                   padding: EdgeInsets.symmetric(
                     horizontal: 6.h,
                     vertical: 8.h,
-                  ),
-                  decoration: BoxDecoration(
-                    color: appTheme.onPrimaryContainer,
                   ),
                   child: Text(
                     "lbl_price".tr,
@@ -261,17 +272,47 @@ class CheckoutScreen extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(right: 4.h),
                   child: Text(
-                    "lbl_139_00".tr,
+                    "200.000 VND".tr,
                     style: CustomTextStyles.titleSmallMedium,
                   ),
                 )
               ],
             ),
           ),
+          // Container(
+          //   margin: EdgeInsets.only(left: 2.h),
+          //   decoration: BoxDecoration(
+          //     color: Colors.white,
+          //   ),
+          //   width: double.maxFinite,
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //     children: [
+          //       Container(
+          //         padding: EdgeInsets.symmetric(
+          //           horizontal: 6.h,
+          //           vertical: 8.h,
+          //         ),
+          //         child: Text(
+          //           "lbl_admin_fee".tr,
+          //           textAlign: TextAlign.left,
+          //           style: CustomTextStyles.titleSmallMedium,
+          //         ),
+          //       ),
+          //       Padding(
+          //         padding: EdgeInsets.only(right: 4.h),
+          //         child: Text(
+          //           "2".tr,
+          //           style: CustomTextStyles.titleSmallMedium,
+          //         ),
+          //       )
+          //     ],
+          //   ),
+          // ),
           Container(
             margin: EdgeInsets.only(left: 2.h),
             decoration: BoxDecoration(
-              color: appTheme.onPrimaryContainer,
+              color: Colors.white,
             ),
             width: double.maxFinite,
             child: Row(
@@ -281,53 +322,17 @@ class CheckoutScreen extends StatelessWidget {
                   padding: EdgeInsets.symmetric(
                     horizontal: 6.h,
                     vertical: 8.h,
-                  ),
-                  decoration: BoxDecoration(
-                    color: appTheme.onPrimaryContainer,
-                  ),
-                  child: Text(
-                    "lbl_admin_fee".tr,
-                    textAlign: TextAlign.left,
-                    style: CustomTextStyles.titleSmallMedium,
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(right: 4.h),
-                  child: Text(
-                    "lbl_2_50".tr,
-                    style: CustomTextStyles.titleSmallMedium,
-                  ),
-                )
-              ],
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(left: 2.h),
-            decoration: BoxDecoration(
-              color: appTheme.onPrimaryContainer,
-            ),
-            width: double.maxFinite,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 6.h,
-                    vertical: 8.h,
-                  ),
-                  decoration: BoxDecoration(
-                    color: appTheme.onPrimaryContainer,
                   ),
                   child: Text(
                     "lbl_total_price".tr,
                     textAlign: TextAlign.left,
-                    style: theme.textTheme.titleSmall,
+                    style: CustomTextStyles.titleSmallMedium,
                   ),
                 ),
                 Padding(
                   padding: EdgeInsets.only(right: 4.h),
                   child: Text(
-                    "lbl_141_50".tr,
+                    "200.000VND",
                     style: CustomTextStyles.titleSmallMedium,
                   ),
                 )

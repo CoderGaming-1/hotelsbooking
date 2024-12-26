@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hotelsbooking/presentation/home_one_screen/models/hotellist_item_model.dart';
+import 'package:hotelsbooking/presentation/show_all_room_screen/show_all_room_screen.dart';
 import '../../core/app_export.dart';
 import '../../theme/custom_button_style.dart';
 import '../../widgets/app_bar/appbar_leading_iconbutton.dart';
@@ -11,12 +13,13 @@ import 'bloc/details_bloc.dart';
 import 'models/details_model.dart';
 import 'models/detailslist_item_model.dart';
 import 'widgets/detailslist_item_widget.dart';
-
+import 'package:hotelsbooking/presentation/sign_up_screen/sign_up_screen.dart';
 class DetailsScreen extends StatelessWidget {
-  const DetailsScreen({Key? key})
+  const DetailsScreen({Key? key, this.hotelItem})
       : super(
           key: key,
         );
+  final HotellistItemModel? hotelItem;
 
   static Widget builder(BuildContext context) {
     return BlocProvider<DetailsBloc>(
@@ -30,11 +33,26 @@ class DetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("Hotel Item ID: ${hotelItem?.id}");
     return SafeArea(
         child: Scaffold(
       // backgroundColor: theme.colorScheme.primaryContainer,
       backgroundColor: appTheme.primaryContainer,
-      appBar: _buildTopNavigation(context),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios_new), // Back icon
+          onPressed: () {
+            Navigator.pop(context); // Navigates to the previous screen
+          },
+        ),
+        title: Text(
+          'Detail',
+          style: TextStyle(
+              fontSize: 20, fontFamily: 'Poppins', fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+      ),
       body: SizedBox(
         width: double.maxFinite,
         child: SingleChildScrollView(
@@ -50,10 +68,10 @@ class DetailsScreen extends StatelessWidget {
               children: [
                 _buildImageSection(context),
                 SizedBox(height: 12.h),
-                _buildTabsRow(context),
+                _buildTabsRow(context, hotelItem!),
                 SizedBox(height: 12.h),
-                _buildHotelInfoRow(context),
-                _buildUserInfoRow(context),
+                _buildHotelInfoRow(context, hotelItem!),
+                _buildUserInfoRow(context, hotelItem!),
                 SizedBox(height: 4.h),
                 Text(
                   "lbl_description".tr,
@@ -67,10 +85,10 @@ class DetailsScreen extends StatelessWidget {
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                      color: Color(0xFF878787),
-                    fontSize: 12,
-                    fontFamily: 'Plus Jakarta Sans',
-                    fontWeight: FontWeight.w500),
+                        color: Color(0xFF878787),
+                        fontSize: 12,
+                        fontFamily: 'Plus Jakarta Sans',
+                        fontWeight: FontWeight.w500),
                   ),
                 ),
                 SizedBox(
@@ -111,11 +129,12 @@ class DetailsScreen extends StatelessWidget {
           bottom: 8.h,
         ),
         onTap: () {
-          Navigator.pop(context); // This will pop the current screen and go back
+          Navigator.pushNamed(
+              // context, '/payment_screen'); // Navigate to mybooking_screen
+              context,
+              '/home_one_initial_page'); // This will pop the current screen and go back
         },
       ),
-
-
       centerTitle: true,
       title: Text(
         'Details',
@@ -276,7 +295,8 @@ class DetailsScreen extends StatelessWidget {
   }
 
   /// Section Widget
-  Widget _buildReviewButton(BuildContext context) {
+  Widget _buildReviewButton(
+      BuildContext context, HotellistItemModel hotelItem) {
     // return CustomElevatedButton(
     //   width: 72.h,
     //   text: "lbl_5_0".tr,
@@ -296,7 +316,7 @@ class DetailsScreen extends StatelessWidget {
         builder: (context, breakfastInputController) {
           return CustomTextFormField(
             controller: breakfastInputController,
-            hintText: "lbl_5_0".tr,
+            hintText: hotelItem.fifty,
             textInputAction: TextInputAction.done,
             prefix: Container(
               margin: EdgeInsets.fromLTRB(12.h, 8.h, 8.h, 8.h),
@@ -324,7 +344,7 @@ class DetailsScreen extends StatelessWidget {
   }
 
   /// Section Widget
-  Widget _buildTabsRow(BuildContext context) {
+  Widget _buildTabsRow(BuildContext context, HotellistItemModel hotelItem) {
     return SizedBox(
       width: double.maxFinite,
       child: Row(
@@ -333,14 +353,14 @@ class DetailsScreen extends StatelessWidget {
           SizedBox(width: 8.h),
           _buildBreakfastInput(context),
           SizedBox(width: 8.h),
-          _buildReviewButton(context)
+          _buildReviewButton(context, hotelItem)
         ],
       ),
     );
   }
 
   /// Section Widget
-  Widget _buildHotelInfoRow(BuildContext context) {
+  Widget _buildHotelInfoRow(BuildContext context, HotellistItemModel hotelItem) {
     return Container(
       width: double.maxFinite,
       margin: EdgeInsets.only(right: 8.h),
@@ -348,14 +368,14 @@ class DetailsScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            "msg_the_aston_vil_hotel".tr,
+            hotelItem.theastonvil!,
             // style: CustomTextStyles.titleMediumPlusJakartaSansOnPrimary,
             style: CustomTextStyles.titleMediumBlack900,
           ),
           Align(
             alignment: Alignment.bottomCenter,
             child: Text(
-              "lbl_38_day".tr,
+              "200.000/Day".tr,
               style: CustomTextStyles.titleSmallInterPrimary,
             ),
           )
@@ -365,7 +385,7 @@ class DetailsScreen extends StatelessWidget {
   }
 
   /// Section Widget
-  Widget _buildUserInfoRow(BuildContext context) {
+  Widget _buildUserInfoRow(BuildContext context, HotellistItemModel hotelItem) {
     return SizedBox(
       width: double.maxFinite,
       child: Row(
@@ -378,7 +398,7 @@ class DetailsScreen extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(left: 8.h),
             child: Text(
-              "msg_upper_indira_nagar".tr,
+              hotelItem.streetromeny!,
               // style: CustomTextStyles.labelLargeOnPrimaryContainer,
               style: TextStyle(
                   color: Color(0xFF878787),
@@ -431,9 +451,15 @@ class DetailsScreen extends StatelessWidget {
       buttonStyle: CustomButtonStyles.fillPrimary,
       buttonTextStyle: CustomTextStyles.labelMediumBlack90001,
       onPressed: () {
-        Navigator.pushNamed(context, '/fromdetails_screen');
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (ctx) => ShowAllRoomScreen(hotelItem: hotelItem), // Pass hotelItem here
+          ),
+        );
       },
     );
+
   }
 
   /// Section Widget

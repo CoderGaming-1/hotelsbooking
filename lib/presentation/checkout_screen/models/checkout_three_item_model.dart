@@ -7,7 +7,7 @@ class CheckoutThreeItemModel extends Equatable {
   CheckoutThreeItemModel({this.dateOne, this.datesTwo, this.nov2024, this.id}) {
     dateOne = dateOne ?? ImageConstant.imgCalendarmonth;
     datesTwo = datesTwo ?? "Dates";
-    nov2024 = nov2024 ?? "12 15 Nov 2024";
+    nov2024 = nov2024 ?? "11 30 Nov 2024";
     id = id ?? "";
   }
 
