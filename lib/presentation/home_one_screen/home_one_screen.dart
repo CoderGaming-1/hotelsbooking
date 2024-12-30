@@ -18,6 +18,7 @@ import 'package:hotelsbooking/presentation/checkout_screen/checkout_screen.dart'
 import 'package:hotelsbooking/presentation/filter_screen/filter_screen.dart';
 import 'package:hotelsbooking/presentation/search_screen/search_screen.dart';
 import 'package:hotelsbooking/presentation/payment_screen/payment_screen.dart';
+import 'package:hotelsbooking/presentation/review_screen/review_screen.dart';
 
 class DefaultWidgets extends StatelessWidget {
   @override
@@ -151,6 +152,8 @@ class HomeOneScreen extends StatelessWidget {
         return SearchScreen.builder(context);
       case AppRoutes.paymentScreen:
         return PaymentScreen.builder(context);
+      case AppRoutes.reviewScreen:
+        return ReviewScreen.builder(context);
       default:
         return DefaultWidgets();
     }

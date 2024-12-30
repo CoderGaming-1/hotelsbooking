@@ -11,7 +11,7 @@ class BookinglistsectionItemModelBooked extends Equatable {
   }) {
     imageOne = imageOne ?? ImageConstant.imgAntdesignstarfilled; // Default image for "Booked"
     fifty = fifty ?? "4.5"; // Default rating for "Booked"
-    fourhundredsixt = fourhundredsixt ?? "(150)"; // Default reviews for "Booked"
+    fourhundredsixt = fourhundredsixt ?? ""; // Default reviews for "Booked"
     id = id ?? "";
   }
 

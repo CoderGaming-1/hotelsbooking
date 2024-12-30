@@ -12,6 +12,7 @@ import 'package:hotelsbooking/presentation/filter_screen/filter_screen.dart';
 import 'package:hotelsbooking/presentation/search_screen/search_screen.dart';
 import 'package:hotelsbooking/presentation/payment_screen/payment_screen.dart';
 import '../presentation/sign_up_screen/sign_up_screen.dart';
+import 'package:hotelsbooking/presentation/review_screen/review_screen.dart'; // Import ReviewScreen
 
 class AppRoutes {
   static const String onBoardingScreen = '/on_boarding_screen';
@@ -29,6 +30,7 @@ class AppRoutes {
   static const String searchScreen = '/search_screen';
   static const String signUpScreen = '/sign_up_screen';
   static const String paymentScreen = '/payment_screen';
+  static const String reviewScreen = '/review_screen';
   static Map<String, WidgetBuilder> get routes => {
         paymentScreen: PaymentScreen.builder,
         searchScreen: SearchScreen.builder,
@@ -44,5 +46,18 @@ class AppRoutes {
         favoriteScreen: FavoriteScreen.builder,
         initialRoute: (context) => OnboardingScreen(),
         signUpScreen: (context) => SignUpScreen(),
-      };
+        reviewScreen: (context) {
+          final roomId = ModalRoute.of(context)?.settings.arguments as String?;
+          print("Received roomId: $roomId");  // Debugging print
+          if (roomId == null) {
+            return Scaffold(
+              body: Center(
+                child: Text('Room ID is missing. Please try again later.'),
+              ),
+            );
+          }
+          return ReviewScreen(roomId: roomId);
+        },
+
+  };
 }

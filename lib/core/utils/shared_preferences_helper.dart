@@ -8,7 +8,7 @@ class SharedPreferencesHelper {
   String? baseUrl = SharedPreferencesHelper.getAPI();
   static const String _userIdKey = "_userId";
   static const String _tokenKey = "_token";
-  static const String _api = "https://5146-2405-4802-6ee7-43b0-20ca-4508-95d1-bddf.ngrok-free.app";
+  static const String _api = "https://8b6b-2402-800-6294-cb6b-307f-c718-fdfc-8636.ngrok-free.app";
 
   // Save token
   static Future<void> saveToken(String token) async {

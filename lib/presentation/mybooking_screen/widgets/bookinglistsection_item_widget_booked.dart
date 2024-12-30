@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import '../../../core/app_export.dart';
 import '../models/bookinglistsection_item_model_booked.dart';
-import '../../../core/utils/shared_preferences_helper.dart';
+import 'package:hotelsbooking/core/utils/shared_preferences_helper.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:hotelsbooking/presentation/forgot_password_screen/forgot_password_screen.dart';
 import 'package:hotelsbooking/presentation/sign_up_screen/sign_up_screen.dart';
+import 'package:hotelsbooking/presentation/review_screen/review_screen.dart';
 
 class BookinglistsectionItemWidgetBooked extends StatelessWidget {
   BookinglistsectionItemWidgetBooked(this.bookinglistsectionItemModelBookedObj,
@@ -69,10 +70,56 @@ class BookinglistsectionItemWidgetBooked extends StatelessWidget {
       throw Exception("HTTP error: ${response.statusCode} - ${response.body}");
     }
   }
+  Future<Map<String, dynamic>> fetchRoomDetails(String roomId) async {
+    final String apiUrl = "$baseUrl/api/rooms/detailroom/$roomId";
+    final response = await http.get(
+      Uri.parse(apiUrl),
+      headers: {"Content-Type": "application/json"},
+    );
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> responseData = jsonDecode(response.body);
+      if (responseData['success'] == true) {
+        print("Fetched room details for Room ID: $roomId");
+        print("Room Data: ${responseData['data']}");
+        return responseData['data'];
+      } else {
+        throw Exception("API responded with an error: ${responseData['message']}");
+      }
+    } else {
+      throw Exception("HTTP error: ${response.statusCode} - ${response.body}");
+    }
+  }
+  Future<void> _navigateToReviewScreen(BuildContext context) async {
+    try {
+      List<Map<String, String>> roomAndHotelIds = await fetchRoomAndHotelIds();
+
+      if (roomAndHotelIds.isNotEmpty) {
+        // Safely get roomId, default to empty string if null
+        String? roomId = roomAndHotelIds[0]['roomId'];
+        if (roomId != null && roomId.isNotEmpty) {
+          print("Room ID pass to Review Screen : $roomId");
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ReviewScreen(roomId: roomId),
+            ),
+          );
+        } else {
+          print("Error: Room ID is null or empty");
+        }
+      } else {
+        print('No room data available');
+      }
+    } catch (e) {
+      print("Error in _navigateToReviewScreen: $e");
+    }
+  }
+
 
   // Fetch hotel details
   Future<Map<String, dynamic>> fetchHotelDetails(String hotelId) async {
-    final String apiUrl = "${baseUrl}/api/hotels/detailhotel/$hotelId";
+    final String apiUrl = "$baseUrl/api/hotels/detailhotel/$hotelId";
     final response = await http.get(
       Uri.parse(apiUrl),
       headers: {"Content-Type": "application/json"},
@@ -93,90 +140,120 @@ class BookinglistsectionItemWidgetBooked extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return FutureBuilder<List<Map<String, String>>>(
-      future: fetchRoomAndHotelIds(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
-        } else if (snapshot.hasError) {
-          return Center(child: Text("Error: ${snapshot.error}"));
-        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return Center(child: Text("No bookings found."));
-        }
+    Widget build(BuildContext context) {
+      return FutureBuilder<List<Map<String, String>>>(
+        future: fetchRoomAndHotelIds(), // Fetch room and hotel IDs
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text("Error: ${snapshot.error}"));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return Center(child: Text("No bookings found."));
+          }
 
-        // Fetch hotel details for each hotelId
-        final roomAndHotelIds = snapshot.data!;
-        return FutureBuilder<List<Widget>>(
-          future: fetchHotelWidgets(roomAndHotelIds),
-          builder: (context, hotelWidgetSnapshot) {
-            if (hotelWidgetSnapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
-            } else if (hotelWidgetSnapshot.hasError) {
-              return Center(child: Text("Error: ${hotelWidgetSnapshot.error}"));
-            }
+          final roomAndHotelIds = snapshot.data!;
 
-            final hotelWidgets = hotelWidgetSnapshot.data ?? [];
-            return Container(
-              width: double.maxFinite,
-              padding: EdgeInsets.symmetric(
-                horizontal: 18.h,
-                vertical: 14.h,
-              ),
-              decoration: BoxDecoration(
-                color: appTheme.blueGray400.withOpacity(0.2),
-                borderRadius: BorderRadiusStyle.roundedBorder16,
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: hotelWidgets,
-              ),
-            );
-          },
-        );
-      },
-    );
-  }
+          return FutureBuilder<List<Widget>>(
+            future: fetchHotelWidgets(context, roomAndHotelIds), // Fetch hotel widgets
+            builder: (context, hotelWidgetSnapshot) {
+              if (hotelWidgetSnapshot.connectionState == ConnectionState.waiting) {
+                return Center(child: CircularProgressIndicator());
+              } else if (hotelWidgetSnapshot.hasError) {
+                return Center(child: Text("Error: ${hotelWidgetSnapshot.error}"));
+              }
 
-  Future<List<Widget>> fetchHotelWidgets(List<Map<String, String>> roomAndHotelIds) async {
-    List<Widget> hotelWidgets = [];
+              final hotelWidgets = hotelWidgetSnapshot.data ?? [];
+              return Container(
+                width: double.maxFinite,
+                padding: EdgeInsets.symmetric(
+                  horizontal: 18.h,
+                  vertical: 14.h,
+                ),
+                decoration: BoxDecoration(
+                  color: appTheme.blueGray400.withOpacity(0.2),
+                  borderRadius: BorderRadiusStyle.roundedBorder16,
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: hotelWidgets,
+                ),
+              );
+            },
+          );
+        },
+      );
+    }
+
+  Future<List<Widget>> fetchHotelWidgets(
+      BuildContext context, // Pass context here
+      List<Map<String, String>> roomAndHotelIds) async {
+    List<Future<Widget>> hotelWidgetFutures = [];
+
     for (var entry in roomAndHotelIds) {
-      try {
-        final hotelDetails = await fetchHotelDetails(entry['hotelId']!);
-        final String hotelName = hotelDetails['name'] ?? "Unknown Hotel";
-        final String location =
-            "${hotelDetails['location']['city']}, ${hotelDetails['location']['country']}";
-        final int price = hotelDetails['rooms'][0]['price'] ?? 0;
+      hotelWidgetFutures.add(
+        fetchHotelDetails(entry['hotelId']!).then((hotelDetails) async {
+          // Safely extract and use hotel details
+          final String hotelName = hotelDetails['name'] ?? "Unknown Hotel";
+          final String location = "${hotelDetails['location']['city']}, ${hotelDetails['location']['country']}";
 
-        String checkInDate = entry['checkInDate']!.split('T').first;
-        String checkOutDate = entry['checkOutDate']!.split('T').first;
+          // Fetch room details to get the price
+          final roomDetails = await fetchRoomDetails(entry['roomId']!);
+          final int price = roomDetails['price'] ?? 0; // Use price from room details
 
-        hotelWidgets.add(
-          _buildBookedHotelItem(
-            imagePath: bookinglistsectionItemModelBookedObj.imageOne ?? ImageConstant.img_1,
+          // Safely extract media list
+          final List<dynamic> mediaList = hotelDetails['media'] ?? [];
+          final String media = mediaList.isNotEmpty
+              ? mediaList.first.toString()
+              : "No Picture contain";
+          final String mediaUrl = "$baseUrl$media";
+
+          // Safely parse dates
+          String checkInDate = entry['checkInDate']?.split('T')?.first ?? "Unknown Date";
+          String checkOutDate = entry['checkOutDate']?.split('T')?.first ?? "Unknown Date";
+
+          // Debugging print statements
+          print("Debug Values:");
+          print("imagePath: $mediaUrl");
+          print("title: $hotelName");
+          print("location: $location");
+          print("price: ${price.toString()} VND");
+          print("checkInDate: $checkInDate");
+          print("checkOutDate: $checkOutDate");
+          print("Media: $mediaUrl");
+
+          return _buildBookedHotelItem(
+            context: context, // Pass context here
+            imagePath: mediaUrl, // Use media URL as imagePath
             title: hotelName,
             location: location,
-            price: "\$${price.toString()}",
+            price: "${price.toString()} VND",
             checkInDate: checkInDate,
             checkOutDate: checkOutDate,
-          ),
-        );
-      } catch (e) {
-        // Handle errors for individual hotels (e.g., API failure)
-        print("Error fetching hotel details: $e");
-      }
+            roomId: entry['roomId'] ?? "Unknown Room ID", // Handle missing room ID
+          );
+        }).catchError((e) {
+          print("Error fetching hotel details: $e");
+          return Center(child: Text("Error fetching hotel details."));
+        }),
+      );
     }
-    return hotelWidgets;
+
+    // Wait for all hotel widget futures to complete
+    return Future.wait(hotelWidgetFutures);
   }
+
 
 
   Widget _buildBookedHotelItem({
+    required BuildContext context, // Accept context here
     required String imagePath,
     required String title,
     required String location,
     required String price,
     required String checkInDate,
     required String checkOutDate,
+    required String roomId, // Add roomId as a parameter
   }) {
     return Column(
       children: [
@@ -227,25 +304,14 @@ class BookinglistsectionItemWidgetBooked extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            Row(
-                              children: [
-                                CustomImageView(
-                                  imagePath: ImageConstant.imgAntDesignStarFilled,
-                                  height: 14.h,
-                                  width: 14.h,
-                                ),
-                                SizedBox(width: 4.h),
-                                Text(
-                                  bookinglistsectionItemModelBookedObj.fifty!,
-                                  style: CustomTextStyles.labelMediumPlusJakartaSansAmberA200,
-                                ),
-                                SizedBox(width: 4.h),
-                                Text(
-                                  bookinglistsectionItemModelBookedObj.fourhundredsixt!,
-                                  style: CustomTextStyles.labelMediumPlusJakartaSansBluegray400Bold,
-                                ),
-                              ],
+                            GestureDetector(
+                              onTap: () {
+                                // Use the context available in the build method
+                                _navigateToReviewScreen(context);
+                              },
+                              child: Icon(Icons.rate_review),
                             ),
+
                           ],
                         )
                       ],

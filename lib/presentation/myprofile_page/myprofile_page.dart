@@ -83,21 +83,23 @@ class MyprofilePage extends StatelessWidget {
                   _buildChangePasswordSection(context),
                   SizedBox(height: 12.h),
                   _buildSecuritySection(context),
-                  Expanded(child: SizedBox()),
-                  CustomElevatedButton(
-                    buttonStyle: CustomButtonStyles.onChoose,
-                    text: 'Log Out',
-                    leftIcon: Container(
-                      margin: EdgeInsets.only(right: 10.h),
-                      child: CustomImageView(
-                        imagePath: ImageConstant.imgLogout,
-                        height: 24.h,
-                        width: 24.h,
-                        fit: BoxFit.contain,
-                      ),
-                    ),
-                  ),
                   SizedBox(height: 12.h),
+                  _buildLogOutSection(context),
+                  // Expanded(child: SizedBox()),
+                  // CustomElevatedButton(
+                  //   buttonStyle: CustomButtonStyles.onChoose,
+                  //   text: 'Log Out',
+                  //   leftIcon: Container(
+                  //     margin: EdgeInsets.only(right: 10.h),
+                  //     child: CustomImageView(
+                  //       imagePath: ImageConstant.imgLogout,
+                  //       height: 24.h,
+                  //       width: 24.h,
+                  //       fit: BoxFit.contain,
+                  //     ),
+                  //   ),
+                  // ),
+                  SizedBox(height: 262.h),
                   _buildBottomNavigation(context)
                 ],
               ),
@@ -180,7 +182,44 @@ class MyprofilePage extends StatelessWidget {
       ),
     );
   }
-
+  Widget _buildLogOutSection(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(12.h),
+      decoration: BoxDecoration(
+        color: appTheme.blueGray400.withOpacity(0.1),
+        borderRadius: BorderRadiusStyle.roundedBorder16,
+      ),
+      width: double.maxFinite,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CustomImageView(
+            imagePath: ImageConstant.imgLock,
+            height: 20.h,
+            width: 22.h,
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 10.h),
+            child: Text(
+              "Log Out".tr,
+              style: CustomTextStyles.titleSmallPoppinsPrimary,
+            ),
+          ),
+          Spacer(),
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, '/on_boarding_screen');
+            },
+            child: CustomImageView(
+              imagePath: ImageConstant.imgArrowRightPrimary,
+              height: 24.h,
+              width: 26.h,
+            ),
+          )
+        ],
+      ),
+    );
+  }
   /// Section Widget
   Widget _buildChangePasswordSection(BuildContext context) {
     return Container(
