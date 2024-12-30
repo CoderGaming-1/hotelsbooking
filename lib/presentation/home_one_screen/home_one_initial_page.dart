@@ -55,7 +55,6 @@ class HomeOneInitialPage extends StatefulWidget {
 
   @override
   HomeOneInitialPageState createState() => HomeOneInitialPageState();
-
   static Widget builder(BuildContext context) {
     return BlocProvider<HomeOneBloc>(
       create: (context) => HomeOneBloc(HomeOneState(
@@ -69,7 +68,7 @@ class HomeOneInitialPage extends StatefulWidget {
 
 class HomeOneInitialPageState extends State<HomeOneInitialPage> {
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey();
-
+  final String name = SharedPreferencesHelper.getUserId().toString();
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -211,13 +210,6 @@ class HomeOneInitialPageState extends State<HomeOneInitialPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: EdgeInsets.only(left: 10.h),
-            child: Text(
-              "lbl_hello_hoangphan".tr,
-              style: CustomTextStyles.labelLargePoppinsBlack90001,
-            ),
-          ),
           Padding(
             padding: EdgeInsets.only(left: 10.h),
             child: RichText(

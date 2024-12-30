@@ -358,6 +358,7 @@ class _FromDetailsScreenState extends State<FromDetailsScreen> {
 
         if (success && paymentUrl != null) {
           _launchUri(Uri.parse(paymentUrl));
+          Navigator.pushNamed(context, '/home_one_screen');
         } else {
           // Nếu không có paymentUrl hoặc thông báo không thành công
           showDialog(

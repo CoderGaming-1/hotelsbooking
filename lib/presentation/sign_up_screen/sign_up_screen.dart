@@ -146,6 +146,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       //phone number
                       TextField(
                         controller: phoneNumberController,
+                        keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           prefixIcon: const Icon(Icons.phone_android_outlined),
                           labelText: "Phone number",
@@ -186,6 +187,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             suffixIcon: const IconButton(
                                 onPressed: null,
                                 icon: Icon(Icons.remove_red_eye))),
+                        obscureText: true,
                       ),
                       const SizedBox(
                         height: 15,

@@ -53,20 +53,20 @@ class OnboardingScreen extends StatelessWidget{
                   child: Text("lbl_get_started".tr, style:  TextStyle(color: Colors.white, fontSize: 16)),
 
                 ),
-                TextButton(
-                  onPressed: (){
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx) => HomeOneScreen(),),);
-                  },
-                  style: TextButton.styleFrom(
-                    foregroundColor: Colors.transparent, // Fully transparent foreground
-                    overlayColor: Colors.transparent,
-                  ),
-                  child: Text(
-                    "lbl_log_in_as_guest".tr,
-                    style: TextStyle(color: Colors.white, fontSize: 16),
-                  ),
-                ),
-                const SizedBox(height: 20,),
+                // TextButton(
+                //   onPressed: (){
+                //     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx) => HomeOneScreen(),),);
+                //   },
+                //   style: TextButton.styleFrom(
+                //     foregroundColor: Colors.transparent, // Fully transparent foreground
+                //     overlayColor: Colors.transparent,
+                //   ),
+                //   child: Text(
+                //     "lbl_log_in_as_guest".tr,
+                //     style: TextStyle(color: Colors.white, fontSize: 16),
+                //   ),
+                // ),
+                const SizedBox(height: 40,),
               ],
             ),
           ],

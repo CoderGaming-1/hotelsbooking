@@ -67,7 +67,7 @@ class _SignInScreenState extends State<SignInScreen> {
         sendVerificationCode(email);
 
         final responseData = jsonDecode(response.body);
-        final userId = responseData['data']['_id'].toString();
+        final userId = responseData['data']['name'].toString();
         final token = responseData['token']; // Assuming the token is in the 'token' field
 
         // Save both token and userId to SharedPreferences
