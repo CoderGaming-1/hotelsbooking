@@ -16,7 +16,7 @@ class ApiServices {
     print(  searchInfModel.endDate);
     try {
       final response = await post(url, body: {
-        'location': "Đà Nẵng",
+        'location': searchInfModel.location,
         'checkInDate': searchInfModel.startDate,
         'checkOutDate': searchInfModel.endDate,
         'guests': searchInfModel.guests.toString(),

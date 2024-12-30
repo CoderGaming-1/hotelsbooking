@@ -54,11 +54,10 @@ class HomeOneBloc extends Bloc<HomeOneEvent, HomeOneState> {
 
     try {
       List<dynamic> fetchedHotels = await fetchHotels();
-
+      String? baseUrl = SharedPreferencesHelper.getAPI();
       List<HotellistItemModel> hotelItems = fetchedHotels.map((hotel) {
         return HotellistItemModel(
-
-          dayOne: ImageConstant.imgImageDefaultProperty1, // Dùng hình ảnh mặc định
+          dayOne: '$baseUrl/uploads/hotel/67712cbab2a6de401866187e/1735492379659-291985175-img_1.jfif', // Dùng hình ảnh mặc định
           price: "\$38/Day", // Thay đổi nếu API trả giá
           dayThree: ImageConstant.imgHeart,
           fifty: hotel['rating'].toString(), // Lấy từ API

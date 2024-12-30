@@ -14,6 +14,7 @@ import 'models/details_model.dart';
 import 'models/detailslist_item_model.dart';
 import 'widgets/detailslist_item_widget.dart';
 import 'package:hotelsbooking/presentation/sign_up_screen/sign_up_screen.dart';
+
 class DetailsScreen extends StatelessWidget {
   const DetailsScreen({Key? key, this.hotelItem})
       : super(
@@ -360,7 +361,8 @@ class DetailsScreen extends StatelessWidget {
   }
 
   /// Section Widget
-  Widget _buildHotelInfoRow(BuildContext context, HotellistItemModel hotelItem) {
+  Widget _buildHotelInfoRow(
+      BuildContext context, HotellistItemModel hotelItem) {
     return Container(
       width: double.maxFinite,
       margin: EdgeInsets.only(right: 8.h),
@@ -447,12 +449,12 @@ class DetailsScreen extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (ctx) => ShowAllRoomScreen(hotelItem: hotelItem), // Pass hotelItem here
+            builder: (ctx) =>
+                ShowAllRoomScreen(hotelItem: hotelItem), // Pass hotelItem here
           ),
         );
       },
     );
-
   }
 
   /// Section Widget
