@@ -46,8 +46,9 @@ final Map<String, String> enUs = {
   "lbl_logout": "Logout",
   "lbl_security": "Security",
   "lbl_my_profile": "Profile",
-
-
+  "lbl_check_out": "Check out",
+  "lbl_15_june": "15 June",
+  "lbl_18_june": "18 June",
   // MyBooking Screen
   "lbl_12_june": "12 June",
   "lbl_15_june": "15 June",
@@ -64,8 +65,8 @@ final Map<String, String> enUs = {
   "msg_zeyzang_resort_hotel_507":
   "Zeyzang Resort Hotel\n507 University St. Endicolt, NY 13760",
 
-
-
+  "lbl_check_in_date" : "Check-In Date",
+  "lbl_check_out_date" : "Check-Out Date",
   // EditProfile Screen
   "lbl_phone": "0123456789",
   "lbl_name": "Hoang Phan",

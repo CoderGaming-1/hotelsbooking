@@ -57,6 +57,7 @@ class HomeOneBloc extends Bloc<HomeOneEvent, HomeOneState> {
 
       List<HotellistItemModel> hotelItems = fetchedHotels.map((hotel) {
         return HotellistItemModel(
+
           dayOne: ImageConstant.imgImageDefaultProperty1, // Dùng hình ảnh mặc định
           price: "\$38/Day", // Thay đổi nếu API trả giá
           dayThree: ImageConstant.imgHeart,
@@ -64,6 +65,7 @@ class HomeOneBloc extends Bloc<HomeOneEvent, HomeOneState> {
           fourhundredsixt: "(463)", // Thay đổi nếu API trả đánh giá
           theastonvil: hotel['name'], // Tên khách sạn từ API
           streetromeny: "${hotel['location']['city']}, ${hotel['location']['country']}", // Địa điểm từ API
+          id: hotel['_id'],
         );
       }).toList();
 

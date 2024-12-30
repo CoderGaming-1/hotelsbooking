@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hotelsbooking/presentation/from_details_screen/models/reservation_model.dart';
 import '../../core/app_export.dart';
 import '../../theme/custom_button_style.dart';
 import '../../widgets/app_bar/appbar_leading_iconbutton.dart';
@@ -12,18 +13,18 @@ import 'models/checkout_three_item_model.dart';
 import 'widgets/checkout_three_item_widget.dart';
 
 class CheckoutScreen extends StatelessWidget {
-  const CheckoutScreen({Key? key})
+  const CheckoutScreen({Key? key,this.reservationModel})
       : super(
           key: key,
         );
-
+  final ReservationModel? reservationModel;
   static Widget builder(BuildContext context) {
     return BlocProvider<CheckoutBloc>(
       create: (context) => CheckoutBloc(CheckoutState(
         checkoutModelObj: CheckoutModel(),
       ))
         ..add(CheckoutInitialEvent()),
-      child: CheckoutScreen(),
+      child: CheckoutScreen(reservationModel: null,),
     );
   }
 
@@ -101,90 +102,7 @@ class CheckoutScreen extends StatelessWidget {
       width: double.maxFinite,
       child: Row(
         children: [
-          // Container(
-          //   height: 108.h,
-          //   width: 108.h,
-          //   decoration: BoxDecoration(
-          //     color: appTheme.onPrimaryContainer,
-          //     borderRadius: BorderRadiusStyle.roundedBorder12,
-          //     boxShadow: [
-          //       BoxShadow(
-          //         color: theme.colorScheme.onPrimary,
-          //         spreadRadius: 2.h,
-          //         blurRadius: 2.h,
-          //         offset: Offset(
-          //           4,
-          //           4,
-          //         ),
-          //       )
-          //     ],
-          //   ),
-          //   child: Stack(
-          //     alignment: Alignment.center,
-          //     children: [
-          //       CustomImageView(
-          //         imagePath: ImageConstant.imgImage7,
-          //         height: 84.h,
-          //         width: 86.h,
-          //         radius: BorderRadius.circular(
-          //           4.h,
-          //         ),
-          //       )
-          //     ],
-          //   ),
-          // ),
           SizedBox(width: 4.h),
-          // Expanded(
-          //   child: Column(
-          //     crossAxisAlignment: CrossAxisAlignment.start,
-          //     children: [
-          //       SizedBox(
-          //         width: double.maxFinite,
-          //         child: Row(
-          //           children: [
-          //             Text(
-          //               "lbl_asteria_hostel".tr,
-          //               style:
-          //                   CustomTextStyles.titleSmallPlusJakartaSansBlack900,
-          //             ),
-          //             Padding(
-          //               padding: EdgeInsets.only(left: 24.h),
-          //               child: Text(
-          //                 "lbl_25_day".tr,
-          //                 style: CustomTextStyles.titleSmallInterPrimary,
-          //               ),
-          //             )
-          //           ],
-          //         ),
-          //       ),
-          //       SizedBox(height: 6.h),
-          //       Text(
-          //         "msg_ram_nagar_nt_0872".tr,
-          //         style: CustomTextStyles
-          //             .labelLargePlusJakartaSansOnPrimaryContainer,
-          //       ),
-          //       SizedBox(height: 6.h),
-          //       SizedBox(
-          //         width: double.maxFinite,
-          //         child: Row(
-          //           children: [
-          //             CustomRatingBar(
-          //               initialRating: 5,
-          //             ),
-          //             Padding(
-          //               padding: EdgeInsets.only(left: 4.h),
-          //               child: Text(
-          //                 "lbl_5_0".tr,
-          //                 style: CustomTextStyles
-          //                     .labelLargePlusJakartaSansBlack900,
-          //               ),
-          //             )
-          //           ],
-          //         ),
-          //       )
-          //     ],
-          //   ),
-          // )
         ],
       ),
     );
@@ -279,36 +197,6 @@ class CheckoutScreen extends StatelessWidget {
               ],
             ),
           ),
-          // Container(
-          //   margin: EdgeInsets.only(left: 2.h),
-          //   decoration: BoxDecoration(
-          //     color: Colors.white,
-          //   ),
-          //   width: double.maxFinite,
-          //   child: Row(
-          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //     children: [
-          //       Container(
-          //         padding: EdgeInsets.symmetric(
-          //           horizontal: 6.h,
-          //           vertical: 8.h,
-          //         ),
-          //         child: Text(
-          //           "lbl_admin_fee".tr,
-          //           textAlign: TextAlign.left,
-          //           style: CustomTextStyles.titleSmallMedium,
-          //         ),
-          //       ),
-          //       Padding(
-          //         padding: EdgeInsets.only(right: 4.h),
-          //         child: Text(
-          //           "2".tr,
-          //           style: CustomTextStyles.titleSmallMedium,
-          //         ),
-          //       )
-          //     ],
-          //   ),
-          // ),
           Container(
             margin: EdgeInsets.only(left: 2.h),
             decoration: BoxDecoration(
@@ -405,8 +293,8 @@ class CheckoutScreen extends StatelessWidget {
             margin: EdgeInsets.only(bottom: 12.h),
             onPressed: () {
               Navigator.pushNamed(
-                  // context, '/payment_screen'); // Navigate to mybooking_screen
-                  context, '/home_one_initial_page');
+                  context, '/payment_screen'); // Navigate to mybooking_screen
+                  // context, '/home_one_initial_page');
             },
           )
         ],

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hotelsbooking/presentation/forgot_password_screen/forgot_password_screen.dart';
+import 'package:hotelsbooking/presentation/sign_in_screen/verification_screen.dart';
 import 'package:hotelsbooking/presentation/sign_up_screen/sign_up_screen.dart';
 import 'package:http/http.dart';
 
@@ -20,28 +21,66 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  void sendVerificationCode(String email) async{
+    try{
+      String? baseUrl = SharedPreferencesHelper.getAPI();
+      Response response = await post(
+        Uri.parse('${baseUrl}/api/auth/send-verification-code'),
+        body: {
+          'email': email,
+        },
+      );
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        // notificationRegister("Login successful");
+        showModalBottomSheet(
+          isScrollControlled: true,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(20),
+            ),
+          ),
+          context: context,
+          builder: (ctx) => VerificationScreen(email: email,),
+
+        );
+      }
+    } catch (e){
+
+    }
+  }
   void signIn(String email, String password) async {
     try {
       print(email);
       print(password);
       String? baseUrl = SharedPreferencesHelper.getAPI();
       Response response = await post(
-          Uri.parse('${baseUrl}/api/auth/login'),
-          body: {
-            'email': email,
-            'password': password,
-          });
+        Uri.parse('${baseUrl}/api/auth/login'),
+        body: {
+          'email': email,
+          'password': password,
+        },
+      );
+
       if (response.statusCode == 200) {
-        notificationRegister("Login successfully");
-        Navigator.pushNamed(context, '/home_one_screen');
+        // notificationRegister("Login successful");
+        sendVerificationCode(email);
+
         final responseData = jsonDecode(response.body);
         final userId = responseData['data']['_id'].toString();
+        final token = responseData['token']; // Assuming the token is in the 'token' field
+
+        // Save both token and userId to SharedPreferences
         await SharedPreferencesHelper.saveUserId(userId);
-        print(userId);
+        await SharedPreferencesHelper.saveToken(token);
+
+        print("User ID: $userId");
+        print("Token: $token");
       } else {
         notificationRegister("Login failed");
         print(response.statusCode);
       }
+
       print(jsonDecode(response.body.toString()));
     } catch (e) {
       print(e.toString());

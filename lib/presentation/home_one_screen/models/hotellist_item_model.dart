@@ -5,14 +5,16 @@ import 'package:hotelsbooking/core/app_export.dart';
 // ignore_for_file: must_be_immutable
 class HotellistItemModel extends Equatable {
   HotellistItemModel(
-      {this.dayOne,
-      this.price,
-      this.dayThree,
-      this.fifty,
-      this.fourhundredsixt,
-      this.theastonvil,
-      this.streetromeny,
-      this.id}) {
+      {
+        this.dayOne,
+        this.price,
+        this.dayThree,
+        this.fifty,
+        this.fourhundredsixt,
+        this.theastonvil,
+        this.streetromeny,
+        this.id
+      }) {
     dayOne = dayOne ?? ImageConstant.imgImageDefaultProperty1;
     price = price ?? "\$38/Day";
     dayThree = dayThree ?? ImageConstant.imgHeart;
@@ -22,7 +24,6 @@ class HotellistItemModel extends Equatable {
     streetromeny = streetromeny ?? "StreetRome, NY 13440";
     id = id ?? "";
   }
-
   String? dayOne;
   String? price;
   String? dayThree;

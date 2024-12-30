@@ -52,9 +52,8 @@ class MybookingbookedTabPageState extends State<MybookingbookedTabPage> {
                 ?.bookinglistsectionItemList.length ??
                 0,
             itemBuilder: (context, index) {
-              BookinglistsectionItemModel model =
-                  mybookingbookedTabModelObj?.bookinglistsectionItemList[index] ??
-                      BookinglistsectionItemModel();
+              BookinglistsectionItemModel model = mybookingbookedTabModelObj?.
+              bookinglistsectionItemList[index] ?? BookinglistsectionItemModel();
               return BookinglistsectionItemWidget(
                 model,
               );

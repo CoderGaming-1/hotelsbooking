@@ -26,6 +26,8 @@ class FromDetailsBloc extends Bloc<FromDetailsEvent, FromDetailsState> {
       state.copyWith(
         dateController: TextEditingController(),
         phoneController: TextEditingController(),
+        checkInController: TextEditingController(),  // Add this line
+        checkOutController: TextEditingController(), // Add this line
         hotelUpdatesCheckbox: false,
         emailUpdatesCheckbox: false,
         termsOfServiceCheckbox: false,

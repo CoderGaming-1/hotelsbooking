@@ -1,58 +1,80 @@
 import 'package:flutter/material.dart';
+import 'package:hotelsbooking/presentation/checkout_screen/checkout_screen.dart';
+import 'package:hotelsbooking/presentation/from_details_screen/models/reservation_model.dart';
 import 'package:hotelsbooking/theme/custom_button_style.dart';
+import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../core/app_export.dart';
-import '../../core/utils/date_time_utils.dart';
-import '../../core/utils/validation_functions.dart';
-import '../../data/models/selectionPopupModel/selection_popup_model.dart';
-import '../../widgets/app_bar/appbar_leading_iconbutton.dart';
-import '../../widgets/app_bar/appbar_title.dart';
-import '../../widgets/app_bar/custom_app_bar.dart';
-import '../../widgets/custom_checkbox_button.dart';
-import '../../widgets/custom_drop_down.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_text_form_field.dart';
 import 'bloc/from_details_bloc.dart';
 import 'models/from_details_model.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import '../../core/utils/shared_preferences_helper.dart';
 
 // ignore_for_file: must_be_immutable
-class FromDetailsScreen extends StatelessWidget {
-  FromDetailsScreen({Key? key})
-      : super(
-          key: key,
-        );
-  GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+class FromDetailsScreen extends StatefulWidget {
+  final String roomId;
+  final String price; // Declare the roomId variable
 
-  static Widget builder(BuildContext context) {
-    return BlocProvider<FromDetailsBloc>(
-      create: (context) => FromDetailsBloc(FromDetailsState(
-        fromDetailsModelObj: FromDetailsModel(),
-      ))
-        ..add(FromDetailsInitialEvent()),
-      child: FromDetailsScreen(),
-    );
+  // Add TextEditingController fields
+  final TextEditingController _checkInController = TextEditingController();
+  final TextEditingController _checkOutController = TextEditingController();
+
+  FromDetailsScreen({Key? key, required this.roomId, required this.price}) : super(key: key);
+
+  @override
+  _FromDetailsScreenState createState() => _FromDetailsScreenState();
+}
+class _FromDetailsScreenState extends State<FromDetailsScreen> {
+  DateTime? _checkInDate;
+  DateTime? _checkOutDate;
+  double totalPrice = 0.0; // Khởi tạo biến tổng giá
+  late final ReservationModel reservationModel;
+
+  // Sử dụng TextEditingController từ widget
+  late TextEditingController _checkInController;
+  late TextEditingController _checkOutController;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkInController = widget._checkInController;
+    _checkOutController = widget._checkOutController;
+  }
+
+  @override
+  void dispose() {
+    _checkInController.dispose();
+    _checkOutController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    print("ID room after I get : ${widget.roomId}");
+    final fromDetailsBloc = context.read<FromDetailsBloc>();
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios_new), // Back icon
+            icon: Icon(Icons.arrow_back_ios_new),
             onPressed: () {
-              Navigator.pop(context); // Navigates to the previous screen
+              Navigator.pop(context);
             },
           ),
           title: Text(
             'From Detail',
             style: TextStyle(
-                fontSize: 20, fontFamily: 'Poppins', fontWeight: FontWeight.bold),
+                fontSize: 20,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.bold),
           ),
           centerTitle: true,
         ),
         body: Form(
-          key: _formkey,
           child: SizedBox(
             width: double.maxFinite,
             child: SingleChildScrollView(
@@ -65,18 +87,40 @@ class FromDetailsScreen extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    _buildDateSelection(context),
+                    _buildDateSelection(context, true), // For check-in date
                     SizedBox(height: 18.h),
-                    _buildGuestSelection(context),
-                    SizedBox(height: 18.h),
-                    _buildRoomTypeSelection(context),
-                    SizedBox(height: 18.h),
-                    _buildPhoneNumberInput(context),
-                    SizedBox(height: 42.h),
-                    _buildHotelUpdatesCheckbox(context),
-                    _buildEmailUpdatesCheckbox(context),
-                    _buildTermsOfServiceCheckbox(context),
-                    SizedBox(height: 26.h)
+                    _buildDateSelection(context, false), // For check-out date
+                    SizedBox(height: 420.h),
+                    Container(
+                      margin: EdgeInsets.only(left: 2.h),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                      ),
+                      width: double.maxFinite,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 6.h,
+                              vertical: 8.h,
+                            ),
+                            child: Text(
+                              "Total Price",
+                              textAlign: TextAlign.left,
+                              style: CustomTextStyles.titleSmallMedium,
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(right: 4.h),
+                            child: Text(
+                              "VND ${totalPrice.toStringAsFixed(0)}", // Hiển thị giá tổng
+                              style: CustomTextStyles.titleSmallMedium,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -89,305 +133,48 @@ class FromDetailsScreen extends StatelessWidget {
   }
 
   /// Section Widget
-  PreferredSizeWidget _buildTopNavigation(BuildContext context) {
-    return CustomAppBar(
-      leadingWidth: 65.h,
-      leading: AppbarLeadingIconbutton(
-        imagePath: ImageConstant.imgArrowLeft,
-        margin: EdgeInsets.only(
-          left: 25.h,
-          top: 8.h,
-          bottom: 8.h,
-        ),
-        onTap: () {
-          // Optionally, you can handle additional logic here
-          Navigator.pushNamed(context, '/detail_screen');
-        },
-      ),
-
-      centerTitle: true,
-      title: Text("lbl_from_detail".tr,
-        style: TextStyle(
-            fontSize: 20,
-            fontFamily: 'Poppins',
-            fontWeight: FontWeight.bold),),
-    );
-  }
-
-  /// Section Widget
-  Widget _buildDateSelection(BuildContext context) {
+  Widget _buildDateSelection(BuildContext context, bool isCheckIn) {
+    final controller = isCheckIn ? _checkInController : _checkOutController;
     return SizedBox(
       width: double.maxFinite,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "lbl_dates".tr,
-            style: theme.textTheme.titleSmall,
+            isCheckIn ? "lbl_check_in_date".tr : "lbl_check_out_date".tr,
+            style: Theme.of(context).textTheme.titleSmall,
           ),
           SizedBox(height: 8.h),
-          BlocSelector<FromDetailsBloc, FromDetailsState,
-              TextEditingController?>(
-            selector: (state) => state.dateController,
-            builder: (context, dateController) {
-              return CustomTextFormField(
-                readonly: true,
-                controller: dateController,
-                hintText: "lbl_select_date".tr,
-                prefix: Container(
-                  margin: EdgeInsets.fromLTRB(12.h, 12.h, 10.h, 12.h),
-                  child: CustomImageView(
-                    imagePath: ImageConstant.imgCalendarmonth,
-                    height: 24.h,
-                    width: 24.h,
-                    fit: BoxFit.contain,
-                  ),
-                ),
-                prefixConstraints: BoxConstraints(
-                  maxHeight: 48.h,
-                ),
-                suffix: Container(
-                  margin: EdgeInsets.fromLTRB(16.h, 12.h, 12.h, 12.h),
-                  child: CustomImageView(
-                    imagePath: ImageConstant.imgArrowdown,
-                    height: 24.h,
-                    width: 24.h,
-                    fit: BoxFit.contain,
-                  ),
-                ),
-                suffixConstraints: BoxConstraints(
-                  maxHeight: 48.h,
-                ),
-                contentPadding: EdgeInsets.all(12.h),
-                onTap: () {
-                  onTapDate(context);
-                },
-              );
-            },
-          )
-        ],
-      ),
-    );
-  }
-
-  /// Section Widget
-  Widget _buildGuestSelection(BuildContext context) {
-    return SizedBox(
-      width: double.maxFinite,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "lbl_guests".tr,
-            style: theme.textTheme.titleSmall,
-          ),
-          SizedBox(height: 8.h),
-          BlocSelector<FromDetailsBloc, FromDetailsState, FromDetailsModel?>(
-            selector: (state) => state.fromDetailsModelObj,
-            builder: (context, fromDetailsModelObj) {
-              return CustomDropDown(
-                icon: Container(
-                  margin: EdgeInsets.only(left: 16.h),
-                  child: CustomImageView(
-                    imagePath: ImageConstant.imgArrowdown,
-                    height: 24.h,
-                    width: 24.h,
-                    fit: BoxFit.contain,
-                  ),
-                ),
-                iconSize: 24.h,
-                hintText: "msg_select_number_of".tr,
-                items: fromDetailsModelObj?.dropdownItemList ?? [],
-                prefix: Container(
-                  margin: EdgeInsets.fromLTRB(12.h, 12.h, 10.h, 12.h),
-                  child: CustomImageView(
-                    imagePath: ImageConstant.imgPersonoutline,
-                    height: 24.h,
-                    width: 24.h,
-                    fit: BoxFit.contain,
-                  ),
-                ),
-                prefixConstraints: BoxConstraints(
-                  maxHeight: 48.h,
-                ),
-                contentPadding: EdgeInsets.all(12.h),
-              );
-            },
-          )
-        ],
-      ),
-    );
-  }
-
-  /// Section Widget
-  Widget _buildRoomTypeSelection(BuildContext context) {
-    return SizedBox(
-      width: double.maxFinite,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "lbl_room_type".tr,
-            style: theme.textTheme.titleSmall,
-          ),
-          SizedBox(height: 8.h),
-          BlocSelector<FromDetailsBloc, FromDetailsState, FromDetailsModel?>(
-            selector: (state) => state.fromDetailsModelObj,
-            builder: (context, fromDetailsModelObj) {
-              return CustomDropDown(
-                icon: Container(
-                  margin: EdgeInsets.only(left: 16.h),
-                  child: CustomImageView(
-                    imagePath: ImageConstant.imgArrowdown,
-                    height: 24.h,
-                    width: 24.h,
-                    fit: BoxFit.contain,
-                  ),
-                ),
-                iconSize: 24.h,
-                hintText: "msg_select_room_type".tr,
-                items: fromDetailsModelObj?.dropdownItemList1 ?? [],
-                prefix: Container(
-                  margin: EdgeInsets.fromLTRB(12.h, 12.h, 10.h, 12.h),
-                  child: CustomImageView(
-                    imagePath: ImageConstant.imgMeetingroom,
-                    height: 24.h,
-                    width: 24.h,
-                    fit: BoxFit.contain,
-                  ),
-                ),
-                prefixConstraints: BoxConstraints(
-                  maxHeight: 48.h,
-                ),
-                contentPadding: EdgeInsets.all(12.h),
-              );
-            },
-          )
-        ],
-      ),
-    );
-  }
-
-  /// Section Widget
-  Widget _buildPhoneNumberInput(BuildContext context) {
-    return SizedBox(
-      width: double.maxFinite,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "lbl_number_phone".tr,
-            style: theme.textTheme.titleSmall,
-          ),
-          SizedBox(height: 8.h),
-          BlocSelector<FromDetailsBloc, FromDetailsState,
-              TextEditingController?>(
-            selector: (state) => state.phoneController,
-            builder: (context, phoneController) {
-              return CustomTextFormField(
-                controller: phoneController,
-                hintText: "msg_your_phone_number".tr,
-                textInputAction: TextInputAction.done,
-                textInputType: TextInputType.phone,
-                prefix: Container(
-                  margin: EdgeInsets.fromLTRB(12.h, 12.h, 10.h, 12.h),
-                  child: CustomImageView(
-                    imagePath: ImageConstant.imgPhone,
-                    height: 24.h,
-                    width: 24.h,
-                    fit: BoxFit.contain,
-                  ),
-                ),
-                prefixConstraints: BoxConstraints(
-                  maxHeight: 48.h,
-                ),
-                contentPadding: EdgeInsets.all(12.h),
-
-                // validator: (value) {
-                // if (!isValidPhone (value)) {
-                // return "err_msg_please_enter_valid_phone_number".tr;
-                // }
-                // return null;
-                // },
-              );
-            },
-          )
-        ],
-      ),
-    );
-  }
-
-  /// Section Widget
-  Widget _buildHotelUpdatesCheckbox(BuildContext context) {
-    return SizedBox(
-      width: double.maxFinite,
-      child: BlocSelector<FromDetailsBloc, FromDetailsState, bool?>(
-        selector: (state) => state.hotelUpdatesCheckbox,
-        builder: (context, hotelUpdatesCheckbox) {
-          return CustomCheckboxButton(
-            text: "msg_keep_me_update_on".tr,
-            isExpandedText: true,
-            value: hotelUpdatesCheckbox,
-            padding: EdgeInsets.symmetric(
-              horizontal: 12.h,
-              vertical: 4.h,
+          CustomTextFormField(
+            readonly: true,
+            controller: controller,
+            hintText: isCheckIn ? "lbl_check_in".tr : "lbl_check_out".tr,
+            prefix: Container(
+              margin: EdgeInsets.fromLTRB(12.h, 12.h, 10.h, 12.h),
+              child: CustomImageView(
+                imagePath: ImageConstant.imgCalendarmonth,
+                height: 24.h,
+                width: 24.h,
+                fit: BoxFit.contain,
+              ),
             ),
-            decoration: CustomCheckBoxStyleHelper.fillPrimaryContainer,
-            onChange: (value) {
-              context
-                  .read<FromDetailsBloc>()
-                  .add(ChangeCheckBoxEvent(value: value));
+            prefixConstraints: BoxConstraints(maxHeight: 48.h),
+            suffix: Container(
+              margin: EdgeInsets.fromLTRB(16.h, 12.h, 12.h, 12.h),
+              child: CustomImageView(
+                imagePath: ImageConstant.imgArrowdown,
+                height: 24.h,
+                width: 24.h,
+                fit: BoxFit.contain,
+              ),
+            ),
+            suffixConstraints: BoxConstraints(maxHeight: 48.h),
+            contentPadding: EdgeInsets.all(12.h),
+            onTap: () {
+              onTapDate(context, isCheckIn); // Open date picker
             },
-          );
-        },
-      ),
-    );
-  }
-
-  /// Section Widget
-  Widget _buildEmailUpdatesCheckbox(BuildContext context) {
-    return SizedBox(
-      width: double.maxFinite,
-      child: BlocSelector<FromDetailsBloc, FromDetailsState, bool?>(
-        selector: (state) => state.emailUpdatesCheckbox,
-        builder: (context, emailUpdatesCheckbox) {
-          return CustomCheckboxButton(
-            text: "msg_send_me_emails_about".tr,
-            isExpandedText: true,
-            value: emailUpdatesCheckbox,
-            padding: EdgeInsets.fromLTRB(12.h, 6.h, 8.h, 6.h),
-            decoration: CustomCheckBoxStyleHelper.fillPrimaryContainer,
-            onChange: (value) {
-              context
-                  .read<FromDetailsBloc>()
-                  .add(ChangeCheckBox1Event(value: value));
-            },
-          );
-        },
-      ),
-    );
-  }
-
-  /// Section Widget
-  Widget _buildTermsOfServiceCheckbox(BuildContext context) {
-    return SizedBox(
-      width: double.maxFinite,
-      child: BlocSelector<FromDetailsBloc, FromDetailsState, bool?>(
-        selector: (state) => state.termsOfServiceCheckbox,
-        builder: (context, termsOfServiceCheckbox) {
-          return CustomCheckboxButton(
-            text: "msg_i_accept_the_apps".tr,
-            isExpandedText: true,
-            value: termsOfServiceCheckbox,
-            padding: EdgeInsets.fromLTRB(12.h, 4.h, 4.h, 4.h),
-            decoration: CustomCheckBoxStyleHelper.fillPrimaryContainer,
-            onChange: (value) {
-              context
-                  .read<FromDetailsBloc>()
-                  .add(ChangeCheckBox2Event(value: value));
-            },
-          );
-        },
+          ),
+        ],
       ),
     );
   }
@@ -404,36 +191,240 @@ class FromDetailsScreen extends StatelessWidget {
             buttonStyle: CustomButtonStyles.onChoose,
             text: "lbl_continue".tr,
             margin: EdgeInsets.only(bottom: 12.h),
-            onPressed: () {
-              Navigator.pushNamed(context, '/checkout_screen');
+            onPressed: () async {
+              String? token = await SharedPreferencesHelper.getToken();
+              print("Token : $token");
+              if (_checkInDate == null) {
+                print("Check-In date is null.");
+                return; // Prevent booking
+              }
+              if (_checkOutDate == null) {
+                print("Check-Out date is null.");
+                return; // Prevent booking
+              }
+
+              final response = await bookRoom(
+                  widget.roomId, _checkInDate!, _checkOutDate!);
+              print(response);
+              if (response != null) {
+                print("Booking Successful: $response");
+                reservationModel = ReservationModel.fromJson(response['data']);
+                showBookingDialog(context);
+              } else {
+                print("Booking Failed: Response is null");
+              }
+
             },
-          )
+          ),
         ],
       ),
     );
   }
 
-  /// Navigates to the previous screen.
-  onTapArrowleftone(BuildContext context) {
-    NavigatorService.goBack();
+  Future<void> onTapDate(BuildContext context, bool isCheckIn) async {
+    DateTime? dateTime = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1970),
+      lastDate: DateTime(DateTime.now().year + 1, 12, 31),
+    );
+
+    if (dateTime != null) {
+      String formattedDate =
+          "${dateTime.year}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')}";
+
+      setState(() {
+        if (isCheckIn) {
+          _checkInDate = dateTime;
+          _checkInController.text = formattedDate;
+        } else {
+          _checkOutDate = dateTime;
+          _checkOutController.text = formattedDate;
+        }
+
+        // Tính tổng giá khi cả ngày check-in và check-out đều được chọn
+        if (_checkInDate != null && _checkOutDate != null) {
+          final duration = _checkOutDate!.difference(_checkInDate!);
+          totalPrice = (duration.inDays) * double.parse(widget.price); // Giá mỗi đêm
+        }
+      });
+
+      // Debugging output
+      print("Selected ${isCheckIn ? 'Check-In' : 'Check-Out'} Date: $formattedDate");
+    } else {
+      print("Date selection was canceled.");
+    }
   }
 
-  /// Displays a date picker dialog and updates the selected date in the
-  /// current [fromDetailsModelObj] object if the user selects a valid date.
-  ///
-  /// This function returns a Future that completes with "void
-  Future<void> onTapDate(BuildContext context) async {
-    var initialState = BlocProvider.of<FromDetailsBloc>(context).state;
-    DateTime? dateTime = await showDatePicker(
+  Future<Map<String, dynamic>?> bookRoom(
+      String roomId, DateTime checkInDate, DateTime checkOutDate) async {
+    try {
+      print(DateFormat('yyyy-MM-dd').format(checkInDate));
+      print(DateFormat('yyyy-MM-dd').format(checkOutDate));
+      String? token = await SharedPreferencesHelper.getToken();
+      String? baseUrl = SharedPreferencesHelper.getAPI();
+      print("Token : $token");
+      print(roomId);
+      final response = await http.post(
+        Uri.parse("$baseUrl/api/reservations/book/$roomId"),
+        headers: {
+          "Authorization": "Bearer $token",
+          "Content-Type": "application/json",
+        },
+        body: jsonEncode({
+          "checkInDate": DateFormat('yyyy-MM-dd').format(checkInDate),
+          "checkOutDate": DateFormat('yyyy-MM-dd').format(checkOutDate),
+          "paymentMethod": 50
+        }),
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return jsonDecode(response.body);
+      } else {
+        print("Error: ${response.body}");
+        return null;
+      }
+    } catch (e) {
+      print("Exception: $e");
+      return null;
+    }
+  }
+  // hiện thị detail booking
+  void showBookingDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Booking Summary"),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("Check-in Date: ${_checkInController.text}"),
+              Text("Check-out Date: ${_checkOutController.text}"),
+              SizedBox(height: 10.h),
+              Text("Total Price: ${totalPrice.toStringAsFixed(0)} VND"),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context); // Đóng dialog
+              },
+              child: Text("Cancel"),
+            ),
+            TextButton(
+              onPressed: () async {
+                await processPayment(context);
+              },
+              child: Text("Proceed to Payment"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> processPayment(BuildContext context) async {
+    // Lấy token và reservationId từ đối tượng đặt phòng
+    String? token = await SharedPreferencesHelper.getToken();
+    String reservationId = reservationModel.id; // Lấy reservationId thực tế từ kết quả đặt phòng
+
+    if (token == null) {
+      print("Token is null, can't proceed with payment.");
+      return;
+    }
+
+    try {
+      String? baseUrl = SharedPreferencesHelper.getAPI();
+      // Gửi yêu cầu thanh toán
+      final response = await http.post(
+        Uri.parse("$baseUrl/api/orders/create"),
+        headers: {
+          "Authorization": "Bearer $token",
+          "Content-Type": "application/json",
+        },
+        body: jsonEncode({
+          "reservationId": reservationId,
+        }),
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        // Thanh toán thành công
+        final responseData = jsonDecode(response.body);
+        print("Payment Order Created: $responseData");
+
+        bool success = responseData["success"];
+        String? paymentUrl = responseData["paymentUrl"];
+
+        if (success && paymentUrl != null) {
+          _launchUri(Uri.parse(paymentUrl));
+        } else {
+          // Nếu không có paymentUrl hoặc thông báo không thành công
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: Text("Payment Error"),
+                content: Text("Unable to proceed with payment. Please try again."),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context); // Đóng dialog
+                    },
+                    child: Text("OK"),
+                  ),
+                ],
+              );
+            },
+          );
+        }
+      } else {
+        // Nếu API trả về lỗi
+        print("Payment Failed: ${response.body}");
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text("Payment Failed"),
+              content: Text("There was an issue with the payment. Please try again."),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context); // Đóng dialog
+                  },
+                  child: Text("OK"),
+                ),
+              ],
+            );
+          },
+        );
+      }
+    } catch (e) {
+      print("Exception during payment process: $e");
+
+      // Hiển thị lỗi nếu có sự cố trong khi gửi yêu cầu
+      showDialog(
         context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime(1970),
-        lastDate: DateTime(
-            DateTime.now().year, DateTime.now().month, DateTime.now().day));
-    if (dateTime != null) {
-      context.read<FromDetailsBloc>().add(ChangeDateEvent(date: dateTime));
-      initialState.dateController?.text =
-          dateTime.format(pattern: dateTimeFormatPattern);
+        builder: (context) {
+          return AlertDialog(
+            title: Text("Error"),
+            content: Text("An error occurred while processing your payment. Please try again later."),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context); // Đóng dialog
+                },
+                child: Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
+  Future<void> _launchUri(Uri _url) async{
+    if(!await launchUrl(_url)){
+      throw 'Cant open url : $_url ';
     }
   }
 }

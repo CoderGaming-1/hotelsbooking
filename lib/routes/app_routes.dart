@@ -34,7 +34,6 @@ class AppRoutes {
         searchScreen: SearchScreen.builder,
         filterScreen: FilterScreen.builder,
         checkoutScreen: CheckoutScreen.builder,
-        fromdetailsScreen: FromDetailsScreen.builder,
         detailScreen: DetailsScreen.builder,
         editProfileScreen: EditprofileScreen.builder,
         onBoardingScreen: (context) => OnboardingScreen(),

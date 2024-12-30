@@ -13,7 +13,7 @@ import 'bloc/details_bloc.dart';
 import 'models/details_model.dart';
 import 'models/detailslist_item_model.dart';
 import 'widgets/detailslist_item_widget.dart';
-
+import 'package:hotelsbooking/presentation/sign_up_screen/sign_up_screen.dart';
 class DetailsScreen extends StatelessWidget {
   const DetailsScreen({Key? key, this.hotelItem})
       : super(
@@ -33,6 +33,7 @@ class DetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("Hotel Item ID: ${hotelItem?.id}");
     return SafeArea(
         child: Scaffold(
       // backgroundColor: theme.colorScheme.primaryContainer,
@@ -359,8 +360,7 @@ class DetailsScreen extends StatelessWidget {
   }
 
   /// Section Widget
-  Widget _buildHotelInfoRow(
-      BuildContext context, HotellistItemModel hotelItem) {
+  Widget _buildHotelInfoRow(BuildContext context, HotellistItemModel hotelItem) {
     return Container(
       width: double.maxFinite,
       margin: EdgeInsets.only(right: 8.h),
@@ -372,13 +372,6 @@ class DetailsScreen extends StatelessWidget {
             // style: CustomTextStyles.titleMediumPlusJakartaSansOnPrimary,
             style: CustomTextStyles.titleMediumBlack900,
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Text(
-              "200.000/Day".tr,
-              style: CustomTextStyles.titleSmallInterPrimary,
-            ),
-          )
         ],
       ),
     );
@@ -446,14 +439,20 @@ class DetailsScreen extends StatelessWidget {
   Widget _buildBookNowButton(BuildContext context) {
     return CustomElevatedButton(
       height: 48.h,
-      text: "lbl_book_now".tr,
+      text: "Show All Room",
       margin: EdgeInsets.only(bottom: 12.h),
       buttonStyle: CustomButtonStyles.fillPrimary,
       buttonTextStyle: CustomTextStyles.labelMediumBlack90001,
       onPressed: () {
-        Navigator.push(context, MaterialPageRoute(builder: (ctx) => ShowAllRoomScreen()));
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (ctx) => ShowAllRoomScreen(hotelItem: hotelItem), // Pass hotelItem here
+          ),
+        );
       },
     );
+
   }
 
   /// Section Widget

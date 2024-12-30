@@ -771,8 +771,6 @@ class HomeOneInitialPageState extends State<HomeOneInitialPage> {
         return EditprofileScreen.builder(context);
       case AppRoutes.detailScreen:
         return DetailsScreen.builder(context);
-      case AppRoutes.fromdetailsScreen:
-        return FromDetailsScreen.builder(context);
       case AppRoutes.paymentScreen:
         return PaymentScreen.builder(context);
       default:

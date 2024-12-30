@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:equatable/equatable.dart';
 import '../../../core/app_export.dart';
 import '../models/bookinglistsection_item_model.dart';
+import '../models/bookinglistsection_item_model_booked.dart';
 import '../models/mybooking_model.dart';
 import '../models/mybookinghistor_tab_model.dart';
 import '../models/mybookingbooked_tab_model.dart';
@@ -20,12 +21,11 @@ class MybookingBloc extends Bloc<MybookingEvent, MybookingState> {
   ) async {
     emit(
       state.copyWith(
-
         mybookingbookedTabModelObj: state.mybookingbookedTabModelObj?.copyWith(
           bookinglistsectionItemList: fillBookinglistsectionItemList(),
-        ), // Initialize booked tab model
+        ),
         mybookinghistorTabModelObj: state.mybookinghistorTabModelObj?.copyWith(
-          bookinglistsectionItemList: fillBookinglistsectionItemList(),
+          bookinglistsectionItemList: fillBookinglistsectionItemListHistor(),
         ),
       ),
     );
@@ -34,16 +34,20 @@ class MybookingBloc extends Bloc<MybookingEvent, MybookingState> {
   List<BookinglistsectionItemModel> fillBookinglistsectionItemList() {
     return [
       BookinglistsectionItemModel(
-          imageOne: ImageConstant.imgAntDesignStarFilled,
+          imageOne: ImageConstant.img_7,
           fifty: "5.0",
           fourhundredsixt: "(463)",
           // id: "1",
       ),
-      BookinglistsectionItemModel(
-          imageOne: ImageConstant.imgAntDesignStarFilled,
-          fifty: "5.0",
-          fourhundredsixt: "(463)",
-          // id: "2",
+    ];
+  }
+  List<BookinglistsectionItemModelBooked> fillBookinglistsectionItemListHistor() {
+    return [
+      BookinglistsectionItemModelBooked(
+        imageOne: ImageConstant.img_1,
+        fifty: "5.0",
+        fourhundredsixt: "(463)",
+        // id: "1",
       ),
     ];
   }

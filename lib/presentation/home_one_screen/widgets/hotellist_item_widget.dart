@@ -41,7 +41,9 @@ class HotellistItemWidget extends StatelessWidget {
                             detailsModelObj: DetailsModel(),
                           ),
                         )..add(DetailsInitialEvent()),
-                        child: DetailsScreen(hotelItem: hotellistItemModelObj!),
+                        child: DetailsScreen(
+                            hotelItem: hotellistItemModelObj!
+                        ),
                       ),
                     ),
                   );

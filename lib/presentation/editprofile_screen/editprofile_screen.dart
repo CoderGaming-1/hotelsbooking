@@ -10,6 +10,9 @@ import '../../widgets/custom_icon_button.dart';
 import '../../widgets/custom_text_form_field.dart';
 import 'bloc/editprofile_bloc.dart';
 import 'models/editprofile_model.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
 
 // ignore_for_file: must_be_immutable
 class EditprofileScreen extends StatelessWidget {
@@ -27,6 +30,35 @@ class EditprofileScreen extends StatelessWidget {
         ..add(EditprofileInitialEvent()),
       child: EditprofileScreen(),
     );
+  }
+  void sendPostRequest() async {
+    try {
+      // The API endpoint
+      final url = Uri.parse('https://7b9e-2405-4802-6f84-8ab0-9cdc-945e-ee95-fbe5.ngrok-free.app/api/reservations/book/672a3b5436d9793d6de59565');
+      // Headers
+      final headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3M2Y2MzA1MDExYjYzNDUwOWJlYWRkNCIsImlhdCI6MTczMzkzMDA1MiwiZXhwIjoxNzM0NTM0ODUyfQ.vUvcr0CwBk9_CFfwPUXqyOWyR6zIOhcfL0NhWU09EoA',
+      };
+      // Body
+      final body = jsonEncode({
+        "checkInDate": "2024-11-20",
+        "checkOutDate": "2024-11-22"
+      });
+      // Sending the POST request
+      final response = await http.post(url, headers: headers, body: body);
+      // Check the response status
+      if (response.statusCode == 200) {
+        print('Request successful!');
+        // Handle successful response
+      } else {
+        print('Request failed with status: ${response.statusCode}.');
+
+        print('Response body: ${response.body}');
+      }
+    } catch (e) {
+      print('Error occurred: $e');
+    }
   }
 
   @override
@@ -74,7 +106,13 @@ class EditprofileScreen extends StatelessWidget {
                     onPressed: () {
                       Navigator.pushNamed(context, '/payment_screen');
                     },
+                    // onPressed: () {
+                    //   sendPostRequest();
+                    // },
                   ),
+                  // onPressed: () {
+                  //   sendPostRequest();
+                  // },
                   //SizedBox(height: 40.h)
                 ],
               ),

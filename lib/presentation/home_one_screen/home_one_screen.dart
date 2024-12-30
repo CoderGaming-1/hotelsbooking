@@ -141,8 +141,6 @@ class HomeOneScreen extends StatelessWidget {
         return EditprofileScreen.builder(context);
       case AppRoutes.detailScreen:
         return DetailsScreen.builder(context);
-      case AppRoutes.fromdetailsScreen:
-        return FromDetailsScreen.builder(context);
       case AppRoutes.checkoutScreen:
         return CheckoutScreen.builder(context);
       case AppRoutes.filterScreen:

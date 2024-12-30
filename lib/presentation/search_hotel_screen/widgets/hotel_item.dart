@@ -61,32 +61,32 @@ class HotelItem extends StatelessWidget{
                   style: TextStyle(fontSize: 14, color: Colors.grey[600]),
                 ),
                 SizedBox(height: 8),
-                // Price
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //   children: [
-                //     Column(
-                //       crossAxisAlignment: CrossAxisAlignment.start,
-                //       children: [
-                //         Text(
-                //           "Price for 1 night",
-                //           style: TextStyle(
-                //             fontSize: 14,
-                //             color: Colors.grey,
-                //             decoration: TextDecoration.lineThrough,
-                //           ),
-                //         ),
-                //         Text(
-                //           "VND ${price.toString()}",
-                //           style: TextStyle(
-                //               fontSize: 18,
-                //               color: Colors.red,
-                //               fontWeight: FontWeight.bold),
-                //         ),
-                //       ],
-                //     ),
-                //   ],
-                // )
+                //Price
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Price for 1 night",
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey,
+                            decoration: TextDecoration.lineThrough,
+                          ),
+                        ),
+                        Text(
+                          "VND ${hotelInf.price.toString()}",
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.red,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  ],
+                )
               ],
             ),
           ),

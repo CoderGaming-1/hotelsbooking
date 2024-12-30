@@ -12,7 +12,7 @@ class BookinglistsectionItemModel extends Equatable {
         this.id
       })
   {
-    imageOne = imageOne ?? ImageConstant.imgAntDesignStarFilled;
+    imageOne = imageOne ?? ImageConstant.img_6;
     fifty = fifty ?? "5.0";
     fourhundredsixt = fourhundredsixt ?? "(463)";
     id = id ?? "";
